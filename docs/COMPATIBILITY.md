@@ -31,4 +31,19 @@ PS5 support is **not implemented**. The intent is to add PS5 13.60 support when 
 
 ## Reporting a result
 
-Use the Firmware test report issue template. Report console family, firmware, jailbreak/payload versions, feature, exact result and whether hardware was used. Never infer that all controls work from one successful connection. Keep private console data and memory captures out of public issues.
+**Help us confirm other versions.** Use the [compatibility report template](https://github.com/SniperCHYF2/ps-neighbourhood/issues/new?template=firmware_report.md) for other PS4 firmware, GoldHEN/PS4Debug releases, Windows versions, MCP clients or Ghidra releases. Successful, failed and partial results are all useful. You do not need to submit code.
+
+Report the app version or commit, exact environment, feature, reproducible steps and whether hardware, simulation or offline testing was used. Never infer that all controls work from one successful connection. Keep private console data and memory captures out of public issues.
+
+## Community confirmations
+
+No additional firmware or software versions have been confirmed through reviewed community reports yet. The current project hardware baseline remains PS4 10.01.
+
+After review, contributors can open a PR adding a result here. Each entry should identify:
+
+- The firmware/software versions and app release or commit tested.
+- The specific features that passed, failed, worked partially or were not tested.
+- Hardware versus simulation/offline testing, repeatability and any relevant limitations.
+- A link to the public test report and reviewing PR so others can reproduce the result.
+
+Label these entries **community-reported** unless independently reproduced by the project. Document confirmation for that particular feature and environment without implying support for every operation or nearby version. Keep failures visible alongside successes.

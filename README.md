@@ -12,6 +12,8 @@ PS Neighbourhood brings console tools into one Windows desktop app. Explore a ru
 
 [Getting started](#getting-started) · [Features and options](#features-and-options) · [MCP setup](docs/MCP.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build from source](#build-from-source) · [Roadmap](docs/ROADMAP.md)
 
+**Contributors and testers welcome!** Fork the project, open a pull request, or help verify another firmware or software version. Improvements to the scanner, MCP tools, trainers, receiver, UI and documentation are all welcome. [Start contributing](CONTRIBUTING.md) or [submit a compatibility report](https://github.com/SniperCHYF2/ps-neighbourhood/issues/new?template=firmware_report.md).
+
 ![PS Neighbourhood memory scanner in the simulated memory lab](docs/images/memory.png)
 
 ## Getting started
@@ -124,7 +126,13 @@ Output: `dist/PS-Neighbourhood-0.8.2-win-x64/`. Packaging refuses to overwrite a
 
 ## Contributing
 
-Firmware test reports are especially helpful: include app version, console model, exact firmware, payload versions, steps, expected/actual results and whether the test used hardware or simulation. Start with read-only checks. See [CONTRIBUTING.md](CONTRIBUTING.md) and the issue templates.
+**Pull requests are encouraged.** This project is open to other developers, testers and documentation contributors. Small fixes, new features, reproducible bug reports and compatibility work all help. Fork the repository, make a focused change and open a PR against `main`; draft PRs are welcome for work in progress. For a larger change, open an issue first to discuss the approach.
+
+**Help confirm other versions.** If you have another PS4 firmware, PS4Debug/NG or GoldHEN version, Windows setup, MCP client or Ghidra release, please report what works and what fails. Include exact versions, app release/commit, console model where relevant, steps and repeatable results. You can contribute a test report without writing code. Start with read-only checks and leave unsupported firmware guards in place.
+
+Only PS4 10.01 currently has project hardware validation. Reviewed community results will be recorded by feature and exact environment in the [compatibility notes](docs/COMPATIBILITY.md), with links to the evidence. One successful connection will not be presented as confirmation that every feature works.
+
+See the [contribution guide](CONTRIBUTING.md), [open issues](https://github.com/SniperCHYF2/ps-neighbourhood/issues), or [submit a compatibility report](https://github.com/SniperCHYF2/ps-neighbourhood/issues/new?template=firmware_report.md).
 
 Please do not attach credentials, account details, save files, game packages, Sony binaries or raw memory dumps to public issues. Share a minimal synthetic reproduction or redacted log instead.
 
