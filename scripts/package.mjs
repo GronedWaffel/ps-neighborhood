@@ -1,0 +1,29 @@
+import { cp, mkdir, readFile, rename, writeFile, access } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
+const out = path.join(root, 'dist', `PS-Neighbourhood-${pkg.version}-win-x64`);
+try { await access(out); throw new Error('Output already exists. Move the previous build before packaging again.'); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+// Build and exercise the actual C dispatch before copying any payload into a
+// release. Host protocol mocks cannot detect a misrouted native operation.
+for(const args of [['receiver/build.mjs'],['--test','tests/receiver-console-native.test.mjs']]) {
+  const result=spawnSync(process.execPath,args,{cwd:root,stdio:'inherit'});
+  if(result.error || result.status!==0)throw result.error || Error('Native receiver release check failed');
+}
+await mkdir(out, { recursive: true });
+await cp(path.join(root, 'node_modules/electron/dist'), out, { recursive: true });
+await rename(path.join(out, 'electron.exe'), path.join(out, 'PS Neighbourhood.exe'));
+const app = path.join(out, 'resources/app'); await mkdir(app, { recursive: true });
+for (const name of ['desktop', 'src', 'ui', 'trainers', 'docs', 'package.json', 'README.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) await cp(path.join(root, name), path.join(app, name), { recursive: true });
+await cp(path.join(root, 'receiver'), path.join(app, 'receiver'), { recursive: true, filter: source => !source.replaceAll('\\','/').includes('/build/zig-cache') });
+await cp(path.join(root, 'node_modules'), path.join(app, 'node_modules'), { recursive: true, filter: src => {
+  const relative = path.relative(path.join(root, 'node_modules'), src).replaceAll('\\', '/');
+  return !['electron', '@electron', '@electron-internal', '.bin'].some(p => relative === p || relative.startsWith(p + '/'));
+} });
+await writeFile(path.join(out, 'START-HERE.txt'), 'PS Neighbourhood\r\n\r\nRun PS Neighbourhood.exe. No Node.js installation is required.\r\nEnter your PS4 IP in the console profile. Typical ports: PS4Debug 744 / FTP 2121 / BinLoader 9090.\r\nOnly PS4 10.01 has been hardware-tested. Other listed targets are experimental.\r\nPS5 13.60 is a future roadmap item, not supported by this build.\r\nEnable the corresponding PS4 services, then Connect console. Do not load PS4Debug twice.\r\nUse Open memory lab to explore the scanner without a console.\r\nOpen MCP bridge in the app to copy the configuration for this build.\r\nOpen BO2 Zombies Trainer.cmd for the optional build-specific trainer; keep the main app open.\r\nData, watches, downloads and RAM exports are under resources/app/data.\r\nKeep the entire folder together. See resources/app/README.md for features and limitations.\r\n');
+await writeFile(path.join(out, 'BO2 Zombies Trainer.cmd'), '@echo off\r\nsetlocal\r\nset "ELECTRON_RUN_AS_NODE="\r\ncd /d "%~dp0"\r\n"%~dp0PS Neighbourhood.exe" --trainer\r\nif errorlevel 1 pause\r\n');
+for (const [name, flag] of [['Console Manager', '--console'], ['PKG Installer', '--pkg']]) await writeFile(path.join(out, `Start ${name}.cmd`), `@echo off\r\nsetlocal\r\nset "ELECTRON_RUN_AS_NODE="\r\nstart "PS Neighbourhood" "%~dp0PS Neighbourhood.exe" ${flag}\r\n`);
+console.log(out);

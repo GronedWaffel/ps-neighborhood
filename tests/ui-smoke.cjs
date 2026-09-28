@@ -1,0 +1,51 @@
+const { app, BrowserWindow } = require('electron');
+const path = require('node:path');
+const fs = require('node:fs/promises');
+const assert = require('node:assert/strict');
+const { pathToFileURL } = require('node:url');
+const root = path.resolve(__dirname, '..');
+app.setPath('userData', path.join(root, 'artifacts', 'ui-userdata'));
+app.disableHardwareAcceleration();
+app.whenReady().then(async () => {
+  const { startServer } = await import(pathToFileURL(path.join(root, 'src/server.mjs')).href);
+  const backend = await startServer({ directory: path.join(root, 'artifacts', 'ui-data-' + Date.now()) });
+  const win = new BrowserWindow({ width: 1510, height: 1000, show: false, webPreferences: { offscreen: true, contextIsolation: true, nodeIntegration: false } });
+  const errors = []; win.webContents.on('console-message', event => { if (event.level === 'error') errors.push(event.message); });
+  const js = code => win.webContents.executeJavaScript(code);
+  const until = async expression => { for (let i = 0; i < 150; i++) { if (await js(expression)) return; await new Promise(r => setTimeout(r, 100)); } throw new Error('UI timed out: ' + expression); };
+  const click = selector => js(`document.querySelector(${JSON.stringify(selector)}).click()`);
+  try {
+    await win.loadURL(backend.url); await until('!!document.querySelector("#open-lab")');
+    await fs.mkdir(path.join(root, 'artifacts/screenshots'), { recursive: true });
+    await fs.writeFile(path.join(root, 'artifacts/screenshots/overview.png'), (await win.webContents.capturePage()).toPNG());
+    await click('#open-lab'); await until('!!document.querySelector("#scan-new")');
+    assert.ok(await js('!!document.querySelector("#scan-backend option[value=ng]")'));
+    await js('document.querySelector("#scan-backend").value="host"');
+    await click('#scan-new'); await until('document.querySelector("#scan-results").textContent.includes("0x100000100")');
+    assert.ok(await js('document.querySelector("#scan-progress").textContent.includes("HOST")'));
+    await click('[data-address="0x100000100"]'); await until('document.querySelector("#hex-output").textContent.includes("64 00 00 00")');
+    await click('[data-watch="0x100000100"]'); await until('document.querySelector("#watch-results").textContent.includes("100")');
+    await fs.writeFile(path.join(root, 'artifacts/screenshots/memory.png'), (await win.webContents.capturePage()).toPNG());
+    await click('#demo-tick'); await js('document.querySelector("#scan-mode").value="decreased"'); await click('#scan-next');
+    await until('document.querySelector("#result-meta").textContent.includes("pass 2") && document.querySelector("#scan-results").textContent.includes("93")');
+    await click('[data-page="map"]'); await click('#maps-select'); await click('#dump-selected');
+    await until('document.querySelector("#dump-list")?.textContent.includes("Scan offline")');
+    await fs.writeFile(path.join(root, 'artifacts/screenshots/dumps.png'), (await win.webContents.capturePage()).toPNG());
+    await click('[data-offline]'); await js('document.querySelector("#scan-value").value="93"'); await click('#scan-new');
+    await until('document.querySelector("#scan-results").textContent.includes("0x100000100")');
+    for (const page of ['folder', 'pkg', 'payload', 'mcp', 'activity', 'home']) { await click(`[data-page="${page}"]`); assert.ok(await js('document.querySelector("h1").textContent.length > 5')); }
+    await click('[data-page="pkg"]'); assert.ok(await js('!!document.querySelector("#pkg-install") && !!document.querySelector("#pkg-path")'));
+    const pkgFolder=path.join(root,'artifacts','ui-packages');await fs.mkdir(path.join(pkgFolder,'nested'),{recursive:true});
+    const pkgData=Buffer.alloc(0x3000);pkgData.writeUInt32BE(0x7f434e54);pkgData.write('UP0002-CUSA57548_00-TESTPACKAGE00001',0x40);pkgData.writeUInt32BE(0x1a,0x74);pkgData.writeBigUInt64BE(0x3000n,0x430);
+    await fs.writeFile(path.join(pkgFolder,'Base game.pkg'),pkgData);pkgData.writeUInt32BE(0x40000000,0x78);await fs.writeFile(path.join(pkgFolder,'nested','Update.pkg'),pkgData);await fs.writeFile(path.join(pkgFolder,'Incomplete.pkg'),'incomplete');
+    await js(`void(window.desktop={chooseFolder:async()=>${JSON.stringify(pkgFolder)}})`);await click('#pkg-add-folder');
+    await until('document.querySelector("#pkg-queue").textContent.includes("3 packages")');
+    assert.ok(await js('document.querySelector("#pkg-queue").textContent.includes("Invalid PKG") && document.querySelector("#pkg-queue").textContent.includes("Update.pkg")'));
+    await click('#pkg-add-folder');assert.equal(await js('document.querySelectorAll("[data-pkg-remove]").length'),3);
+    await click('[data-pkg-remove]');await until('document.querySelectorAll("[data-pkg-remove]").length===2');
+    await js('document.querySelector("#toasts").replaceChildren();document.querySelector("#pkg-add-folder").scrollIntoView({block:"center"});');
+    await fs.writeFile(path.join(root, 'artifacts/screenshots/pkg-installer.png'), (await win.webContents.capturePage()).toPNG());
+    assert.deepEqual(errors, []); console.log('PASS: desktop UI scan → inspect → watch → refine → RAM dump → offline scan; all pages render.');
+    await backend.close(); win.destroy(); app.exit(0);
+  } catch (e) { console.error(e.stack); try { await fs.writeFile(path.join(root, 'artifacts/screenshots/failure.png'), (await win.webContents.capturePage()).toPNG()); } catch {} await backend.close(); app.exit(1); }
+});

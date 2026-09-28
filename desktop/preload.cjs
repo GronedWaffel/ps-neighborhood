@@ -1,0 +1,2 @@
+const { contextBridge, ipcRenderer } = require('electron');
+contextBridge.exposeInMainWorld('desktop', { chooseFile: () => ipcRenderer.invoke('choose-file'), chooseFolder: () => ipcRenderer.invoke('choose-folder'), openExports: () => ipcRenderer.invoke('open-exports'), openSaves:()=>ipcRenderer.invoke('open-saves'), confirmConsole:request=>ipcRenderer.invoke('confirm-console',request), mcpConfig: () => ipcRenderer.invoke('mcp-config') });

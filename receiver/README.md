@@ -1,0 +1,37 @@
+# PS Neighbourhood background receiver
+
+A small, source-built PS4 payload loaded through an already enabled GoldHEN BinLoader. It does not need a PS4 installer app in the foreground and is not a game-scoped PRX plugin. It is loaded in memory for a PC session, not installed into plugins.ini or set to autorun.
+
+## Use
+
+Enable GoldHEN BinLoader (saved console port, normally 9090). In PS Neighbourhood → PKG installer choose **PS Neighbourhood background receiver** and **Load background receiver**. The app selects the PC adapter using a UDP route lookup, without making an empty BinLoader TCP connection. The receiver connects back to that adapter on TCP 9697 and authenticates with the random key patched into that particular payload. Allow that port from the console IP in Windows Firewall. PKG data is streamed separately on TCP 9696.
+
+Select a complete local PKG and install. The receiver calls the PS4 BGFT download service; the PC continues hosting the original file. PS4 Notifications → Downloads is the final installation authority. Keep the PC/app awake, or minimize it. Rebooting the PS4 or closing the PC app ends the receiver session. There is no automatic retry after an uncertain install reply, no automatic uninstall or replacement of installed titles, and no firmware bypass.
+
+## Build and protocol
+
+Run `node receiver/build.mjs` from the workspace. Install Zig 0.14.1 (Clang) from ziglang.org and verify its published checksum. Set `ZIG` to its executable path, or place it at `tools/zig-x86_64-windows-0.14.1/zig.exe`. The compiler is not included in this repository. It cross-compiles freestanding x86-64 C and a minimal Orbis syscall shim, links at virtual offset zero, rejects leftover ELF relocations, and includes zeroed BSS in the transmitted image. Outputs are `build/receiver.elf`, `build/ps-neighbourhood-receiver.bin` and `build/manifest.json`. The host verifies the binary hash before patching its network address and session key.
+
+Messages have a 16-byte little-endian header: magic, request ID, operation/status, body length. Bodies are bounded to 2048 bytes. Commands are heartbeat, initialize/check, install, progress, pause, resume, and receiver exit. Install metadata uses length-prefixed UTF-8 strings with explicit capacity checks and stable storage. Reads and writes loop until the complete frame arrives. The receiver handles only its most recently registered task and exposes no remote shell, filesystem service, generic memory writer, or kernel execution command. Host requests are serialized with deadlines; heartbeat keeps the receiver alive while the PC app is running. Wrong session keys and malformed replies are rejected.
+
+BGFT initialization uses the established libjbc/DPI credential setup through an existing GoldHEN syscall 11 environment. This is not a jailbreak or exploit loader. Initialization is deferred until requested; the initial connection/heartbeat test performs no BGFT or credential changes. Service initialization and install registration failures report stage and native return code. The initialization ABI is compiled with layout assertions. Initialization and repeated unload/reload checks passed on the target PS4 10.01. The active foreground user is resolved from an existing initialized UserService instance when available; otherwise startup errors are checked explicitly. Stage 30 identifies UserService startup, while stage 3 identifies active-user lookup. A live 186,122,240-byte package transfer completed with BGFT error zero, preparing/copy at 100%, and every byte reported transferred. The user confirmed successful installation on the PS4; the UI still distinguishes transfer completion from final installation. The HTTP host accepts BGFT query parameters on the exact authenticated package path and retains a bounded, token-redacted request trace for diagnosis.
+
+## Source and licensing
+
+### Console-management extension
+
+Operations 8–12 add capability discovery, bounded filesystem statistics, installed/running-title queries, game actions, and power actions. Titles are restricted to CUSA IDs. Game removal and patch-only removal call separate AppInstUtil APIs, and running-title removal is refused. The desktop serializes actions and confirms their target; no game/power mutation is exposed through MCP.
+
+PS4 syscall dlsym does not expose packed libraries such as LncUtil. The fallback reads only the current payload host's dynamic-loader metadata through existing libjbc facilities. Table sizes, entry offsets, function ranges and traversal counts are bounded. A public function address must match ordinary dlsym before a private function address is accepted. There is no firmware-specific function-address table or remote arbitrary-symbol/call endpoint.
+
+The loader layout definitions and read-only packed-symbol lookup are adapted from [ps4-payload-dev/sdk](https://github.com/ps4-payload-dev/sdk/blob/master/crt/kernel.c), Copyright (C) 2025 John Törnblom, GPL-3.0-or-later. Definitions retain their original notice in `vendor/dynlib-layout.h`. NIDs are generated at build time from symbol names. Application ABI references: [Itemzflow](https://github.com/LightningMods/Itemzflow), [PS4 daemon writeup](https://github.com/LightningMods/PS4-daemon-writeup), and [OpenOrbis SystemService declarations](https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/blob/master/include/orbis/SystemService.h). The fallback shutdown sequence follows [Scene-Collective's sysutil](https://github.com/Scene-Collective/ps4-payload-sdk/blob/main/libPS4/source/sysutil.c).
+
+Storage, native capabilities and installed-game queries were checked on PS4 10.01. The user confirmed game launching works after the v0.6.1 fix. Uninstall and power transitions remain untested.
+
+Receiver source is GPL-3.0-or-later; see LICENSE. The credential and dynamic loader helpers under `vendor/` were taken from [marcussacana/DirectPackageInstaller](https://github.com/marcussacana/DirectPackageInstaller), commit `ca7bade66737fede3b0e7bad73b665e0a4d4ff39`, which incorporates ps4-libjbc and flatz's module loader. Local changes bound credential-process discovery, use the kernel module-start API instead of manually invoking constructors, and reuse an initialized UserService instance from the payload host. The new receiver framing, callback authentication, host integration and build script are PS Neighbourhood code.
+
+BGFT structures, exported names and registration flow were checked against [DPI's payload](https://github.com/marcussacana/DirectPackageInstaller/tree/DN8/Payload), [flatz Remote Package Installer](https://github.com/flatz/ps4_remote_pkg_installer), and [njzydark's OpenOrbis port](https://github.com/njzydark/PS4RPI). Credit to those authors and the libjbc, OpenOrbis and GoldHEN developers. Full receiver source accompanies the binary in the portable build; the compiler is not redistributed there.
+
+## Firmware detection (v0.7)
+
+Operation 13 is a read-only 12-byte reply: raw firmware word, target-layout flag, receiver revision (all uint32 little endian). It calls sysctl {1,38} without credential or BGFT initialization. Initialization checks the explicit target list in firmware.h before entering libjbc and reports stage 40 for unknown firmware. Targets cover the released 9.00–11.00 versions listed in the main README plus experimental 13.52; only 10.01 is hardware-tested. A compatible GoldHEN syscall-11 environment is still required. Do not infer compatibility merely from an open BinLoader port or from selecting a profile.

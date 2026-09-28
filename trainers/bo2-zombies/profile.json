@@ -1,0 +1,267 @@
+{
+  "name": "Black Ops II Zombies",
+  "processName": "codzm.elf",
+  "titleId": "CUSA57548",
+  "contentId": "UP0002-CUSA57548_00-CODBO2GAME000001",
+  "fingerprint": {
+    "length": 4096,
+    "sha256": "e1e2fc9536be3fa889ecb1a8680cf2599fe9fb01560a9af4d64fd90abe88637b"
+  },
+  "note": "Points and starting-pistol magazine confirmed in game. God mode, 2× movement speed and FOV 90 are confirmed in game. Native perk effects still need gameplay confirmation. Perk effects do not run the purchase scripts or add HUD icons. Freeze stops when the player, connection, write permission or build changes.",
+  "fields": [
+    {
+      "id": "points",
+      "label": "Points",
+      "offset": "0x55C8",
+      "min": 0,
+      "max": 1000000,
+      "default": 10000,
+      "verified": true,
+      "validation": {
+        "memoryPropagation": true,
+        "hudConfirmed": true,
+        "confirmedValue": 10000,
+        "date": "2026-09-26T23:59:11.622Z"
+      },
+      "relativeTo": "player"
+    },
+    {
+      "id": "magazine",
+      "label": "Infinite clip · equipped weapon",
+      "offset": "0x42C",
+      "min": 1,
+      "max": 250,
+      "default": 30,
+      "verified": true,
+      "validation": {
+        "memoryPropagation": true,
+        "hudConfirmed": true,
+        "before": 6,
+        "confirmedValue": 8,
+        "date": "2026-09-27T00:05:51.764Z"
+      },
+      "relativeTo": "player",
+      "freeze": true,
+      "activeClip": true,
+      "help": "Refills the equipped weapon. Stops on weapon switch; enable again for the new weapon.",
+      "freezeValidation": {
+        "memoryRefillConfirmed": true,
+        "test": "30 -> 28 -> 30 through live MCP",
+        "gameplayContinuousFireConfirmed": false,
+        "date": "2026-09-27T02:01:20.333Z",
+        "continuousFireRaceRegressionPassed": true,
+        "liveReadbackRaceRecoveryConfirmed": true
+      }
+    },
+    {
+      "id": "godmode",
+      "label": "God mode",
+      "relativeTo": "player",
+      "offset": "0x18",
+      "mask": 1,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "evidence": "enableinvulnerability @ 0x62E7F0 / disableinvulnerability @ 0x62E870",
+      "help": "Native invulnerability flag. Confirmed in game.",
+      "validation": {
+        "hudConfirmed": true,
+        "date": "2026-09-27T01:52:28.676Z"
+      }
+    },
+    {
+      "id": "speed",
+      "label": "Movement speed",
+      "pointerOffset": "0x1B70548",
+      "offset": "0x28",
+      "dvar": {
+        "nameOffset": "0x9209FA",
+        "type": 6
+      },
+      "min": 190,
+      "max": 760,
+      "default": 380,
+      "verified": true,
+      "control": "range",
+      "step": 19,
+      "reset": 190,
+      "help": "190 normal · 380 double · 760 quadruple. Applies to server movement.",
+      "validation": {
+        "hudConfirmed": true,
+        "date": "2026-09-27T01:52:28.677Z"
+      }
+    },
+    {
+      "id": "fov",
+      "label": "Field of view",
+      "pointerOffset": "0xFA5C60",
+      "offset": "0x28",
+      "dvar": {
+        "nameOffset": "0x8F9C34",
+        "type": 2
+      },
+      "type": "f32",
+      "min": 65,
+      "max": 120,
+      "default": 90,
+      "verified": true,
+      "control": "range",
+      "step": 1,
+      "reset": 65,
+      "help": "Camera field of view in degrees. Confirmed in game.",
+      "validation": {
+        "hudConfirmed": true,
+        "date": "2026-09-27T01:52:28.677Z"
+      }
+    },
+    {
+      "id": "juggernog",
+      "label": "Juggernog · armor",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x548",
+      "mirrorOffsets": [
+        "0x5594"
+      ],
+      "mask": 4,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    },
+    {
+      "id": "speedcola",
+      "label": "Speed Cola · fast reload",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x548",
+      "mirrorOffsets": [
+        "0x5594"
+      ],
+      "mask": 1048576,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    },
+    {
+      "id": "doubletap",
+      "label": "Double Tap · fire rate",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x54C",
+      "mirrorOffsets": [
+        "0x5598"
+      ],
+      "mask": 1048576,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    },
+    {
+      "id": "quickrevive",
+      "label": "Quick Revive",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x54C",
+      "mirrorOffsets": [
+        "0x5598"
+      ],
+      "mask": 131072,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    },
+    {
+      "id": "staminup",
+      "label": "Stamin-Up · sprint",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x54C",
+      "mirrorOffsets": [
+        "0x5598"
+      ],
+      "mask": 32,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    },
+    {
+      "id": "deadshot",
+      "label": "Deadshot",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x548",
+      "mirrorOffsets": [
+        "0x5594"
+      ],
+      "mask": 128,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    },
+    {
+      "id": "mulekick",
+      "label": "Mule Kick · extra primary",
+      "group": "perks",
+      "relativeTo": "player",
+      "offset": "0x548",
+      "mirrorOffsets": [
+        "0x5594"
+      ],
+      "mask": 1,
+      "min": 0,
+      "max": 1,
+      "default": 1,
+      "verified": true,
+      "control": "toggle",
+      "help": "Native perk effect only; purchase scripts and HUD icons are not invoked."
+    }
+  ],
+  "player": {
+    "pointerOffset": "0x19C4B98",
+    "healthOffset": "0x19C4C04",
+    "size": 22520
+  },
+  "weaponValidation": {
+    "rayGun": {
+      "spawnConfirmed": true,
+      "equippedAndFiredConfirmed": true,
+      "oldInsertionRejectedByWeaponLimit": true,
+      "fixedInsertionRetentionConfirmed": true,
+      "sustainedGameplayAfterFixConfirmed": false,
+      "date": "2026-09-27T02:22:47.905Z"
+    },
+    "packAPunch": {
+      "gameplayConfirmed": true,
+      "weapon": "ray_gun_upgraded_zm",
+      "replaced": "ray_gun_zm",
+      "sameSlotConfirmed": true,
+      "equippedAndFiredConfirmed": true,
+      "clip": 40,
+      "date": "2026-09-27T02:43:28.730Z"
+    },
+    "twoPrimaryLimit": {
+      "liveConfirmed": true,
+      "date": "2026-09-27T02:24:12.1927170Z"
+    }
+  }
+}
