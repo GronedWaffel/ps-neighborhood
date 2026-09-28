@@ -58,7 +58,7 @@ export async function bridgeCall(method, args) {
   const data = await response.json(); if (!response.ok) throw new Error(data.error); return data.result;
 }
 export function createMcp(call = bridgeCall) {
-  const server = new McpServer({ name: 'ps-neighbourhood', version: '0.8.2' });
+  const server = new McpServer({ name: 'ps-neighbourhood', version: '0.8.3' });
   for (const [name, description, shape] of tools) {
     const mutation = ['console_refresh','console_backup','connect', 'disconnect', 'memory_write', 'watch_add', 'watch_remove', 'scan_start', 'scan_cancel', 'dump_start', 'dump_cancel', 'pointer_search', 'pointer_cancel', 'ftp_download'].includes(name);
     server.registerTool('psn_' + name, { description, inputSchema: z.object(shape), annotations: { readOnlyHint: !mutation, destructiveHint: name === 'memory_write' || name === 'disconnect', openWorldHint: true } }, async args => {

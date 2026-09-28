@@ -17,7 +17,7 @@ await mkdir(out, { recursive: true });
 await cp(path.join(root, 'node_modules/electron/dist'), out, { recursive: true });
 await rename(path.join(out, 'electron.exe'), path.join(out, 'PS Neighbourhood.exe'));
 const app = path.join(out, 'resources/app'); await mkdir(app, { recursive: true });
-for (const name of ['desktop', 'src', 'ui', 'trainers', 'docs', 'package.json', 'README.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) await cp(path.join(root, name), path.join(app, name), { recursive: true });
+for (const name of ['desktop', 'src', 'ui', 'trainers', 'docs', 'package.json', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) await cp(path.join(root, name), path.join(app, name), { recursive: true });
 await cp(path.join(root, 'receiver'), path.join(app, 'receiver'), { recursive: true, filter: source => !source.replaceAll('\\','/').includes('/build/zig-cache') });
 await cp(path.join(root, 'node_modules'), path.join(app, 'node_modules'), { recursive: true, filter: src => {
   const relative = path.relative(path.join(root, 'node_modules'), src).replaceAll('\\', '/');

@@ -1,6 +1,6 @@
 # PS Neighbourhood
 
-[![Release](https://img.shields.io/github/v/release/SniperCHYF2/ps-neighbourhood)](https://github.com/SniperCHYF2/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange)
+[![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighbourhood)](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange)
 
 **Your PS4 workbench: memory scanner, MCP server, Ghidra RAM exports, direct PKG installs, FTP, saves and console management.**
 
@@ -12,7 +12,7 @@ PS Neighbourhood brings console tools into one Windows desktop app. Explore a ru
 
 [Getting started](#getting-started) · [Features and options](#features-and-options) · [MCP setup](docs/MCP.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build from source](#build-from-source) · [Roadmap](docs/ROADMAP.md)
 
-**Contributors and testers welcome!** Fork the project, open a pull request, or help verify another firmware or software version. Improvements to the scanner, MCP tools, trainers, receiver, UI and documentation are all welcome. [Start contributing](CONTRIBUTING.md) or [submit a compatibility report](https://github.com/SniperCHYF2/ps-neighbourhood/issues/new?template=firmware_report.md).
+**Contributors and testers welcome!** Fork the project, open a pull request, or help verify another firmware or software version. Improvements to the scanner, MCP tools, trainers, receiver, UI and documentation are all welcome. [Start contributing](CONTRIBUTING.md) or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md).
 
 ![PS Neighbourhood memory scanner in the simulated memory lab](docs/images/memory.png)
 
@@ -20,7 +20,7 @@ PS Neighbourhood brings console tools into one Windows desktop app. Explore a ru
 
 ### Windows portable release
 
-1. Download the Windows x64 ZIP from the [Releases page](https://github.com/SniperCHYF2/ps-neighbourhood/releases/latest) and extract the whole folder somewhere writable.
+1. Download the Windows x64 ZIP from the [Releases page](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) and extract the whole folder somewhere writable.
 2. Run **PS Neighbourhood.exe**. No separate Node.js installation is needed.
 3. Enter your PS4's local IP in the console profile. The initial localhost value is a placeholder.
 4. Enable the services needed for your task, then connect. Typical ports are PS4Debug **744**, FTP **2121**, and GoldHEN BinLoader **9090**; all are editable.
@@ -122,7 +122,7 @@ node node_modules/electron/cli.js tests/ui-smoke.cjs
 npm run package
 ```
 
-Output: `dist/PS-Neighbourhood-0.8.2-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
+Output: `dist/PS-Neighbourhood-0.8.3-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
 
 ## Contributing
 
@@ -132,7 +132,7 @@ Output: `dist/PS-Neighbourhood-0.8.2-win-x64/`. Packaging refuses to overwrite a
 
 Only PS4 10.01 currently has project hardware validation. Reviewed community results will be recorded by feature and exact environment in the [compatibility notes](docs/COMPATIBILITY.md), with links to the evidence. One successful connection will not be presented as confirmation that every feature works.
 
-See the [contribution guide](CONTRIBUTING.md), [open issues](https://github.com/SniperCHYF2/ps-neighbourhood/issues), or [submit a compatibility report](https://github.com/SniperCHYF2/ps-neighbourhood/issues/new?template=firmware_report.md).
+See the [contribution guide](CONTRIBUTING.md), [open issues](https://github.com/GronedWaffel/ps-neighbourhood/issues), or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md).
 
 Please do not attach credentials, account details, save files, game packages, Sony binaries or raw memory dumps to public issues. Share a minimal synthetic reproduction or redacted log instead.
 

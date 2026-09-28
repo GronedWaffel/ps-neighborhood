@@ -1,7 +1,7 @@
 {
   "name": "ps-neighbourhood",
   "productName": "PS Neighbourhood",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",
@@ -41,10 +41,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SniperCHYF2/ps-neighbourhood.git"
+    "url": "https://github.com/GronedWaffel/ps-neighbourhood.git"
   },
-  "homepage": "https://github.com/SniperCHYF2/ps-neighbourhood#readme",
+  "homepage": "https://github.com/GronedWaffel/ps-neighbourhood#readme",
   "bugs": {
-    "url": "https://github.com/SniperCHYF2/ps-neighbourhood/issues"
+    "url": "https://github.com/GronedWaffel/ps-neighbourhood/issues"
   }
 }

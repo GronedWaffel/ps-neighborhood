@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.3 — Community documentation and repository links
+
+- Updated project and download links to GronedWaffel/ps-neighbourhood.
+- Added prominent invitations for pull requests and community testing.
+- Expanded compatibility reports to record exact firmware, payload, Windows, MCP client and Ghidra versions with per-feature results.
+- Included the contribution guide and changelog in the portable build.
+- No new firmware support or console behavior is introduced in this release.
+
 ## 0.8.2 — Public release preparation
 
 - Documented features, setup, MCP integration, known limitations and firmware validation.

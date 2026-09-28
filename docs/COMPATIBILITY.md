@@ -31,7 +31,7 @@ PS5 support is **not implemented**. The intent is to add PS5 13.60 support when 
 
 ## Reporting a result
 
-**Help us confirm other versions.** Use the [compatibility report template](https://github.com/SniperCHYF2/ps-neighbourhood/issues/new?template=firmware_report.md) for other PS4 firmware, GoldHEN/PS4Debug releases, Windows versions, MCP clients or Ghidra releases. Successful, failed and partial results are all useful. You do not need to submit code.
+**Help us confirm other versions.** Use the [compatibility report template](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md) for other PS4 firmware, GoldHEN/PS4Debug releases, Windows versions, MCP clients or Ghidra releases. Successful, failed and partial results are all useful. You do not need to submit code.
 
 Report the app version or commit, exact environment, feature, reproducible steps and whether hardware, simulation or offline testing was used. Never infer that all controls work from one successful connection. Keep private console data and memory captures out of public issues.
 
