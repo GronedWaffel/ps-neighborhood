@@ -1,3 +1,3 @@
 @echo off
 setlocal
-call "%~dp0Start PS Neighbourhood.cmd" --ps5 --shadow
+call "%~dp0Start PS Neighborhood.cmd" --ps5 --shadow

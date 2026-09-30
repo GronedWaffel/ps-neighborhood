@@ -18,4 +18,4 @@ MCP exposes `psn_shadow_status`, `psn_shadow_refresh`, `psn_shadow_inspect`, and
 
 Transfer speed depends on the console FTP server and network. In the 13.60 hardware check, etaHEN FTP on 1337 ran around 7 MB/s, while ftpsrv 0.21.1 on 2121 ran roughly 60–80 MB/s over the same gigabit link. Use the port of the FTP service you have running. The app does not automatically start or replace FTP servers. Its existence checks handle ftpsrv's misleading `SIZE` response for absent files by reading the parent directory instead. On ftpsrv connections, the app disables virtual decrypted SELF transfer mode so file-size checks and downloads use the original stored bytes.
 
-Requires ShadowMount API v1 and PS Neighbourhood PS5 companion revision 106. Developed against the supplied `1.7beta2-snipers1360-r1` ShadowMount source. External-drive behavior depends on the mounted drives reported by the console.
+Requires ShadowMount API v1 and PS Neighborhood PS5 companion revision 106. Developed against the supplied `1.7beta2-snipers1360-r1` ShadowMount source. External-drive behavior depends on the mounted drives reported by the console.

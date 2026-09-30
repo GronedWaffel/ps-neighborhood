@@ -5,15 +5,15 @@ import { address, hex, integer } from './protocol.mjs';
 
 function ghidraScript(manifest) {
   const segments = manifest.segments.map(s => `        load(program, folder, ${JSON.stringify(s.file)}, ${JSON.stringify(s.name.replace(/[^a-zA-Z0-9_.-]/g, '_'))}, ${JSON.stringify(s.start.slice(2))}, ${s.length}L, ${!!(s.prot & 2)}, ${!!(s.prot & 4)});`).join('\n');
-  return `// Import a PS Neighbourhood memory snapshot into a NEW x86-64 program.
-// @category PS Neighbourhood
+  return `// Import a PS Neighborhood memory snapshot into a NEW x86-64 program.
+// @category PS Neighborhood
 import java.io.*;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.lang.*;
 import ghidra.program.model.mem.MemoryBlock;
 
-public class ImportPSNeighbourhood extends GhidraScript {
+public class ImportPSNeighborhood extends GhidraScript {
     public void run() throws Exception {
         File folder = askDirectory("Select this dump bundle folder", "Import");
         Language language = getLanguage(new LanguageID("x86:LE:64:default"));
@@ -42,7 +42,7 @@ ${segments}
         try (InputStream stream = new FileInputStream(source)) {
             MemoryBlock block = p.getMemory().createInitializedBlock(name + "_" + start, p.getAddressFactory().getDefaultAddressSpace().getAddress(start), stream, size, monitor, false);
             block.setRead(true); block.setWrite(write); block.setExecute(execute);
-            block.setComment("PS Neighbourhood RAM snapshot; source " + file);
+            block.setComment("PS Neighborhood RAM snapshot; source " + file);
         }
     }
 }
@@ -79,7 +79,7 @@ export class Dumps {
     if (total > 4n * 1024n ** 3n) throw new Error('Limit each dump to 4 GiB; export additional regions separately');
     job.total = Number(total);
     const folder = path.join(this.directory, job.id); await mkdir(folder, { recursive: true }); job.folder = folder;
-    const manifest = { format: 'ps-neighbourhood-memory-v1', id: job.id, created: new Date().toISOString(), ...context, pid: options.pid, process: processInfo, architecture: 'x86:LE:64:default', byteOrder: 'little', consistency: 'Sequential live reads; process is not paused. Memory can change during capture.', requestedRange: options.start ? { start: options.start, end: options.end } : null, maps, segments: [] };
+    const manifest = { format: 'ps-neighborhood-memory-v1', id: job.id, created: new Date().toISOString(), ...context, pid: options.pid, process: processInfo, architecture: 'x86:LE:64:default', byteOrder: 'little', consistency: 'Sequential live reads; process is not paused. Memory can change during capture.', requestedRange: options.start ? { start: options.start, end: options.end } : null, maps, segments: [] };
     try {
       for (let index = 0; index < regions.length; index++) {
         const region = regions[index], lo = address(region.start), length = Number(address(region.end) - lo);
@@ -101,8 +101,8 @@ export class Dumps {
       }
       // A bundle is complete only when the manifest has been atomically committed.
       manifest.completed = new Date().toISOString();
-      await writeFile(path.join(folder, 'ImportPSNeighbourhood.java'), ghidraScript(manifest));
-      await writeFile(path.join(folder, 'README.txt'), 'PS Neighbourhood RAM bundle\n\nAdd this folder to Ghidra Script Manager script directories, then run ImportPSNeighbourhood.java. Select this folder when prompted. The script creates a new x86-64 program with original virtual addresses and captured read/write/execute permissions. Save it, then Auto Analyze. Verify file SHA-256 hashes against manifest.json if transporting the bundle.\n\nHeadless: analyzeHeadless <project-directory> <project-name> -scriptPath <bundle-folder> -preScript ImportPSNeighbourhood.java <bundle-folder> -noanalysis\nThis saves a new PSN_<bundle-id> program in the project. Process that program separately to run analysis. Existing programs are not overwritten.\n\nThese are raw mapped-memory images, not reconstructed ELF/SELF executables. Gaps are omitted and listed in the original maps. ASLR addresses apply to this capture. Reads are sequential and not atomic.\n');
+      await writeFile(path.join(folder, 'ImportPSNeighborhood.java'), ghidraScript(manifest));
+      await writeFile(path.join(folder, 'README.txt'), 'PS Neighborhood RAM bundle\n\nAdd this folder to Ghidra Script Manager script directories, then run ImportPSNeighborhood.java. Select this folder when prompted. The script creates a new x86-64 program with original virtual addresses and captured read/write/execute permissions. Save it, then Auto Analyze. Verify file SHA-256 hashes against manifest.json if transporting the bundle.\n\nHeadless: analyzeHeadless <project-directory> <project-name> -scriptPath <bundle-folder> -preScript ImportPSNeighborhood.java <bundle-folder> -noanalysis\nThis saves a new PSN_<bundle-id> program in the project. Process that program separately to run analysis. Existing programs are not overwritten.\n\nThese are raw mapped-memory images, not reconstructed ELF/SELF executables. Gaps are omitted and listed in the original maps. ASLR addresses apply to this capture. Reads are sequential and not atomic.\n');
       await writeFile(path.join(folder, 'manifest.json.partial'), JSON.stringify(manifest, null, 2));
       await rename(path.join(folder, 'manifest.json.partial'), path.join(folder, 'manifest.json'));
       return { folder, manifestPath: path.join(folder, 'manifest.json'), segments: manifest.segments.length, bytes: job.total };

@@ -7,4 +7,4 @@ if not exist "node_modules\electron\dist\electron.exe" (
   pause
   exit /b 1
 )
-start "PS Neighbourhood" "node_modules\electron\dist\electron.exe" . %*
+start "PS Neighborhood" "node_modules\electron\dist\electron.exe" . %*

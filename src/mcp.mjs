@@ -18,7 +18,7 @@ const tools = [
   ['console_refresh', 'Start a read-only FTP console inventory and storage scan. Poll console_status until its job completes. Capacity needs the background receiver.', {}],
   ['console_backup', 'Download encrypted save containers and metadata with SHA-256 manifests. Set decrypted=true for a PS5 save to retain an encrypted backup and export decrypted files from a staged copy through the PS5 13.60 companion. The target game must be closed. Poll console_status. Restoring edited files requires desktop confirmation.', {id:z.string(),decrypted:z.boolean().optional()}],
   ['pkg_inspect', 'Validate a local PS4 CNT or PS5 FIH/CNT package for the selected platform and read its content ID, type and size without copying it. Header/bounds validation does not prove full content integrity.', { local: z.string() }],
-  ['pkg_check', 'Check the loaded PS Neighbourhood background receiver install services, or the optional Remote Package Installer API. No install is started.', { mode: z.enum(['background','remote']).optional(), installerPort: z.number().int().min(1).max(65535).optional() }],
+  ['pkg_check', 'Check the loaded PS Neighborhood background receiver install services, or the optional Remote Package Installer API. No install is started.', { mode: z.enum(['background','remote']).optional(), installerPort: z.number().int().min(1).max(65535).optional() }],
   ['pkg_status', 'Read package serving and installation progress. Start installs in the desktop PKG installer.', { refresh: z.boolean().optional() }],
   ['status', 'Get connection, scan, dump, transfer, and activity status.', {}],
   ['connect', 'Connect using the saved console profile, or explicitly open the simulated memory lab. Resets scan sessions.', { demo: z.boolean().optional() }],
@@ -56,13 +56,13 @@ const tools = [
 ];
 export async function bridgeCall(method, args) {
   let bridge;
-  try { bridge = JSON.parse(await readFile(path.join(directory, 'bridge.json'), 'utf8')); } catch { throw new Error('Open PS Neighbourhood first, or set PSN_DATA to its data folder.'); }
+  try { bridge = JSON.parse(await readFile(path.join(directory, 'bridge.json'), 'utf8')); } catch { throw new Error('Open PS Neighborhood first, or set PSN_DATA to its data folder.'); }
   const url = new URL(bridge.url); if (url.hostname !== '127.0.0.1' || url.protocol !== 'http:') throw new Error('Bridge must be on IPv4 loopback');
   const response = await fetch(url + 'api/call', { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${bridge.token}`, 'X-PSN-Client': 'mcp' }, body: JSON.stringify({ method, args }), signal: AbortSignal.timeout(120000) });
   const data = await response.json(); if (!response.ok) throw new Error(data.error); return data.result;
 }
 export function createMcp(call = bridgeCall) {
-  const server = new McpServer({ name: 'ps-neighbourhood', version: '0.10.0' });
+  const server = new McpServer({ name: 'ps-neighborhood', version: '0.10.1' });
   for (const [name, description, shape] of tools) {
     const mutation = ['shadow_add','shadow_refresh','console_refresh','console_backup','connect', 'disconnect', 'memory_write', 'watch_add', 'watch_remove', 'scan_start', 'scan_cancel', 'dump_start', 'dump_cancel', 'pointer_search', 'pointer_cancel', 'ftp_download'].includes(name);
     server.registerTool('psn_' + name, { description, inputSchema: z.object(shape), annotations: { readOnlyHint: !mutation, destructiveHint: name === 'memory_write' || name === 'disconnect', openWorldHint: true } }, async args => {
@@ -71,9 +71,9 @@ export function createMcp(call = bridgeCall) {
     });
   }
   for (const [name, uri, method] of [['workspace', 'psn://workspace', 'status'], ['dumps', 'psn://dumps', 'dump_list'], ['watches', 'psn://watches', 'watch_list']]) {
-    server.registerResource(name, uri, { mimeType: 'application/json', description: `PS Neighbourhood ${name}` }, async url => ({ contents: [{ uri: url.href, mimeType: 'application/json', text: JSON.stringify(await call(method, {})) }] }));
+    server.registerResource(name, uri, { mimeType: 'application/json', description: `PS Neighborhood ${name}` }, async url => ({ contents: [{ uri: url.href, mimeType: 'application/json', text: JSON.stringify(await call(method, {})) }] }));
   }
-  server.registerPrompt('offline-trainer-research', { description: 'A reproducible workflow for analyzing your own offline game memory.' }, async () => ({ messages: [{ role: 'user', content: { type: 'text', text: 'Inspect PS Neighbourhood status and processes, then identify the target process and memory maps. Ask which value or behavior I want to investigate. Start with read-only scans, refine against controlled changes, record module-relative offsets and title/version identity. Export selected mapped regions using psn_dump_start for Ghidra, poll completion, and report manifest and importer paths. Use dump reads, structure inspection, string extraction and pointer chains for offline analysis. Do not treat sequential live captures as atomic or absolute addresses as stable across launches. Propose any writes with expected bytes before applying them.' } }] }));
+  server.registerPrompt('offline-trainer-research', { description: 'A reproducible workflow for analyzing your own offline game memory.' }, async () => ({ messages: [{ role: 'user', content: { type: 'text', text: 'Inspect PS Neighborhood status and processes, then identify the target process and memory maps. Ask which value or behavior I want to investigate. Start with read-only scans, refine against controlled changes, record module-relative offsets and title/version identity. Export selected mapped regions using psn_dump_start for Ghidra, poll completion, and report manifest and importer paths. Use dump reads, structure inspection, string extraction and pointer chains for offline analysis. Do not treat sequential live captures as atomic or absolute addresses as stable across launches. Propose any writes with expected bytes before applying them.' } }] }));
   return server;
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await createMcp().connect(new StdioServerTransport());

@@ -1,7 +1,7 @@
 {
-  "name": "ps-neighbourhood",
-  "productName": "PS Neighbourhood",
-  "version": "0.10.0",
+  "name": "ps-neighborhood",
+  "productName": "PS Neighborhood",
+  "version": "0.10.1",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",
@@ -43,10 +43,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/GronedWaffel/ps-neighbourhood.git"
+    "url": "https://github.com/GronedWaffel/ps-neighborhood.git"
   },
-  "homepage": "https://github.com/GronedWaffel/ps-neighbourhood#readme",
+  "homepage": "https://github.com/GronedWaffel/ps-neighborhood#readme",
   "bugs": {
-    "url": "https://github.com/GronedWaffel/ps-neighbourhood/issues"
+    "url": "https://github.com/GronedWaffel/ps-neighborhood/issues"
   }
 }

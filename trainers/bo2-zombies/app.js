@@ -31,7 +31,7 @@ async function refresh() {
     $('#freeze-status').textContent = state.freeze.active ? `Clip freeze active · target ${state.freeze.value}` : state.freeze.error ? `Freeze stopped: ${state.freeze.error}` : 'Clip freeze off';
     if (!state.writesEnabled) {
       $('#spawn-weapon').disabled = true; $('#upgrade-weapon').disabled = true;
-      message('Enable “Allow MCP compare-and-write” in PS Neighbourhood → MCP bridge.');
+      message('Enable “Allow MCP compare-and-write” in PS Neighborhood → MCP bridge.');
     }
   } catch (e) {
     $('#connection').textContent = 'Waiting for an active Zombies player';

@@ -8,7 +8,7 @@ import { Workbench } from '../src/workbench.mjs';
 
 await mkdir('artifacts/tests', { recursive: true });
 async function ftpFixture(t) {
-  const files = new Map([['/data/hello.bin', Buffer.from('PS Neighbourhood FTP test')]]), sockets = new Set(), listeners = new Set();
+  const files = new Map([['/data/hello.bin', Buffer.from('PS Neighborhood FTP test')]]), sockets = new Set(), listeners = new Set();
   const server = net.createServer(control => {
     sockets.add(control); control.on('close', () => sockets.delete(control)); control.on('error', () => {});
     let buffer = '', dataReady, cwd = '/';

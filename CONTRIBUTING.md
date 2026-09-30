@@ -1,4 +1,4 @@
-# Contributing to PS Neighbourhood
+# Contributing to PS Neighborhood
 
 **Pull requests, testing and ideas are welcome.** You do not need to be an expert or write code to help. We welcome bug fixes, scanner and MCP improvements, trainer profiles, receiver compatibility work, UI changes and clearer documentation.
 
@@ -13,7 +13,7 @@ Draft PRs are welcome while work is in progress. Documentation-only changes do n
 
 ## Help verify firmware and software versions
 
-Use the [compatibility report template](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md) to report successes, failures or partial results. Testing other PS4 firmware and PS4Debug/NG/GoldHEN versions is especially valuable. Reports for different Windows versions, MCP clients and Ghidra versions also help.
+Use the [compatibility report template](https://github.com/GronedWaffel/ps-neighborhood/issues/new?template=firmware_report.md) to report successes, failures or partial results. Testing other PS4 firmware and PS4Debug/NG/GoldHEN versions is especially valuable. Reports for different Windows versions, MCP clients and Ghidra versions also help.
 
 Include the app release or commit, exact relevant software versions, console model/firmware if applicable, feature tested, steps, expected behavior, actual behavior and whether the result is repeatable. Identify real hardware, simulation or offline-only testing explicitly. Mark each tested feature as passed, failed, partial or not tested. No coding contribution is required for a useful report.
 

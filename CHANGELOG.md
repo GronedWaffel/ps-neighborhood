@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.0 — ShadowMount game transfers
+## 0.10.1 — ShadowMount game transfers
 
 - Added a PS5 ShadowMount page for folder/image transfer queues, free-space checks, progress, cancellation and file-level retry. Incomplete games remain staged, existing games are not overwritten, and copying is distinguished from console recognition.
 - Added library refresh/rescan, mount/unmount and launch/close controls, plus MCP source inspection, queueing and status tools.
@@ -33,7 +33,7 @@
 
 ## 0.8.3 — Community documentation and repository links
 
-- Updated project and download links to GronedWaffel/ps-neighbourhood.
+- Updated project and download links to GronedWaffel/ps-neighborhood.
 - Added prominent invitations for pull requests and community testing.
 - Expanded compatibility reports to record exact firmware, payload, Windows, MCP client and Ghidra versions with per-feature results.
 - Included the contribution guide and changelog in the portable build.

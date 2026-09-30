@@ -1,13 +1,13 @@
 # Importing RAM captures into Ghidra
 
-Export selected readable mappings or a bounded range from PS Neighbourhood. The resulting bundle contains raw segments, original virtual addresses, permissions, SHA-256 hashes, a manifest and `ImportPSNeighbourhood.java`.
+Export selected readable mappings or a bounded range from PS Neighborhood. The resulting bundle contains raw segments, original virtual addresses, permissions, SHA-256 hashes, a manifest and `ImportPSNeighborhood.java`.
 
-In Ghidra Script Manager, add the bundle folder to the script directories and run `ImportPSNeighbourhood.java`. Select that bundle when prompted. Save the new program, then run Auto Analyze. A capture is not a reconstructed ELF/SELF; it contains only the requested memory, and live reads are sequential rather than atomic.
+In Ghidra Script Manager, add the bundle folder to the script directories and run `ImportPSNeighborhood.java`. Select that bundle when prompted. Save the new program, then run Auto Analyze. A capture is not a reconstructed ELF/SELF; it contains only the requested memory, and live reads are sequential rather than atomic.
 
 New bundles also support headless import:
 
 ```powershell
-& '<Ghidra directory>\support\analyzeHeadless.bat' '<project directory>' PSNRAM -scriptPath '<bundle folder>' -preScript ImportPSNeighbourhood.java '<bundle folder>' -noanalysis
+& '<Ghidra directory>\support\analyzeHeadless.bat' '<project directory>' PSNRAM -scriptPath '<bundle folder>' -preScript ImportPSNeighborhood.java '<bundle folder>' -noanalysis
 ```
 
 The importer saves a new `PSN_<bundle-id>` program. Existing programs are not overwritten. Run `analyzeHeadless` with `-process PSN_<bundle-id>` to analyze that saved program. Older bundles generated before this update support the interactive workflow but do not save automatically in headless mode.

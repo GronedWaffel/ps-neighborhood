@@ -14,7 +14,7 @@ export class Trainer {
   async bytes(pid, at, length = 4) { return Buffer.from((await this.call('memory_read', { pid, address: hex(at), length })).hex, 'hex'); }
   async target({ allowUnequipped = false } = {}) {
     const status = await this.call('status');
-    if (status.mode !== 'live') throw new Error('Connect PS Neighbourhood to the real console first');
+    if (status.mode !== 'live') throw new Error('Connect PS Neighborhood to the real console first');
     if((status.profile?.platform||'ps4')!==(this.profile.platform||'ps4'))throw Error('This trainer profile targets a different console platform; a PS5 game build needs its own validated trainer profile');
     const candidates = (await this.call('processes')).filter(p => p.name === this.profile.processName);
     if (candidates.length !== 1) throw new Error('The expected Zombies process is not running');
@@ -80,7 +80,7 @@ export class Trainer {
       if (pin && target.fields.find(x => x.id === id)?.weaponId !== pin.weaponId) throw new Error('Equipped weapon changed; enable clip freeze again');
       if (pin && target.commandTime < pin.commandTime) throw new Error('Match clock restarted; freeze stopped');
       if (pin) pin.commandTime = target.commandTime;
-      if (!target.status.mcpWrites) throw new Error('Enable Allow MCP compare-and-write in PS Neighbourhood → MCP bridge');
+      if (!target.status.mcpWrites) throw new Error('Enable Allow MCP compare-and-write in PS Neighborhood → MCP bridge');
       if (target.status.scan?.state === 'running' || target.status.dump?.state === 'running') throw new Error('Finish the current scan or dump first');
       const field = target.fields.find(x => x.id === id);
       let before; const changed = [];

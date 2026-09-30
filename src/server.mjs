@@ -39,6 +39,6 @@ export async function startServer({ port = Number(process.env.PSN_PORT || 0), di
   return { server, workbench, url, directory, close: async () => { await workbench.shadow.close(); await workbench.console.close(); await workbench.packages.close(); await workbench.packages.receiver.close(); await workbench.ps5Receiver.close(); await workbench.disconnect(); server.close(); } };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const app = await startServer(); console.log(`PS Neighbourhood: ${app.url}`);
+  const app = await startServer(); console.log(`PS Neighborhood: ${app.url}`);
   for (const signal of ['SIGINT', 'SIGTERM']) process.on(signal, async () => { await app.close(); process.exit(0); });
 }

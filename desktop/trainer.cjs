@@ -17,7 +17,7 @@ app.on('second-instance', showTrainer);
 app.on('activate', showTrainer);
 app.whenReady().then(async () => {
   backend = await (await import(pathToFileURL(path.join(root, 'src/trainer-server.mjs')).href)).startTrainer();
-  const win = new BrowserWindow({ width: 1000, height: 800, minWidth: 750, minHeight: 620, title: 'BO2 Zombies · PS Neighbourhood', backgroundColor: '#10100f', autoHideMenuBar: true, webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false } });
+  const win = new BrowserWindow({ width: 1000, height: 800, minWidth: 750, minHeight: 620, title: 'BO2 Zombies · PS Neighborhood', backgroundColor: '#10100f', autoHideMenuBar: true, webPreferences: { sandbox: true, contextIsolation: true, nodeIntegration: false } });
   win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   win.webContents.on('will-navigate', (event, url) => { if (!url.startsWith(backend.url + '/')) event.preventDefault(); });
   await win.loadURL(backend.url);

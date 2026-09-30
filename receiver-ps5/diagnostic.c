@@ -9,7 +9,7 @@
 struct __attribute__((packed)) configuration {char magic[16];uint32_t addr;uint16_t port,reserved;uint8_t token[32];};
 volatile struct configuration config={.magic="PSNRECEIVERCFG01",.addr=0xb4b4b4b4,.port=0xb4b4};
 struct values {uint32_t value,second;float floating;uint32_t pad;double precise;uint64_t pointer;char text[32];};
-volatile struct values scratch={.value=100,.second=200,.floating=1.5f,.precise=2.25,.text="PS Neighbourhood diagnostic"};
+volatile struct values scratch={.value=100,.second=200,.floating=1.5f,.precise=2.25,.text="PS Neighborhood diagnostic"};
 int main(void){
  int fd=socket(AF_INET,SOCK_STREAM,0);if(fd<0)return 1;
  struct sockaddr_in dest;memset(&dest,0,sizeof dest);dest.sin_len=sizeof dest;dest.sin_family=AF_INET;dest.sin_addr.s_addr=config.addr;dest.sin_port=config.port;

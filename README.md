@@ -1,12 +1,12 @@
-# PS Neighbourhood
+# PS Neighborhood
 
-**[Download the Windows release — v0.10.0 with PS5 ShadowMount support](https://github.com/GronedWaffel/ps-neighbourhood/releases/tag/v0.10.0)**. Extract the Windows ZIP and run **Start PS5 Neighbourhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
+**[Download the Windows release — v0.10.1 with PS5 ShadowMount support](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.10.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
 
-[![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighbourhood)](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange) ![Hardware tested: PS5 13.60](https://img.shields.io/badge/hardware%20tested-PS5%2013.60-blue)
+[![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighborhood)](https://github.com/GronedWaffel/ps-neighborhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange) ![Hardware tested: PS5 13.60](https://img.shields.io/badge/hardware%20tested-PS5%2013.60-blue)
 
 **Your PS4 / PS5 memory workbench: scanning, MCP tools, Ghidra RAM exports, FTP and payload loading, plus platform-specific package and console management.**
 
-PS Neighbourhood brings console tools into one Windows desktop app. Explore a running game's memory through PS4Debug or PS5Debug-NG, capture regions for offline analysis, build a trainer, or install a folder of local PKGs directly from your PC. An integrated [Model Context Protocol](https://modelcontextprotocol.io/) server gives compatible AI clients access to the same memory workflow.
+PS Neighborhood brings console tools into one Windows desktop app. Explore a running game's memory through PS4Debug or PS5Debug-NG, capture regions for offline analysis, build a trainer, or install a folder of local PKGs directly from your PC. An integrated [Model Context Protocol](https://modelcontextprotocol.io/) server gives compatible AI clients access to the same memory workflow.
 
 Version 0.10.0 adds **ShadowMount**: PS5 folder/image transfer queues, free-space checks, progress, cancellation/retry, and library mount/unmount/launch/close controls. See the [ShadowMount guide](docs/SHADOWMOUNT.md).
 
@@ -16,19 +16,19 @@ Version 0.10.0 adds **ShadowMount**: PS5 folder/image transfer queues, free-spac
 
 [Getting started](#getting-started) · [Features and options](#features-and-options) · [MCP setup](docs/MCP.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build from source](#build-from-source) · [Roadmap](docs/ROADMAP.md)
 
-**Contributors and testers welcome!** Fork the project, open a pull request, or help verify another firmware or software version. Improvements to the scanner, MCP tools, trainers, receiver, UI and documentation are all welcome. [Start contributing](CONTRIBUTING.md) or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md).
+**Contributors and testers welcome!** Fork the project, open a pull request, or help verify another firmware or software version. Improvements to the scanner, MCP tools, trainers, receiver, UI and documentation are all welcome. [Start contributing](CONTRIBUTING.md) or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighborhood/issues/new?template=firmware_report.md).
 
-![PS Neighbourhood memory scanner in the simulated memory lab](docs/images/memory.png)
+![PS Neighborhood memory scanner in the simulated memory lab](docs/images/memory.png)
 
 ## Getting started
 
 ### Windows portable release
 
-1. Download the Windows x64 ZIP from the [Releases page](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) and extract the whole folder somewhere writable.
-2. Run **PS Neighbourhood.exe** for the standard workspace, or **Start PS5 Neighbourhood.cmd** for a separate PS5 workspace. No separate Node.js installation is needed.
+1. Download the Windows x64 ZIP from the [Releases page](https://github.com/GronedWaffel/ps-neighborhood/releases/latest) and extract the whole folder somewhere writable.
+2. Run **PS Neighborhood.exe** for the standard workspace, or **Start PS5 Neighborhood.cmd** for a separate PS5 workspace. No separate Node.js installation is needed.
 3. Enter your console's local IP in the console profile. The initial localhost value is a placeholder.
 4. Select PS4 or PS5 and enable the services needed for your task. Debugger **744**, FTP **2121**, PS4 BinLoader **9090**, and PS5 ELF Loader **9021** are typical ports; all are editable. FTP and ELF loading work independently of a memory connection.
-5. For PKGs and native console controls, load the platform-specific **PS Neighbourhood background receiver**: BinLoader on PS4, ELF Loader on PS5. Follow the [PS5 setup guide](docs/PS5.md) for its companion connection.
+5. For PKGs and native console controls, load the platform-specific **PS Neighborhood background receiver**: BinLoader on PS4, ELF Loader on PS5. Follow the [PS5 setup guide](docs/PS5.md) for its companion connection.
 
 PS4Debug or a compatible PS5Debug-NG service must already be running for live memory tools. PS5Debug-NG 1.3.2 supports verified native integer scans; other scan types use the host scanner. Reuse an existing PS4Debug session; **do not load another copy just because a connection fails**. The app does not jailbreak your console and does not include GoldHEN or PS4Debug.
 
@@ -132,7 +132,7 @@ node node_modules/electron/cli.js tests/ui-smoke.cjs
 npm run package
 ```
 
-Output: `dist/PS-Neighbourhood-0.9.0-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
+Output: `dist/PS-Neighborhood-0.10.1-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
 
 ## Contributing
 
@@ -142,13 +142,13 @@ Output: `dist/PS-Neighbourhood-0.9.0-win-x64/`. Packaging refuses to overwrite a
 
 Project hardware checks cover PS4 10.01 and limited PS5 13.60 workflows. Reviewed community results will be recorded by feature and exact environment in the [compatibility notes](docs/COMPATIBILITY.md), with links to the evidence. One successful connection will not be presented as confirmation that every feature works.
 
-See the [contribution guide](CONTRIBUTING.md), [open issues](https://github.com/GronedWaffel/ps-neighbourhood/issues), or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md).
+See the [contribution guide](CONTRIBUTING.md), [open issues](https://github.com/GronedWaffel/ps-neighborhood/issues), or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighborhood/issues/new?template=firmware_report.md).
 
 Please do not attach credentials, account details, save files, game packages, Sony binaries or raw memory dumps to public issues. Share a minimal synthetic reproduction or redacted log instead.
 
 ## Credits and license
 
-PS Neighbourhood is released under **GPL-3.0-or-later**; see [LICENSE](LICENSE) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Third-party components retain their own licenses. Complete receiver source and build instructions are included for [PS4](receiver/README.md) and [PS5](receiver-ps5/README.md).
+PS Neighborhood is released under **GPL-3.0-or-later**; see [LICENSE](LICENSE) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Third-party components retain their own licenses. Complete receiver source and build instructions are included for [PS4](receiver/README.md) and [PS5](receiver-ps5/README.md).
 
 Built on the work of [GoldHEN](https://github.com/GoldHEN/GoldHEN), [PS4Debug](https://github.com/GoldHEN/ps4debug), [jogolden/ps4debug](https://github.com/jogolden/ps4debug), [PS4Debug-NG](https://github.com/OpenSourcereR-dev/ps4debug-NG), [DirectPackageInstaller](https://github.com/marcussacana/DirectPackageInstaller), [Remote Package Installer](https://github.com/flatz/ps4_remote_pkg_installer), [OpenOrbis](https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain), [ps4-payload-dev/sdk](https://github.com/ps4-payload-dev/sdk), [Electron](https://github.com/electron/electron) and the [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk). Additional attribution is in the third-party notices.
 

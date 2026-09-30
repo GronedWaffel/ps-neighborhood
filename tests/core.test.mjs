@@ -103,7 +103,7 @@ test('RAM bundles hash correctly, retain map metadata, support offline reads/sca
   d.start(demo, opts, { mode: 'demo' }); await d.running; assert.equal(d.job.state, 'complete'); const a = d.job.id;
   const m = await d.manifest(a), data = await readFile(path.join(d.job.folder, m.segments[0].file));
   assert.equal(createHash('sha256').update(data).digest('hex'), m.segments[0].sha256); assert.equal(m.segments[0].start, opts.start); assert.equal(m.segments[0].prot, 3);
-  assert.match(await readFile(path.join(d.job.folder, 'ImportPSNeighbourhood.java'), 'utf8'), /new ProgramDB/);
+  assert.match(await readFile(path.join(d.job.folder, 'ImportPSNeighborhood.java'), 'utf8'), /new ProgramDB/);
   assert.equal((await d.read(a, '0x100000100', 4)).readUInt32LE(), 100);
   demo.tick(); d.start(demo, opts, { mode: 'demo' }); await d.running; const diff = await d.compare(a, d.job.id); assert.equal(diff.changedPages, 1); assert.equal(diff.addedPages, 0);
   const scan = new Scanner(await dir()); scan.start({ maps: async () => m.segments, read: (_, a2, n) => d.read(a, a2, n) }, { pid: 1337, type: 'u32', mode: 'exact', value: '100', connectionId: a }); await scan.running;
@@ -127,7 +127,7 @@ test('typed structures, pointers, strings, expected-byte writes and MCP write ga
   const w = await new Workbench(await dir()).init(); await w.connect(true);
   assert.equal((await w.pointer({ pid: 1337, base: '0x100000200', offsets: ['0'] })).address, '0x100000100');
   assert.equal((await w.inspect({ pid: 1337, address: '0x100000100', fields: [{ name: 'health', type: 'u32', offset: 0 }] }))[0].value, '100');
-  assert.match((await w.strings({ pid: 1337, address: '0x100000120', length: 32 })).rows[0].text, /PS NEIGHBOURHOOD/);
+  assert.match((await w.strings({ pid: 1337, address: '0x100000120', length: 32 })).rows[0].text, /PS NEIGHBORHOOD/);
   const args = { pid: 1337, address: '0x100000100', expectedHex: '64000000', hex: '65000000' };
   await assert.rejects(w.call('memory_write', args, 'mcp'), /disabled/);
   assert.equal((await w.call('memory_write', args)).verified, true); await assert.rejects(w.call('memory_write', args), /Memory changed/);

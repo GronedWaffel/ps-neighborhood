@@ -10,7 +10,7 @@ The existing per-title registration hook was unavailable. Enabling ShadowMount's
 
 ## Earlier 0.9.0 audit
 
-Environment: PS5 firmware 13.60, PS5Debug-NG 1.3.2, PS Neighbourhood 0.9.0, Windows x64. Hardware results apply to this environment and the tested operations, not every game or firmware. Private captures and device details are excluded from source control.
+Environment: PS5 firmware 13.60, PS5Debug-NG 1.3.2, PS Neighborhood 0.9.0, Windows x64. Hardware results apply to this environment and the tested operations, not every game or firmware. Private captures and device details are excluded from source control.
 
 ## Confirmed on hardware
 

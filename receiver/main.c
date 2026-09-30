@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// PS Neighbourhood background receiver. BGFT ABI follows flatz and marcussacana.
+// PS Neighborhood background receiver. BGFT ABI follows flatz and marcussacana.
 #include <stdint.h>
 #include <stddef.h>
 #include "vendor/ps4-libjbc/jailbreak.h"

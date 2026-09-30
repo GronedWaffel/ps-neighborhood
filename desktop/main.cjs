@@ -14,7 +14,7 @@ else app.whenReady().then(async () => {
   const { startServer } = await import(pathToFileURL(path.join(root, 'src', 'server.mjs')).href);
   backend = await startServer({ directory });
   if (ps5 && newWorkspace) await backend.workbench.setProfile({...backend.workbench.profile,platform:'ps5',payloadPort:9021,firmware:'13.60'});
-  const win = new BrowserWindow({ width: 1510, height: 1000, minWidth: 1100, minHeight: 760, title: 'PS Neighbourhood', backgroundColor: '#0b1017', autoHideMenuBar: true, webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true } });
+  const win = new BrowserWindow({ width: 1510, height: 1000, minWidth: 1100, minHeight: 760, title: 'PS Neighborhood', backgroundColor: '#0b1017', autoHideMenuBar: true, webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true } });
   const sleepTimer = setInterval(() => {
     const awake=backend.workbench.packages.server || backend.workbench.shadow.busy || backend.workbench.console.backup?.state==='running';
     if (awake && sleepBlocker === undefined) sleepBlocker = powerSaveBlocker.start('prevent-app-suspension');
@@ -50,13 +50,13 @@ else app.whenReady().then(async () => {
   });
   ipcMain.handle('mcp-config', event => {
     if (!trusted(event)) return null;
-    return { mcpServers: { 'ps-neighbourhood': { command: process.execPath, args: [path.join(root, 'src', 'mcp.mjs')], env: { ELECTRON_RUN_AS_NODE: '1', PSN_DATA: directory } } } };
+    return { mcpServers: { 'ps-neighborhood': { command: process.execPath, args: [path.join(root, 'src', 'mcp.mjs')], env: { ELECTRON_RUN_AS_NODE: '1', PSN_DATA: directory } } } };
   });
   win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   win.webContents.on('will-navigate', (event, url) => { if (!url.startsWith(backend.url + '/')) event.preventDefault(); });
   await win.loadURL(backend.url + (process.argv.includes('--shadow') ? '/#shadow' : process.argv.includes('--console') ? '/#console' : process.argv.includes('--pkg') ? '/#pkg' : ''));
   win.show();
   app.on('second-instance', () => { win.restore(); win.show(); win.focus(); });
-}).catch(e => { dialog.showErrorBox('PS Neighbourhood', e.stack || e.message); app.quit(); });
+}).catch(e => { dialog.showErrorBox('PS Neighborhood', e.stack || e.message); app.quit(); });
 app.on('window-all-closed', () => app.quit());
 app.on('will-quit', () => { backend?.workbench.client?.close(); backend?.workbench.packages.close().catch(() => {}); backend?.server.close(); if (sleepBlocker !== undefined) powerSaveBlocker.stop(sleepBlocker); });

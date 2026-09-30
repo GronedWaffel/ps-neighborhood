@@ -11,7 +11,7 @@ try {
   $config=$prepared | ConvertFrom-Json
   $importLog=Join-Path $config.directory 'import.log'
   $importScriptLog=Join-Path $config.directory 'import-script.log'
-  & $launcher $config.projects PSNValidation -scriptPath $config.scripts -preScript ImportPSNeighbourhood.java $config.bundle -postScript VerifyPSNImport.java -noanalysis -log $importLog -scriptlog $importScriptLog
+  & $launcher $config.projects PSNValidation -scriptPath $config.scripts -preScript ImportPSNeighborhood.java $config.bundle -postScript VerifyPSNImport.java -noanalysis -log $importLog -scriptlog $importScriptLog
   if($LASTEXITCODE -ne 0 -or -not (Select-String -LiteralPath $importScriptLog -Pattern 'PSN_IMPORT_VERIFIED' -Quiet)){throw 'Ghidra import verification failed; inspect the logs'}
   $analysisLog=Join-Path $config.directory 'analysis.log'
   $analysisScriptLog=Join-Path $config.directory 'analysis-script.log'

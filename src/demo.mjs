@@ -5,7 +5,7 @@ export class DemoConsole {
     this.connected = true; this.memory = Buffer.alloc(2 * 1024 * 1024); this.base = 0x100000000n;
     for (let i = 0; i < this.memory.length; i += 4) this.memory.writeUInt32LE((i * 13) % 10007, i);
     this.memory.writeUInt32LE(100, 0x100); this.memory.writeFloatLE(100, 0x104);
-    this.memory.writeUInt32LE(30, 0x108); this.memory.write('PS NEIGHBOURHOOD // MEMORY LAB', 0x120);
+    this.memory.writeUInt32LE(30, 0x108); this.memory.write('PS NEIGHBORHOOD // MEMORY LAB', 0x120);
     this.memory.writeBigUInt64LE(this.base + 0x100n, 0x200);
     Buffer.from('488b05deadbeef4885c0', 'hex').copy(this.memory, 0x400);
   }

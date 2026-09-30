@@ -21,7 +21,7 @@ popd
 exit /b 1
 
 :runtime_error
-echo The Electron runtime is missing from this copy of PS Neighbourhood.
+echo The Electron runtime is missing from this copy of PS Neighborhood.
 echo Run npm install in this folder, then open this launcher again.
 pause
 popd

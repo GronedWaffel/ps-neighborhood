@@ -1,2 +1,2 @@
 @echo off
-call "%~dp0Start PS Neighbourhood.cmd" --pkg
+call "%~dp0Start PS Neighborhood.cmd" --pkg

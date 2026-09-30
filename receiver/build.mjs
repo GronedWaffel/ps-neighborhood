@@ -20,5 +20,5 @@ if(elf.readBigUInt64LE(24)!==0n)throw Error('Payload entry is not at offset zero
 const shoff=Number(elf.readBigUInt64LE(40)), stride=elf.readUInt16LE(58),count=elf.readUInt16LE(60);let end=0;const sections=[];
 for(let i=0;i<count;i++){const p=shoff+i*stride,type=elf.readUInt32LE(p+4),flags=elf.readBigUInt64LE(p+8),address=Number(elf.readBigUInt64LE(p+16)),offset=Number(elf.readBigUInt64LE(p+24)),size=Number(elf.readBigUInt64LE(p+32));if((type===4||type===9)&&size)throw Error('Unresolved relocations in final payload');if(flags&2n){end=Math.max(end,address+size);sections.push({type,address,offset,size});}}
 if(end>1024*1024)throw Error('Unexpected payload size');const bin=Buffer.alloc(end);for(const s of sections)if(s.type!==8)elf.copy(bin,s.address,s.offset,s.offset+s.size);
-const output=path.join(root,'build/ps-neighbourhood-receiver.bin');await writeFile(output,bin);
+const output=path.join(root,'build/ps-neighborhood-receiver.bin');await writeFile(output,bin);
 const manifest={protocol:1,bytes:bin.length,sha256:createHash('sha256').update(bin).digest('hex'),compiler:'Zig 0.14.1 / Clang',source:'receiver/main.c'};await writeFile(path.join(root,'build/manifest.json'),JSON.stringify(manifest,null,2)+'\n');console.log(JSON.stringify(manifest));

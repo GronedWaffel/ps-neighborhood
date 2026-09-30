@@ -31,7 +31,7 @@ export class Receiver {
       if(net.isIP(host)!==4 || net.isIP(pcAddress)!==4 || !Number.isInteger(port)||port<1024||port>65535||!Number.isInteger(payloadPort)||payloadPort<1||payloadPort>65535)throw Error('Invalid receiver network settings');
       this.host=host;this.pcAddress=pcAddress;this.port=port;
       const build=this.platform==='ps5'?path.resolve(root,'../../receiver-ps5/build'):root;
-      const image=Buffer.from(await readFile(path.join(build,this.platform==='ps5'?'ps-neighbourhood-ps5.elf':'ps-neighbourhood-receiver.bin'))), manifest=JSON.parse(await readFile(path.join(build,'manifest.json'),'utf8'));
+      const image=Buffer.from(await readFile(path.join(build,this.platform==='ps5'?'ps-neighborhood-ps5.elf':'ps-neighborhood-receiver.bin'))), manifest=JSON.parse(await readFile(path.join(build,'manifest.json'),'utf8'));
       if(createHash('sha256').update(image).digest('hex')!==manifest.sha256)throw Error('Receiver binary checksum mismatch; rebuild the receiver');
       if(this.platform==='ps5'){if(manifest.platform!=='ps5')throw Error('Wrong receiver platform');validatePS5Elf(image);}
       const marker=Buffer.from('PSNRECEIVERCFG01'),at=image.indexOf(marker);
@@ -68,7 +68,7 @@ export class Receiver {
   }
   command(op,body=Buffer.alloc(0)){
     const run=this.tail.then(()=>new Promise((resolve,reject)=>{
-      if(!this.ready||!this.socket)return reject(Error('Load the PS Neighbourhood receiver first'));
+      if(!this.ready||!this.socket)return reject(Error('Load the PS Neighborhood receiver first'));
       const id=this.next++,frame=Buffer.alloc(16);frame.writeUInt32LE(COMMAND);frame.writeUInt32LE(id,4);frame.writeUInt32LE(op,8);frame.writeUInt32LE(body.length,12);
       const timer=setTimeout(()=>{this.pending.delete(id);this.socket?.destroy();reject(Error('Receiver command timed out; check console Downloads before retrying an install'));},20000);
       this.pending.set(id,{resolve,reject,timer});this.socket.write(Buffer.concat([frame,body]));

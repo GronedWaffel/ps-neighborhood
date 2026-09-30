@@ -6,10 +6,10 @@ ShadowMount tools in 0.10.0: `psn_shadow_status` reads the library/queue/progres
 
 ## Recommended configuration
 
-1. Start PS Neighbourhood and open **MCP bridge**.
+1. Start PS Neighborhood and open **MCP bridge**.
 2. Copy its generated configuration into your client's MCP server configuration (for example, Cursor's `mcpServers` configuration).
 3. Restart/reconnect the MCP server in the client and request `psn_status`.
-4. Keep PS Neighbourhood open while using its tools. Choose the memory lab explicitly or connect to your console.
+4. Keep PS Neighborhood open while using its tools. Choose the memory lab explicitly or connect to your console.
 
 The generated configuration uses absolute paths and the runtime included with a portable build. Avoid copying configuration from an older installation, because its data directory and bridge credential may differ.
 
@@ -18,18 +18,18 @@ For a source checkout with Node.js installed, adapt this example:
 ```json
 {
   "mcpServers": {
-    "ps-neighbourhood": {
+    "ps-neighborhood": {
       "command": "node",
-      "args": ["C:/path/to/ps-neighbourhood/src/mcp.mjs"],
+      "args": ["C:/path/to/ps-neighborhood/src/mcp.mjs"],
       "env": {
-        "PSN_DATA": "C:/path/to/ps-neighbourhood/data"
+        "PSN_DATA": "C:/path/to/ps-neighborhood/data"
       }
     }
   }
 }
 ```
 
-If your MCP client cannot find `node`, use its absolute executable path. In the portable configuration, the command is `PS Neighbourhood.exe`, with `ELECTRON_RUN_AS_NODE=1`; use the exact configuration produced by the app. The server reserves stdout for MCP messages.
+If your MCP client cannot find `node`, use its absolute executable path. In the portable configuration, the command is `PS Neighborhood.exe`, with `ELECTRON_RUN_AS_NODE=1`; use the exact configuration produced by the app. The server reserves stdout for MCP messages.
 
 ## Permissions and boundaries
 
@@ -69,7 +69,7 @@ For Ghidra work, enumerate mappings, capture selected regions, wait for completi
 ## Troubleshooting
 
 - **No module named psn:** remove the obsolete Python command and use `src/mcp.mjs` with Node or the generated Electron configuration.
-- **Open PS Neighbourhood first:** start the main app and ensure `PSN_DATA` points to its actual data directory.
+- **Open PS Neighborhood first:** start the main app and ensure `PSN_DATA` points to its actual data directory.
 - **Write denied:** enable the desktop write switch and verify that you are connected to the intended console.
 - **Connection closed:** verify executable/script paths and the runtime, then inspect the MCP client's stderr log.
 - **Console unavailable:** verify its address, network route and existing PS4Debug/PS5Debug service. Do not blindly reload a debugger over a running copy. FTP and the loader are separate services.

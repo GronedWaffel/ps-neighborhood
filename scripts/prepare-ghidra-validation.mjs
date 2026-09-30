@@ -9,7 +9,8 @@ await mkdir(path.join(directory,'projects'),{recursive:true});
 let maps,read,pid=1;
 if(process.argv[2]){
   const source=path.resolve(process.argv[2]),manifest=JSON.parse(await readFile(path.join(source,'manifest.json'),'utf8'));
-  assert.equal(manifest.format,'ps-neighbourhood-memory-v1');
+  // Earlier captures retain their original format identifier.
+  assert.ok(['ps-neighborhood-memory-v1','ps-neighbourhood-memory-v1'].includes(manifest.format));
   maps=manifest.segments;
   const data=new Map();
   for(const segment of maps){
@@ -33,7 +34,7 @@ const dumps=new Dumps(path.join(directory,'bundles'));
 dumps.start({maps:async()=>maps,read},{pid,regionStarts:maps.map(s=>s.start)},{mode:'offline-validation'});
 await dumps.running;assert.equal(dumps.job.state,'complete',dumps.job.error);
 const manifest=await dumps.manifest(dumps.job.id),scripts=path.join(directory,'scripts');await mkdir(scripts);
-await copyFile(path.join(dumps.job.folder,'ImportPSNeighbourhood.java'),path.join(scripts,'ImportPSNeighbourhood.java'));
+await copyFile(path.join(dumps.job.folder,'ImportPSNeighborhood.java'),path.join(scripts,'ImportPSNeighborhood.java'));
 const programName='PSN_'+manifest.id;
 const checks=manifest.segments.map(s=>`check(program, "${s.start.slice(2)}", ${s.length}L, ${!!(s.prot&2)}, ${!!(s.prot&4)}, "${s.sha256}");`).join('\n');
 await writeFile(path.join(scripts,'VerifyPSNImport.java'),`import ghidra.app.script.GhidraScript;

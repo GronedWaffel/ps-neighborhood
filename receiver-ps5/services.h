@@ -137,7 +137,8 @@ static int submit_package(const uint8_t *data,uint32_t length){
  if(read_string(&p,&left,content,sizeof content)||read_string(&p,&left,name,sizeof name)||read_string(&p,&left,url,sizeof url)||left)return -1010;
  char title[10];if(strlen(content)!=36||valid_title((uint8_t*)content+7,9,title))return -1010;
  // Local staging is restricted to files placed by this application's FTP workflow.
- if(strncmp(url,"http://",7)&&strncmp(url,"/data/ps-neighbourhood-pkgs/",26))return -1010;
+ // Accept the previous staging path for existing clients as well.
+ if(strncmp(url,"http://",7)&&strncmp(url,"/data/ps-neighborhood-pkgs/",sizeof("/data/ps-neighborhood-pkgs/")-1)&&strncmp(url,"/data/ps-neighbourhood-pkgs/",sizeof("/data/ps-neighbourhood-pkgs/")-1))return -1010;
  if(strstr(url,"..")||strchr(url,'\\'))return -1010;
  int r=init_installer();if(r)return r;
  // Native arguments remain alive until the system finishes using them.

@@ -1,6 +1,6 @@
 # BO2 Zombies trainer
 
-Launch **BO2 Zombies Trainer.cmd** in the PS Neighbourhood source folder. Keep the connected PS Neighbourhood desktop open with **MCP bridge → Allow MCP compare-and-write** enabled. Every console operation goes through the public stdio MCP tools.
+Launch **BO2 Zombies Trainer.cmd** in the PS Neighborhood source folder. Keep the connected PS Neighborhood desktop open with **MCP bridge → Allow MCP compare-and-write** enabled. Every console operation goes through the public stdio MCP tools.
 
 ## Controls and validation
 

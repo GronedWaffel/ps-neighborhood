@@ -83,7 +83,7 @@ export class ShadowMount {
     const remote='/data/shadowmount/config.ini',original=await this.remoteBytes(c,remote,65536),text=original.toString('utf8');
     if(!Buffer.from(text).equals(original))throw Error('ShadowMount config must use UTF-8');
     const key=/^[ \t]*app_install_all[ \t]*=.*$/gmi;
-    const changed=key.test(text)?text.replace(key,'app_install_all=true'):text+(text.endsWith('\n')?'':'\n')+'\n# PS Neighbourhood: native batch registration on PS5 13.60\napp_install_all=true\n';
+    const changed=key.test(text)?text.replace(key,'app_install_all=true'):text+(text.endsWith('\n')?'':'\n')+'\n# PS Neighborhood: native batch registration on PS5 13.60\napp_install_all=true\n';
     if(changed!==text){
      const id=randomUUID();backup=path.join(this.directory,'shadowmount','config-backups',id+'.ini');await mkdir(path.dirname(backup),{recursive:true});await writeFile(backup,original,{flag:'wx'});
      const temporary='/data/shadowmount/.psn-config-'+id+'.tmp';
@@ -113,7 +113,7 @@ export class ShadowMount {
  checkCancel(){if(this.cancelled)throw Error('Transfer cancelled; retry to resume completed files');}
  async close(){this.cancel();await this.running;await this.persistTail;}
  async ftp(fn){const c=this.clientFactory();this.activeClient=c;try{
-  const hello=await c.access({host:this.runProfile.host,port:this.runProfile.ftpPort,user:'anonymous',password:'ps-neighbourhood'});
+  const hello=await c.access({host:this.runProfile.host,port:this.runProfile.ftpPort,user:'anonymous',password:'ps-neighborhood'});
   // ftpsrv defaults to virtual decrypted SELF sizes/downloads. Transfer checks
   // must use the original stored bytes, including signed executables/libraries.
   if(/ftpsrv/i.test(hello?.message||'')){

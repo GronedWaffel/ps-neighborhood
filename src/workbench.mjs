@@ -149,7 +149,7 @@ export class Workbench extends EventEmitter {
     const remote = String(o.remote || '/'); if (!remote.startsWith('/') || /[\r\n\0]/.test(remote)) throw new Error('Enter an absolute console path');
     const ftp = new FtpClient(10000);
     try {
-      await ftp.access({ host: this.profile.host, port: this.profile.ftpPort, user: 'anonymous', password: 'ps-neighbourhood', secure: false });
+      await ftp.access({ host: this.profile.host, port: this.profile.ftpPort, user: 'anonymous', password: 'ps-neighborhood', secure: false });
       if (action === 'list') return (await listDirectory(ftp,remote)).map(f => ({ name: f.name, size: f.size, directory: f.isDirectory, modified: f.modifiedAt?.toISOString() }));
       if (this.transfer?.state === 'running') throw new Error('A transfer is already running');
       this.transfer = { state: 'running', action, remote, bytes: 0 };

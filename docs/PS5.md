@@ -4,7 +4,7 @@ v0.9.0 adds a PS5-specific connection path, memory tools, FTP, inventory, encryp
 
 ## Start your workspace
 
-1. Extract the portable build and open **Start PS5 Neighbourhood.cmd**. From source, use `npm start -- --ps5`.
+1. Extract the portable build and open **Start PS5 Neighborhood.cmd**. From source, use `npm start -- --ps5`.
 2. Enter your console IP in Overview. Select **PlayStation 5**, debugger port **744**, FTP **2121**, ELF loader **9021**, and the appropriate firmware profile, then save.
 3. FTP browsing and file transfer are independent of the debugger. Open File browser and list `/` to check the service.
 4. For memory tools, use a compatible PS5Debug service. This integration targets [PS5Debug-NG 1.3.2](https://github.com/Pharaoh2k/ps5debug-NG/releases/tag/1.3.2), whose upstream release explicitly lists firmware 13.60.
@@ -40,7 +40,7 @@ Do not rename a PS4 payload to `.elf`. The ELF validator checks file structure, 
 
 ## Report results
 
-Include the app version, exact firmware, loader and debugger versions, and feature-by-feature results. Distinguish live hardware results from simulation. Upstream debugger support alone is not PS Neighbourhood hardware validation. See [compatibility](COMPATIBILITY.md) and [contributing](../CONTRIBUTING.md).
+Include the app version, exact firmware, loader and debugger versions, and feature-by-feature results. Distinguish live hardware results from simulation. Upstream debugger support alone is not PS Neighborhood hardware validation. See [compatibility](COMPATIBILITY.md) and [contributing](../CONTRIBUTING.md).
 
 Minecraft base, update and 73 DLC packages are registered on-console, and the storage viewer lists their names and sizes. Minecraft launch/close passed. The PS5 browser installed with byte-identical content. An earlier automated launch returned 0x80020060, but the user subsequently confirmed the browser works.
 
@@ -48,4 +48,4 @@ Rest mode is hardware/user-confirmed on PS5 13.60. Restart passed with user conf
 
 ## PS5 save editing
 
-Companion revision 105 adds staged-copy decryption, verified re-encryption and confirmed replacement of one existing PS5 save container. Decrypted export and edited-copy preparation passed on 13.60; installed replacement passed with unchanged original bytes. PS Neighbourhood is not a game-specific save editor or account resigner. See [PS5 saves](PS5-SAVES.md) for the complete workflow and validation scope.
+Companion revision 105 adds staged-copy decryption, verified re-encryption and confirmed replacement of one existing PS5 save container. Decrypted export and edited-copy preparation passed on 13.60; installed replacement passed with unchanged original bytes. PS Neighborhood is not a game-specific save editor or account resigner. See [PS5 saves](PS5-SAVES.md) for the complete workflow and validation scope.

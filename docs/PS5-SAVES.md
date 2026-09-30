@@ -1,6 +1,6 @@
 # PS5 saves on firmware 13.60
 
-PS Neighbourhood exports decrypted PS5 save files and restores edits to existing files for the same console, local user and game. It requires FTP, a connected PS5Debug service and companion revision 105. The PS5 BO2 trainer is separate and remains deferred.
+PS Neighborhood exports decrypted PS5 save files and restores edits to existing files for the same console, local user and game. It requires FTP, a connected PS5Debug service and companion revision 105. The PS5 BO2 trainer is separate and remains deferred.
 
 ## Export, edit and restore
 

@@ -47,7 +47,7 @@ export class ConsoleManager {
   guard(){if(this.busy || this.job?.state==='running' || this.backup?.state==='running')throw Error('Wait for the console operation to finish');}
   guardTransfers(){if(this.externalTransferBusy?.())throw Error('Wait for the ShadowMount transfer');if(this.packages.busy || this.packages.queue.processing || this.packages.server)throw Error('Finish the PKG queue and stop sharing packages before controlling the console');}
   requireReceiver(){if(!this.receiver.ready || this.receiver.host!==this.profile().host)throw Error('Load the background receiver for this console first');}
-  async ftp(profile,fn){const c=this.clientFactory();this.activeClient=c;try{await c.access({host:profile.host,port:profile.ftpPort,user:'anonymous',password:'ps-neighbourhood'});return await fn(c);}finally{c.close();if(this.activeClient===c)this.activeClient=null;}}
+  async ftp(profile,fn){const c=this.clientFactory();this.activeClient=c;try{await c.access({host:profile.host,port:profile.ftpPort,user:'anonymous',password:'ps-neighborhood'});return await fn(c);}finally{c.close();if(this.activeClient===c)this.activeClient=null;}}
   async list(c,remote,optional=false){try{const entries=(await listDirectory(c,remote)).filter(e=>e.name!=='.'&&e.name!=='..');if(entries.some(e=>!safeName(e.name)))throw Error('A console filename cannot be represented safely on Windows: '+remote);return entries.filter(e=>!e.isSymbolicLink);}catch(e){if(optional&&e.code===550)return [];throw e;}}
   async walk(c,root,{optional=false,budget={dirs:0,files:0},prefix=''}={}){
     if(++budget.dirs>20000)throw Error('Directory scan limit reached; results are incomplete');
