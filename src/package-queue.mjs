@@ -69,7 +69,7 @@ export class PackageQueue {
           await this.installer.progress();
           item.transferred=job.progress?.transferred_total||0;item.total=job.progress?.length_total||item.size;
           if(job.error||job.pollError||job.servingError)throw Error(job.error||job.pollError||job.servingError);
-          if(job.state.startsWith('transfer complete')&&Number(job.progress.local_copy_percent)>=100)break;
+          if(job.state==='installation complete'||(job.consolePlatform!=='ps5'&&job.state.startsWith('transfer complete')&&Number(job.progress.local_copy_percent)>=100))break;
         }
         item.state='download complete';
       } catch(e) { item.state='needs attention';item.error=e.message;throw e; }

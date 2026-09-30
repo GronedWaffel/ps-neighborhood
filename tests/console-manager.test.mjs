@@ -9,6 +9,19 @@ import {ConsoleManager,safeName} from '../src/console-manager.mjs';
 import {Receiver,parseStorage} from '../src/pkg-receiver.mjs';
 import {Workbench} from '../src/workbench.mjs';
 
+test('recursive inventory supports FTP servers that ignore LIST paths and rejects missing directories',async()=>{
+  const entry=(name,isDirectory,size=0)=>({name,isDirectory,isFile:!isDirectory,size});
+  const directories=new Map([['/',[entry('user',true)]],['/user',[entry('captures',true)]],['/user/captures',[entry('clip.mp4',false,1234)]]]);
+  let cwd='/',listings=0;
+  const client={cd:async remote=>{if(!directories.has(remote)){const e=Error('Missing directory');e.code=550;throw e;}cwd=remote;},list:async()=>{assert.ok(++listings<=3,'Unexpected repeated directory traversal');return directories.get(cwd);}};
+  const manager=new ConsoleManager({});
+  const files=await manager.walk(client,'/user');
+  assert.deepEqual(files.map(f=>[f.remote,f.size]),[['/user/captures/clip.mp4',1234]]);
+  assert.deepEqual(await manager.list(client,'/missing',true),[]);
+  await assert.rejects(manager.list(client,'/missing'),/Missing directory/);
+  assert.equal(listings,2);
+});
+
 async function fixture(t){
   const directory=await mkdtemp(path.join(tmpdir(),'psn-console-'));t.after(()=>rm(directory,{recursive:true,force:true}));
   const dbFile=path.join(directory,'fixture.db'),db=new DatabaseSync(dbFile);
@@ -17,7 +30,7 @@ async function fixture(t){
   const files=new Map([['/system_data/priv/mms/app.db',await readFile(dbFile)],['/user/app/CUSA12345/app.pkg',Buffer.alloc(100)],['/user/patch/CUSA12345/patch.pkg',Buffer.alloc(40)],[root+'/sdimg_save',Buffer.alloc(16,3)],[root+'/save.bin',Buffer.alloc(96,4)],[meta+'/icon.png',Buffer.from('image')]]);
   let stamp='2026-09-27',running=false;
   const operations=[];
-  const client={access:async()=>{},close:()=>{},trackProgress:()=>{},list:async remote=>{
+  const client={cd:async remote=>{client.cwd=remote;},access:async()=>{},close:()=>{},trackProgress:()=>{},list:async remote=>{remote=client.cwd;
     const entries=new Map();for(const [p,data] of files){if(!p.startsWith(remote+'/'))continue;const rel=p.slice(remote.length+1),name=rel.split('/')[0],dir=rel.includes('/');entries.set(name,{name,isDirectory:dir,isFile:!dir,size:dir?0:data.length,rawModifiedAt:stamp});}
     if(!entries.size){const e=Error('Not found');e.code=550;throw e;}return [...entries.values()];
   },downloadTo:async(local,remote)=>{if(!files.has(remote)){const e=Error('Missing');e.code=550;throw e;}if(typeof local==='string')await writeFile(local,files.get(remote));else await new Promise((resolve,reject)=>{local.on('error',reject);local.on('finish',resolve);local.end(files.get(remote));});if(client.changeDuringBackup&&remote===root+'/save.bin')stamp='changed';}};
@@ -41,6 +54,29 @@ test('attached extended storage is measured separately from the internal disk',a
   const f=await fixture(t),original=f.receiver.storage;f.receiver.storage=async index=>index===1?{index,path:'/mnt/ext0',mount:'/mnt/ext0',fsid:'external',total:50000,free:40000,available:40000,used:10000}:original(index);
   f.files.set('/mnt/ext0/user/app/CUSA22222/app.pkg',Buffer.alloc(900));f.manager.refresh();await f.manager.running;assert.equal(f.manager.job.state,'complete');
   assert.equal(f.manager.snapshot.drives.length,2);assert.equal(f.manager.snapshot.games.find(g=>g.titleId==='CUSA22222').baseBytes,900);assert.equal(f.manager.snapshot.categories.find(c=>c.drive==='/mnt/ext0'&&c.category==='games').bytes,900);
+});
+
+test('PS5 inventory measures direct M.2 and nested USB layouts without counting placeholders or device aliases',async t=>{
+  const f=await fixture(t);
+  f.manager.profile=()=>({platform:'ps5',host:'192.0.2.1',ftpPort:2121});
+  const drives=[
+    {index:0,path:'/user',mount:'/user',mountFrom:'/dev/ssd0.user'},
+    {index:1,path:'/mnt/ext0',mount:'/mnt/ext0',mountFrom:'/dev/da0'},
+    {index:2,path:'/mnt/ext1',mount:'/mnt/ext1',mountFrom:'nvme1'},
+    {index:3,path:'/user2',mount:'/user2',mountFrom:'/dev/nvme1'},
+    {index:4,path:'/mnt/ext2',mount:'/mnt/ext2',mountFrom:'tmpfs',placeholder:true}
+  ];
+  f.manager.ps5Receiver={...f.receiver,storage:async i=>{if(!drives[i])throw Error('Not mounted');return {...drives[i],total:4000000000000,free:3000000000000,available:2900000000000,used:1000000000000};}};
+  f.files.set('/mnt/ext0/user/app/CUSA22222/app.pkg',Buffer.alloc(200));
+  f.files.set('/mnt/ext1/app/PPSA33333/app.pkg',Buffer.alloc(300));
+  f.files.set('/mnt/ext1/patch/PPSA33333/patch.pkg',Buffer.alloc(30));
+  f.files.set('/mnt/ext2/app/PPSA44444/app.pkg',Buffer.alloc(400));
+  f.manager.refresh();await f.manager.running;assert.equal(f.manager.job.state,'complete',f.manager.job.error);
+  const s=f.manager.status();assert.deepEqual(s.drives.map(d=>d.path),['/user','/mnt/ext0','/mnt/ext1']);
+  assert.equal(s.games.length,3);assert.equal(s.games.find(g=>g.titleId==='CUSA22222').totalBytes,200);
+  const m2=s.games.find(g=>g.titleId==='PPSA33333');assert.equal(m2.totalBytes,330);assert.deepEqual(m2.locations,['/mnt/ext1']);
+  assert.equal(s.categories.find(c=>c.drive==='/mnt/ext1'&&c.category==='patches').bytes,30);
+  assert.ok(!s.games.some(g=>g.titleId==='PPSA44444'));
 });
 
 test('mounted evidence survives closing a game but invalidates after package changes without changing disk totals',async t=>{

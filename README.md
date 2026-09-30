@@ -1,14 +1,14 @@
 # PS Neighbourhood
 
-[![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighbourhood)](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange)
+[![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighbourhood)](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange) ![Hardware tested: PS5 13.60](https://img.shields.io/badge/hardware%20tested-PS5%2013.60-blue)
 
-**Your PS4 workbench: memory scanner, MCP server, Ghidra RAM exports, direct PKG installs, FTP, saves and console management.**
+**Your PS4 / PS5 memory workbench: scanning, MCP tools, Ghidra RAM exports, FTP and payload loading, plus platform-specific package and console management.**
 
-PS Neighbourhood brings console tools into one Windows desktop app. Explore a running game's memory through PS4Debug, capture regions for offline analysis, build a trainer, or install a folder of local PKGs directly from your PC. An integrated [Model Context Protocol](https://modelcontextprotocol.io/) server gives compatible AI clients access to the same memory workflow.
+PS Neighbourhood brings console tools into one Windows desktop app. Explore a running game's memory through PS4Debug or PS5Debug-NG, capture regions for offline analysis, build a trainer, or install a folder of local PKGs directly from your PC. An integrated [Model Context Protocol](https://modelcontextprotocol.io/) server gives compatible AI clients access to the same memory workflow.
 
-> **Compatibility: only PS4 firmware 10.01 has been hardware-tested. Nothing above 10.01 has been tested on real hardware.** Other listed PS4 firmware targets are experimental, including versions below 10.01. Individual features have their own validation limits below.
+> **PS4 compatibility: only PS4 firmware 10.01 has been hardware-tested.** Other listed PS4 firmware targets are experimental, including versions below 10.01. Individual features have their own validation limits below.
 >
-> **PS5 13.60 is a future goal, not current support.** We plan to add support when a compatible jailbreak and the necessary debugging/payload tools become available. This requires a separate PS5 implementation and hardware validation; there is no release date or compatibility guarantee.
+> **PS5 13.60 support is here:** memory scanning, guarded writes, MCP, Ghidra RAM exports, FTP, ELF loading, PS4/PS5 PKG installation and folder queues, game launch/close, storage inventory, uninstall, power controls, and PS5 save export/restore. These workflows have scoped hardware checks on 13.60. The BO2 trainer remains PS4-only; external/M.2 drive behavior has automated coverage but no attached-drive hardware test. See the [PS5 setup guide](docs/PS5.md), [save guide](docs/PS5-SAVES.md), and [validation record](docs/PS5-VALIDATION.md).
 
 [Getting started](#getting-started) · [Features and options](#features-and-options) · [MCP setup](docs/MCP.md) · [Compatibility](docs/COMPATIBILITY.md) · [Build from source](#build-from-source) · [Roadmap](docs/ROADMAP.md)
 
@@ -21,18 +21,20 @@ PS Neighbourhood brings console tools into one Windows desktop app. Explore a ru
 ### Windows portable release
 
 1. Download the Windows x64 ZIP from the [Releases page](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) and extract the whole folder somewhere writable.
-2. Run **PS Neighbourhood.exe**. No separate Node.js installation is needed.
-3. Enter your PS4's local IP in the console profile. The initial localhost value is a placeholder.
-4. Enable the services needed for your task, then connect. Typical ports are PS4Debug **744**, FTP **2121**, and GoldHEN BinLoader **9090**; all are editable.
-5. For PKGs and native console controls, open the PKG installer and load **PS Neighbourhood background receiver** through BinLoader.
+2. Run **PS Neighbourhood.exe** for the standard workspace, or **Start PS5 Neighbourhood.cmd** for a separate PS5 workspace. No separate Node.js installation is needed.
+3. Enter your console's local IP in the console profile. The initial localhost value is a placeholder.
+4. Select PS4 or PS5 and enable the services needed for your task. Debugger **744**, FTP **2121**, PS4 BinLoader **9090**, and PS5 ELF Loader **9021** are typical ports; all are editable. FTP and ELF loading work independently of a memory connection.
+5. For PKGs and native console controls, load the platform-specific **PS Neighbourhood background receiver**: BinLoader on PS4, ELF Loader on PS5. Follow the [PS5 setup guide](docs/PS5.md) for its companion connection.
 
-PS4Debug must already be running for live memory tools. Reuse an existing PS4Debug session; **do not load another copy just because a connection fails**. The app does not jailbreak your console and does not include GoldHEN or PS4Debug.
+PS4Debug or a compatible PS5Debug-NG service must already be running for live memory tools. PS5Debug-NG 1.3.2 supports verified native integer scans; other scan types use the host scanner. Reuse an existing PS4Debug session; **do not load another copy just because a connection fails**. The app does not jailbreak your console and does not include GoldHEN or PS4Debug.
 
 No console available? Choose **Open memory lab** to try scanning, inspection, watches and dumps against simulated memory. Simulated memory operations do not contact a console.
 
-Keep the portable folder together. Your settings, MCP bridge credentials, downloads, scans and captures live under `resources/app/data`; source builds use `data`. Keep that directory private. Set `PSN_DATA` to use another directory, and use the same value for the main app, trainer and MCP client.
+Keep the portable folder together. Your settings, MCP bridge credentials, downloads, scans and captures live under `resources/app/data`; source builds use `data`. The separate PS5 launcher uses `resources/app/data/ps5` (or `data/ps5` from source). Keep that directory private. Set `PSN_DATA` to use another directory, and use the same value for the main app, trainer and MCP client.
 
 ## Features and options
+
+Memory tools, MCP, dumps, FTP, payload transfer, inventory, capacity and encrypted save archives have PS4/PS5 paths. PS5 uses its own native companion for game/power controls and an experimental AppInstUtil installer. See the PS5 validation record for measured results and test scope. The PS4 receiver is never loaded on PS5.
 
 ### Memory scanner and inspector
 
@@ -46,7 +48,7 @@ Keep the portable folder together. Your settings, MCP bridge credentials, downlo
 
 ### RAM capture, Ghidra and offline research
 
-Select readable mappings or a bounded address range and save raw memory segments with original addresses, permissions, SHA-256 hashes and a manifest. A generated Java importer helps place the segments into Ghidra at their captured addresses; [Ghidra](https://github.com/NationalSecurityAgency/ghidra) is installed separately. The generated importer has not been independently validated inside Ghidra.
+Select readable mappings or a bounded address range and save raw memory segments with original addresses, permissions, SHA-256 hashes and a manifest. A generated Java importer helps place the segments into Ghidra at their captured addresses; [Ghidra](https://github.com/NationalSecurityAgency/ghidra) is installed separately. Ghidra 12.1.3 import, saving/reopening and analysis passed byte/address/permission verification on a real PS5 capture and a multi-region fixture. See the [Ghidra guide](docs/GHIDRA.md).
 
 Scan dumps offline, compare captures, inspect strings and structures, or reverse-search for pointer chains up to five levels deep. Searches expose truncation and require revalidation across captures. Captures are sequential, not an atomic snapshot; ASLR addresses can change between sessions. These exports do not reconstruct an original executable.
 
@@ -54,10 +56,10 @@ Scan dumps offline, compare captures, inspect strings and structures, or reverse
 
 Choose a local PKG or **add a whole folder**, optionally including subfolders. Review detected files, remove unwanted entries and run the queue. Duplicate entries are ignored, invalid headers are flagged, and packages are submitted sequentially. The queue stops on errors or uncertain replies and is not persisted between app sessions.
 
-- **Background receiver:** our included, source-built payload runs in the PS4 background. You do not have to leave a Remote Package Installer app open on the console.
+- **Background receiver:** our included, source-built PS4 receiver or PS5 companion runs in the console background. You do not have to leave a Remote Package Installer app open on the console.
 - **Remote Package Installer:** an optional compatibility route for an existing RPI installation; its console app must be open. Configure its API port for your fork.
 - Files stream directly from their existing PC location. There is no USB transfer or second full local copy.
-- Progress distinguishes transferred data from final installation. PS4 Notifications → Downloads remains the final authority.
+- Progress distinguishes transferred data from final installation. Check the console's download/install status if the connection is interrupted.
 - Keep the PC and app running until installation finishes; minimizing is fine. The app prevents idle sleep during file serving, but cannot prevent a manual shutdown.
 
 The background receiver normally uses TCP **9697** for its authenticated callback and **9696** for PKG serving. Allow the console to reach those ports on your private network. PKG checks validate headers, declared size and content identity, not cryptographic integrity or firmware/backport compatibility. Bring your own package files; none are provided.
@@ -66,15 +68,15 @@ The background receiver normally uses TCP **9697** for its authenticated callbac
 
 View installed games, separate patches and DLC, available drive capacity, category sizes and save groups. Some bundled content can be recognized from mounted game assets, including BO1/BO2 profiles. Bundled assets are not separately removable DLC, and finding an asset does not prove that all DLC is present or playable. File totals are logical sizes and can differ from disk allocation.
 
-Launch or close games, uninstall a game or its separate patch, and request shutdown, restart or rest mode from desktop controls. Destructive actions identify their target; running-title removal is refused. **Uninstall and power transitions have not been hardware-validated.** External-storage scenarios also need hardware testing.
+Launch or close games, uninstall a game or its separate patch, and request shutdown, restart or rest mode from desktop controls. Destructive actions identify their target; running-title removal is refused. On PS5 13.60, test-content uninstall, patch removal, rest mode and restart passed hardware checks. Shutdown was tested successfully by the user. External-storage scenarios also need hardware testing.
 
-Download an encrypted save group, key files and metadata with a SHA-256 manifest while the game is closed. This is a raw backup, **not save decryption, account resigning, USB export or a restore workflow**.
+Download an encrypted save group, key files and metadata with a SHA-256 manifest while the game is closed. On **PS5 13.60**, also export decrypted PS5 files, prepare edits to existing files, and confirm a restore to the same console/user. Original encrypted backups are retained; staged copies are re-encrypted and verified before replacement. Account resigning and cross-console transfer are not implemented. See the [PS5 save guide and hardware test limits](docs/PS5-SAVES.md).
 
 ### FTP and payload loader
 
 Browse the console's filesystem, download files and upload files through passive anonymous FTP. Downloads are staged before the final rename; uploads refuse to overwrite an existing file. Transfer resume and recursive FTP queues are not implemented.
 
-Send a selected local payload through BinLoader with a displayed SHA-256 hash. A completed transfer means the bytes were sent; it does not confirm that the payload executed successfully.
+Send a selected local payload with a displayed SHA-256 hash: PS4 uses BinLoader; PS5 uses a 64-bit x86-64 ELF Loader. PS5 headers and load-segment bounds are validated before connecting, and PS4 binaries are rejected. Service checks do not probe the loader with an empty connection. A completed transfer means the bytes were sent; it does not confirm that the payload executed successfully.
 
 ### BO2 Zombies trainer
 
@@ -96,11 +98,13 @@ Tools cover processes, mappings, bounded reads, structures, strings, scans, watc
 
 On 10.01, live checks covered classic PS4Debug memory workflows, selected trainer controls, a completed PC-to-PS4 package installation, console inventory, save backup and game launching. Automated tests exercise additional paths using simulation and native dispatch fixtures; they do not substitute for console testing. Read the [compatibility notes](docs/COMPATIBILITY.md) before trying an experimental target.
 
-**PS5 13.60 support is planned for the future**, conditional on a compatible jailbreak, usable tools and validation. PS4 firmware numbers and payloads do not imply PS5 compatibility.
+**PS5 13.60:** v0.9.0 includes PS5Debug-NG integration and a separate native companion for package installation, game and power controls, storage, and PS5 save operations. Hardware checks cover the features summarized above; [the option audit](docs/PS5-VALIDATION.md) records the scope. Other PS5 firmware is not confirmed. PS4 firmware numbers and payloads do not imply PS5 compatibility.
 
 ## Build from source
 
 Requires **Windows x64**, **Node.js 24 or newer**, npm, and **Zig 0.14.1** for the native receiver and its regression test. Download Zig from [ziglang.org](https://ziglang.org/download/) and verify its published checksum. The compiler is not committed or included in the portable release.
+
+For PS5 builds and portable packaging, also obtain the [PS5 payload SDK v0.43](https://github.com/ps5-payload-dev/sdk/releases/tag/v0.43). See [PS5 companion build instructions](receiver-ps5/README.md).
 
 From a checkout, in PowerShell:
 
@@ -108,6 +112,8 @@ From a checkout, in PowerShell:
 npm ci
 $env:ZIG = 'C:\path\to\zig.exe'
 npm run build:receiver
+$env:PS5_PAYLOAD_SDK = 'C:\path\to\ps5-payload-sdk'
+node receiver-ps5/build.mjs
 npm test
 npm start
 ```
@@ -122,7 +128,7 @@ node node_modules/electron/cli.js tests/ui-smoke.cjs
 npm run package
 ```
 
-Output: `dist/PS-Neighbourhood-0.8.3-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
+Output: `dist/PS-Neighbourhood-0.9.0-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
 
 ## Contributing
 
@@ -130,7 +136,7 @@ Output: `dist/PS-Neighbourhood-0.8.3-win-x64/`. Packaging refuses to overwrite a
 
 **Help confirm other versions.** If you have another PS4 firmware, PS4Debug/NG or GoldHEN version, Windows setup, MCP client or Ghidra release, please report what works and what fails. Include exact versions, app release/commit, console model where relevant, steps and repeatable results. You can contribute a test report without writing code. Start with read-only checks and leave unsupported firmware guards in place.
 
-Only PS4 10.01 currently has project hardware validation. Reviewed community results will be recorded by feature and exact environment in the [compatibility notes](docs/COMPATIBILITY.md), with links to the evidence. One successful connection will not be presented as confirmation that every feature works.
+Project hardware checks cover PS4 10.01 and limited PS5 13.60 workflows. Reviewed community results will be recorded by feature and exact environment in the [compatibility notes](docs/COMPATIBILITY.md), with links to the evidence. One successful connection will not be presented as confirmation that every feature works.
 
 See the [contribution guide](CONTRIBUTING.md), [open issues](https://github.com/GronedWaffel/ps-neighbourhood/issues), or [submit a compatibility report](https://github.com/GronedWaffel/ps-neighbourhood/issues/new?template=firmware_report.md).
 
@@ -138,7 +144,7 @@ Please do not attach credentials, account details, save files, game packages, So
 
 ## Credits and license
 
-PS Neighbourhood is released under **GPL-3.0-or-later**; see [LICENSE](LICENSE) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Third-party components retain their own licenses. Complete receiver source and its build instructions are included under [receiver/](receiver/README.md).
+PS Neighbourhood is released under **GPL-3.0-or-later**; see [LICENSE](LICENSE) and [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md). Third-party components retain their own licenses. Complete receiver source and build instructions are included for [PS4](receiver/README.md) and [PS5](receiver-ps5/README.md).
 
 Built on the work of [GoldHEN](https://github.com/GoldHEN/GoldHEN), [PS4Debug](https://github.com/GoldHEN/ps4debug), [jogolden/ps4debug](https://github.com/jogolden/ps4debug), [PS4Debug-NG](https://github.com/OpenSourcereR-dev/ps4debug-NG), [DirectPackageInstaller](https://github.com/marcussacana/DirectPackageInstaller), [Remote Package Installer](https://github.com/flatz/ps4_remote_pkg_installer), [OpenOrbis](https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain), [ps4-payload-dev/sdk](https://github.com/ps4-payload-dev/sdk), [Electron](https://github.com/electron/electron) and the [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk). Additional attribution is in the third-party notices.
 

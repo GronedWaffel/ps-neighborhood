@@ -68,6 +68,15 @@ test('validation preserves 64-bit precision, signed values, float tolerance and 
   const f = Buffer.alloc(4); f.writeFloatLE(1.5); assert.ok(matcher('f32', 'exact', '1.501', null, .01).test(f, 0));
   const big = Buffer.alloc(8); big.writeBigInt64LE(-9007199254740993n); assert.ok(matcher('i64', 'exact', '-9007199254740993').test(big, 0));
 });
+
+test('text and AOB defaults search every byte, including long patterns at unaligned addresses',async()=>{
+ const demo=new DemoConsole(),scan=new Scanner(await dir(),{chunkSize:128});
+ const text='An unaligned string '.repeat(5);demo.memory.write(text,0x513);
+ for(const [type,value] of [['text',text],['aob',Buffer.from(text).toString('hex').match(/../g).join(' ')]]){
+  scan.start(demo,{pid:1337,type,mode:'exact',value,start:'0x100000500',end:'0x100000700',connectionId:'demo'});await scan.running;
+  assert.equal(scan.job.state,'complete',scan.job.error);const result=await scan.results(scan.job.sessionId);assert.equal(result.count,1);assert.equal(result.rows[0].address,'0x100000513');
+ }
+});
 test('disk-backed unknown scan retains all candidates, refines changes, and keeps previous results on cancellation', async () => {
   const demo = new DemoConsole(), scan = new Scanner(await dir(), { chunkSize: 128 });
   const opts = { pid: 1337, type: 'u32', mode: 'unknown', start: '0x100000000', end: '0x100001000', connectionId: 'demo' };

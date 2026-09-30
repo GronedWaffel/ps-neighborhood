@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.9.0 — PS5 13.60 workbench, installer, console controls and saves
+
+- Fixed delayed ELF socket timeouts escaping into Electron's main process. Transfers now clear their timers, close their sockets, and return transport errors to the caller. Added completion, stalled-transfer, late-error and refused-connection checks.
+
+- Added PS5 13.60 decrypted save export through the desktop and MCP, staged editing/re-encryption verification, and confirmed same-console/user restore of existing files. Companion revision 105 retains encrypted backups, protects metadata and rejects newer save progress. See docs/PS5-SAVES.md for hardware test scope and restrictions.
+
+- Added PS5 companion revision 104 storage metadata, M.2 identification, extended/USB slot probing, placeholder/alias filtering and direct/nested library layouts.
+- Verified the generated importer in Ghidra 12.1.3 against real and synthetic captures; added automatic headless program saving and repeatable import/analysis verification scripts.
+
+- Fixed FTP browsing, inventory traversal and upload overwrite checks with servers that ignore LIST path arguments. Verified the corrected inventory on PS5 13.60 after reboot.
+
+- Added PS4/PS5 platform selection and a separate PS5 workspace launcher.
+- Added a PS5Debug-NG identity handshake and shared host scanning, memory, dump and MCP workflows.
+- Added PS5 ELF64 validation and duplicate-debugger checks before loader connections.
+- Removed empty loader-port probes from service checks.
+- Added experimental read-only CUSA/PPSA FTP inventory.
+- Added PS5-native launch/close, uninstall, power and AppInstUtil installation paths; kept the PS4-specific trainer behind a platform guard. Fixed text/AOB default alignment so valid unaligned matches are found.
+- Added PS5 protocol, catalog, storage, save-archive and platform-guard regressions, plus PS5 UI coverage.
+- Confirmed PS5 13.60 memory, all scan types, controlled scratch-buffer writes, pointers, RAM export, MCP, FTP, inventory, internal capacity and one encrypted save archive. Added a PS5-native companion and PS5 catalog/save layouts. See docs/PS5-VALIDATION.md for limits.
+- Confirmed BO2 close/relaunch and native NG exact/refinement scans on PS5 13.60. Rest mode passed. Test-content uninstall and patch removal/reinstall passed; restart passed with user confirmation; shutdown was tested successfully by the user. Corrected the native install metadata and 712-byte status ABI; both PS4 Minecraft and the PS5 browser package now install over HTTP with native completion and user confirmation.
+- Added dedicated PS5 patch progress and native base/update pause/resume, verified through a full update download. Installed 73 DLC packages through the folder queue and added named PS5 add-on catalog reading. Minecraft launch/close passed; the user subsequently confirmed the browser works after an earlier automated launch error with byte-identical installed content.
+- Extended the duplicate-debugger check to five seconds: Windows can take just over two seconds to report a closed port.
+
 ## 0.8.3 — Community documentation and repository links
 
 - Updated project and download links to GronedWaffel/ps-neighbourhood.

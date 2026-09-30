@@ -52,6 +52,10 @@ All tool names use the `psn_` prefix. The client can discover exact argument sch
 - **Packages:** `pkg_inspect`, `pkg_check`, `pkg_status`.
 - **Console:** `console_status`, `console_refresh`, `console_backup`.
 
+## PS5 workspaces
+
+Start the PS5 launcher or select the PS5 platform in Overview. Copy MCP configuration from that running window: its data directory is separate from the PS4 workspace. The existing memory, scan, dump and FTP tool names work with the selected PS5Debug service. `psn_status` exposes the platform, detected firmware/branding and feature availability. PS5 scans use the host backend. PS4 installer and native console actions are rejected for a PS5 profile, including when called through MCP.
+
 ## Limits and workflow
 
 Addresses are strings to preserve 64-bit precision. Individual reads are capped at 1 MiB; vector reads allow 1–128 ranges with a combined 1 MiB limit and execute sequentially. Writes are capped at 4096 bytes. Scan selections are capped at 512 MiB; RAM captures allow up to 4 GiB. Pointer search is offline, up to five levels, and reports truncated results.
@@ -66,4 +70,6 @@ For Ghidra work, enumerate mappings, capture selected regions, wait for completi
 - **Open PS Neighbourhood first:** start the main app and ensure `PSN_DATA` points to its actual data directory.
 - **Write denied:** enable the desktop write switch and verify that you are connected to the intended console.
 - **Connection closed:** verify executable/script paths and the runtime, then inspect the MCP client's stderr log.
-- **Console unavailable:** verify its address, network route and existing PS4Debug service. Do not blindly reload PS4Debug over a running copy.
+- **Console unavailable:** verify its address, network route and existing PS4Debug/PS5Debug service. Do not blindly reload a debugger over a running copy. FTP and the loader are separate services.
+
+PS5 console refresh includes PS5/PS4 save layouts and the PS5 content catalog. Load the separate companion in the desktop for capacity and decrypted saves. `psn_console_backup` accepts `decrypted: true` for PS5 saves on 13.60; poll `psn_console_status` for completion and output paths. It retains an encrypted original backup and mounts only staged copies. Restore preparation and replacement are desktop-only. See the [PS5 save workflow](PS5-SAVES.md) and [option validation](PS5-VALIDATION.md).

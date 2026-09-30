@@ -19,7 +19,7 @@ Include the app release or commit, exact relevant software versions, console mod
 
 Begin with read-only workflows such as process enumeration, bounded reads and inventory. Do not remove firmware guards or reload an already running PS4Debug payload to force a test. There is no need to try uninstall or power actions just to submit a compatibility report.
 
-Reviewed reports can be added to `docs/COMPATIBILITY.md` through a PR, with links to their issue and exact environment. Keep community-reported results distinct from project hardware validation. Confirmation is limited to the features actually exercised; preserve known failures and remaining uncertainty. PS5 13.60 remains a future implementation, not a supported target to test with the current PS4 receiver.
+Reviewed reports can be added to `docs/COMPATIBILITY.md` through a PR, with links to their issue and exact environment. Keep community-reported results distinct from project hardware validation. Confirmation is limited to the features actually exercised; preserve known failures and remaining uncertainty. PS5 has an experimental memory/FTP/ELF integration; test it using the PS5 profile and a compatible PS5 debugger. PS5 native receiver features remain unimplemented; never test them with the PS4 receiver.
 
 ## Development checks
 

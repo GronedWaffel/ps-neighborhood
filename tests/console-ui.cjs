@@ -11,6 +11,19 @@ app.whenReady().then(async()=>{
   const caps=Object.fromEntries(['appInfo','storage','launch','close','uninstall','patch','shutdown','restart','rest'].map(x=>[x,true]));
   const fallback={host:'192.0.2.1',updatedAt:new Date().toISOString(),capabilities:caps,warnings:[],drives:[{index:0,path:'/user',total:400e9,free:350e9,available:320e9,used:50e9}],categories:[{drive:'/user',category:'games',bytes:40e9},{drive:'/user',category:'patches',bytes:5e9}],games:[{titleId:'CUSA12345',name:'Example <Game>',version:'01.03',baseBytes:40e9,patchBytes:5e9,dlcBytes:0,totalBytes:45e9,locations:['/user'],managed:true,running:false}],saves:[{id:'123abc:CUSA12345',titleId:'CUSA12345',userId:'123abc',name:'Example <Game>',bytes:16e6,files:2}]};
   const snapshot=process.env.PSN_VISUAL_FIXTURE?JSON.parse(await fs.readFile(process.env.PSN_VISUAL_FIXTURE)):fallback;
+  backend.workbench.profile.host=snapshot.host;
+  const ps5Saves=process.env.PSN_TEST_PS5_SAVES==='1';let saveExports=0,restoreCalls=0;
+  if(ps5Saves){
+    backend.workbench.profile.platform='ps5';snapshot.platform='ps5';snapshot.capabilities.saveMount=true;
+    snapshot.saves=[{id:'abcd:PPSA12345',titleId:'PPSA12345',userId:'abcd',name:'PS5 example',bytes:1e6,files:1,format:'ps5-encrypted-archive'}];
+    backend.workbench.console.debuggerInfo=()=>({platform:'ps5',firmware:'13.60'});
+    backend.workbench.ps5Receiver.ready=true;backend.workbench.ps5Receiver.host=snapshot.host;
+    backend.workbench.console.startBackup=({id,decrypted})=>{assert.equal(id,snapshot.saves[0].id);assert.equal(decrypted,true);saveExports++;return {};};
+    backend.workbench.console.startSaveRestore=()=>{restoreCalls++;throw Error('Cancelled restore must not reach backend');};
+    backend.workbench.console.saveTools.plans.set('ui-plan',{});
+    backend.workbench.console.backup={state:'complete',ready:true,planId:'ui-plan',sourceId:snapshot.saves[0].id,slot:'sdimg_slot',changes:[{path:'data.bin'}]};
+  }
+  if(!process.env.PSN_VISUAL_FIXTURE)snapshot.drives.push({index:2,path:'/mnt/ext1',label:'M.2 SSD',total:2e12,free:1.5e12,available:1.4e12,used:0.5e12});
   backend.workbench.console.snapshot=snapshot;backend.workbench.packages.receiver.ready=true;backend.workbench.packages.receiver.host=backend.workbench.profile.host;
   if(snapshot.compatibility?.detected)backend.workbench.packages.receiver.runtimeInfo={firmware:snapshot.compatibility.detected,revision:2};
   backend.workbench.console.action=async()=>{throw Error('Cancelled UI action must never reach backend');};
@@ -21,7 +34,16 @@ app.whenReady().then(async()=>{
   try{
     await win.loadURL(backend.url+'/#console');await until('!!document.querySelector("[data-console-action=patch]:not(:disabled)")');
     assert.ok(await js('document.querySelector("#console-storage").textContent.includes("Reserved free space")'));
-    assert.ok(await js('document.querySelector("#console-saves").textContent.includes("Download save")'));
+    if(!process.env.PSN_VISUAL_FIXTURE){assert.equal(await js('document.querySelectorAll(".console-drives meter").length'),2);assert.ok(await js('document.querySelector("#console-storage").textContent.includes("M.2 SSD")'));}
+    assert.ok(await js('document.querySelector("#console-saves").textContent.includes("Encrypted backup")'));
+    if(ps5Saves){
+      await until('!!document.querySelector("[data-save-decrypt]:not(:disabled)")');
+      await js('void(window.desktop={chooseFolder:async()=>null,confirmSaveRestore:async()=>false})');
+      await click('[data-save-prepare]');await click('[data-save-apply]');
+      await click('[data-save-decrypt]');await until('!!document.querySelector("[data-save-discard]")');
+      await click('[data-save-discard]');await until('!document.querySelector("[data-save-apply]")');
+      assert.equal(saveExports,1);assert.equal(restoreCalls,0);assert.equal(backend.workbench.console.saveTools.plans.size,0);
+    }
     await js('void(window.desktop={confirmConsole:async()=>false})');await click('[data-console-action=patch]:not(:disabled)');
     await js('document.querySelector("#console-search").value="no-such-game";document.querySelector("#console-search").dispatchEvent(new Event("input",{bubbles:true}))');
     assert.ok(await js('document.querySelector("#console-games").textContent.includes("No games to show")'));

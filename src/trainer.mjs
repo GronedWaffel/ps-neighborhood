@@ -15,6 +15,7 @@ export class Trainer {
   async target({ allowUnequipped = false } = {}) {
     const status = await this.call('status');
     if (status.mode !== 'live') throw new Error('Connect PS Neighbourhood to the real console first');
+    if((status.profile?.platform||'ps4')!==(this.profile.platform||'ps4'))throw Error('This trainer profile targets a different console platform; a PS5 game build needs its own validated trainer profile');
     const candidates = (await this.call('processes')).filter(p => p.name === this.profile.processName);
     if (candidates.length !== 1) throw new Error('The expected Zombies process is not running');
     const pid = candidates[0].pid, identity = await this.call('process_info', { pid });

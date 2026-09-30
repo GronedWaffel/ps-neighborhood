@@ -40,7 +40,7 @@ export class PS4Debug {
       this.flush();
     });
     this.socket.on('error', err => this.fail(err));
-    this.socket.on('close', () => this.fail(new Error('PS4Debug connection closed. Reload the payload and reconnect.')));
+    this.socket.on('close', () => this.fail(new Error('Debugger connection closed. Check the existing service before reconnecting; do not load a duplicate payload.')));
     await new Promise((resolve, reject) => {
       const timer = setTimeout(() => { this.socket.destroy(); reject(new Error(`Connection timed out: ${this.host}:${this.port}`)); }, this.timeout);
       this.socket.once('connect', () => { clearTimeout(timer); resolve(); });
@@ -130,7 +130,7 @@ export class PS4Debug {
   }); }
 }
 
-export async function probe(host, port, timeout = 2000) {
+export async function probe(host, port, timeout = 5000) {
   return new Promise(resolve => {
     const s = net.connect({ host, port }); const start = Date.now();
     const done = (open, error) => { s.destroy(); resolve({ port, open, latencyMs: Date.now() - start, error }); };

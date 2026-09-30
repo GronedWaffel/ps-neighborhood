@@ -82,7 +82,7 @@ export class Scanner {
     if (previous && m.width !== previous.width) throw new Error('Keep the pattern width unchanged when refining');
     if (previous && previous.connectionId !== options.connectionId) throw new Error('Console connection changed. Start a new scan.');
     const pid = previous?.pid ?? integer(options.pid, 1, 0xffffffff, 'PID');
-    const alignment = previous?.alignment ?? integer(options.alignment ?? m.width, 1, 64, 'Alignment');
+    const alignment = previous?.alignment ?? integer(options.alignment ?? (type==='aob'||type==='text'?1:m.width), 1, 64, 'Alignment');
     const requestedBackend = options.backend ?? previous?.requestedBackend ?? 'auto';
     if (!['auto', 'host', 'ng'].includes(requestedBackend)) throw new Error('Scan backend must be auto, host, or ng');
     const nativeReason = !client.capabilities?.nativeScan ? 'NG unavailable on this source' : !/^[ui](8|16|32|64)$/.test(type) ? 'Host preserves float, text and wildcard semantics' : alignment !== m.width ? 'Host preserves custom alignment' : null;

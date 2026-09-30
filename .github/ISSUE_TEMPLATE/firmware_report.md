@@ -34,4 +34,4 @@ How many attempts? Did the result persist after an ordinary reconnect or applica
 
 Attach only redacted logs or screenshots. Do not upload credentials, saves, game packages or raw RAM.
 
-Only PS4 10.01 has project hardware validation. Start with read-only checks; leave unsupported-firmware guards in place and do not reload an already running PS4Debug payload. PS5 support is not implemented in this release.
+Project hardware checks cover PS4 10.01 and limited PS5 13.60 workflows; see docs/COMPATIBILITY.md for the exact scope. Start with read-only checks; leave unsupported-firmware guards in place and do not reload an already running debugger. PS5 memory/FTP/ELF integration is experimental; PS5 native installer and console controls are not implemented.

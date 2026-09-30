@@ -4,8 +4,10 @@ import { createReadStream } from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import path from 'node:path';
 import net from 'node:net';
+import dgram from 'node:dgram';
 import { randomUUID, createHash } from 'node:crypto';
 import { Client as FtpClient } from 'basic-ftp';
+import {listDirectory} from './ftp-list.mjs';
 import { PS4Debug, probe, address, hex, bytes, integer } from './protocol.mjs';
 import { Scanner, types } from './scanner.mjs';
 import { Dumps } from './dumps.mjs';
@@ -14,15 +16,20 @@ import { PointerSearch } from './pointers.mjs';
 import { PackageInstaller, inspectPackage } from './packages.mjs';
 import { ConsoleManager } from './console-manager.mjs';
 import {firmwareProfile} from './firmware.mjs';
+import {consolePlatform, platformFeatures, validatePS5Elf} from './platform.mjs';
+import {PS5Debug} from './ps5debug.mjs';
+import {Receiver} from './pkg-receiver.mjs';
+import {transferPayload} from './payload-transfer.mjs';
 
 export class Workbench extends EventEmitter {
   constructor(directory) {
     super(); this.directory = directory; this.client = null; this.mode = 'disconnected'; this.connectionId = randomUUID();
-    this.profile = { host: '127.0.0.1', debugPort: 744, ftpPort: 2121, payloadPort: 9090, firmware: 'auto' };
+    this.profile = { platform: 'ps4', host: '127.0.0.1', debugPort: 744, ftpPort: 2121, payloadPort: 9090, firmware: 'auto' };
     this.scanner = new Scanner(path.join(directory, 'scans')); this.dumps = new Dumps(path.join(directory, 'exports'));
     this.pointers = new PointerSearch(this.dumps);
-    this.packages = new PackageInstaller();
-    this.console = new ConsoleManager({directory,profile:()=>this.profile,packages:this.packages,log:(action,detail)=>this.log(action,detail)});
+    this.ps5Receiver = new Receiver({platform:'ps5'});
+    this.packages = new PackageInstaller({profile:()=>this.profile,ps5Receiver:this.ps5Receiver});
+    this.console = new ConsoleManager({directory,profile:()=>this.profile,debuggerInfo:()=>this.client?.connected?this.client.capabilities:null,ps5Receiver:this.ps5Receiver,ps5AppInfo:title=>this.ps5AppInfo(title),packages:this.packages,log:(action,detail)=>this.log(action,detail)});
     this.watches = []; this.activity = []; this.mcpWrites = false; this.transfer = null; this.controlTail = Promise.resolve();
   }
   async init() {
@@ -35,25 +42,34 @@ export class Workbench extends EventEmitter {
     const entry = { time: new Date().toISOString(), action, detail, source }; this.activity.unshift(entry); this.activity.length = Math.min(200, this.activity.length);
     this.emit('activity', entry);
   }
-  status() { return { mode: this.client?.connected ? this.mode : 'disconnected', capabilities: this.client?.capabilities ?? { nativeScan: false, reason: this.mode === 'demo' ? 'Simulated memory lab uses host scanning' : 'No NG payload detected' }, profile: this.profile, connectionId: this.connectionId, scan: this.scanner.status(), dump: this.dumps.status(), pointers: this.pointers.status(), transfer: this.transfer, mcpWrites: this.mcpWrites, activity: this.activity.slice(0, 40), watchCount: this.watches.length }; }
-  requireClient() { if (!this.client?.connected) throw new Error('Connect to PS4Debug or open the memory lab first'); return this.client; }
+  status() { return { mode: this.client?.connected ? this.mode : 'disconnected', features: platformFeatures(this.profile.platform), capabilities: this.client?.capabilities ?? { nativeScan: false, reason: this.mode === 'demo' ? 'Simulated memory lab uses host scanning' : 'No debugger detected' }, profile: this.profile, connectionId: this.connectionId, scan: this.scanner.status(), dump: this.dumps.status(), pointers: this.pointers.status(), transfer: this.transfer, mcpWrites: this.mcpWrites, activity: this.activity.slice(0, 40), watchCount: this.watches.length }; }
+  requireClient() { if (!this.client?.connected) throw new Error('Connect to the console debugger or open the memory lab first'); return this.client; }
   async setProfile(p) {
     this.console.guard();
     if(this.packages.server || this.packages.queue.processing)throw Error('Stop sharing packages before changing consoles');
     if (!net.isIP(p.host)) throw new Error('Console host must be an IP address');
     for (const k of ['debugPort', 'ftpPort', 'payloadPort']) integer(p[k], 1, 65535, k);
     if (this.client?.connected) throw new Error('Disconnect before editing the console profile');
-    this.profile = { host: p.host, debugPort: p.debugPort, ftpPort: p.ftpPort, payloadPort: p.payloadPort, firmware: firmwareProfile(p.firmware??this.profile.firmware) }; await this.save(); return this.profile;
+    const platform = consolePlatform(p.platform ?? this.profile.platform);
+    if ((this.packages.receiver.ready || this.ps5Receiver.ready) && (platform !== this.profile.platform || p.host !== this.profile.host)) throw Error('Close the current background receiver before changing consoles');
+    if (this.transfer?.state === 'running') throw Error('Wait for the file or payload transfer before changing consoles');
+    this.profile = { platform, host: p.host, debugPort: p.debugPort, ftpPort: p.ftpPort, payloadPort: p.payloadPort, firmware: firmwareProfile(p.firmware??this.profile.firmware) }; await this.save(); return this.profile;
   }
   async connect(demo = false) {
-    await this.disconnect(); const client = demo ? new DemoConsole() : await new PS4Debug({ host: this.profile.host, port: this.profile.debugPort }).connect();
-    try { const processes = await client.processes(); if (!demo) await client.detectCapabilities(); this.client = client; this.mode = demo ? 'demo' : 'live'; this.connectionId = randomUUID(); this.log('Connected', demo ? 'Simulated memory lab' : this.profile.host); return { ...this.status(), processes }; }
+    await this.disconnect(); const client = demo ? new DemoConsole() : await new (this.profile.platform === 'ps5' ? PS5Debug : PS4Debug)({ host: this.profile.host, port: this.profile.debugPort }).connect();
+    try { if (!demo && this.profile.platform === 'ps5') await client.detectCapabilities(); const processes = await client.processes(); if (!demo && this.profile.platform !== 'ps5') await client.detectCapabilities(); this.client = client; this.mode = demo ? 'demo' : 'live'; this.connectionId = randomUUID(); this.log('Connected', demo ? 'Simulated memory lab' : this.profile.host); return { ...this.status(), processes }; }
     catch (e) { client.close(); throw e; }
   }
   async disconnect() {
     this.scanner.cancel(); this.dumps.cancel();
     this.client?.close(); await Promise.allSettled([this.scanner.running, this.dumps.running]);
     await this.scanner.clear(); this.client = null; this.mode = 'disconnected'; this.connectionId = randomUUID(); this.mcpWrites = false; return this.status();
+  }
+  async ps5AppInfo(titleId) {
+    if(this.profile.platform!=='ps5'||this.mode!=='live')throw Error('Connect PS5Debug to check whether this save is in use');
+    const client=this.requireClient(),games=(await client.processes()).filter(p=>p.name==='eboot.bin');
+    const titles=[];for(const game of games){const info=await client.info(game.pid);if(!/^(PPSA|CUSA|MOUU)\d{5}$/.test(info.titleId))throw Error('Cannot identify a running game; close games before archiving saves');titles.push(info.titleId);}
+    return {running:titles.includes(titleId),exists:true};
   }
   async read({ pid, address: a, length = 256, dumpId }) {
     integer(pid ?? 1, 1, 0xffffffff, 'PID'); integer(length, 1, 1024 * 1024, 'Length'); address(a);
@@ -110,14 +126,14 @@ export class Workbench extends EventEmitter {
     integer(o.pid, 1, 0xffffffff, 'PID'); address(o.address); if (!Object.hasOwn(types, o.type)) throw new Error('Unknown watch type');
     if (this.watches.length >= 128) throw new Error('Watch list is limited to 128 entries');
     const maps = await this.requireClient().maps(o.pid), region = maps.find(m => address(o.address) >= address(m.start) && address(o.address) < address(m.end));
-    const watch = { id: randomUUID(), pid: o.pid, address: hex(address(o.address)), type: o.type, label: String(o.label || 'Untitled watch').slice(0, 80), host: this.profile.host, mode: this.mode, module: region?.name, regionStart: region?.start, regionOffset: region ? hex(address(o.address) - address(region.start)) : null };
+    const watch = { id: randomUUID(), pid: o.pid, address: hex(address(o.address)), type: o.type, label: String(o.label || 'Untitled watch').slice(0, 80), platform:this.profile.platform, host: this.profile.host, mode: this.mode, module: region?.name, regionStart: region?.start, regionOffset: region ? hex(address(o.address) - address(region.start)) : null };
     this.watches.push(watch); await this.save(); return watch;
   }
   async watchRead() {
     const rows = [];
     for (const w of this.watches) {
       try {
-        if (w.mode !== this.mode || w.host !== this.profile.host) throw new Error('Different console/session mode');
+        if (w.mode !== this.mode || w.host !== this.profile.host || (w.platform||'ps4')!==this.profile.platform) throw new Error('Different console/session mode');
         const b = await this.requireClient().read(w.pid, w.address, types[w.type][0]); rows.push({ ...w, value: String(b[types[w.type][1]]()), hex: b.toString('hex') });
       } catch (e) { rows.push({ ...w, error: e.message }); }
     }
@@ -125,11 +141,11 @@ export class Workbench extends EventEmitter {
   }
   async ftp(action, o = {}) {
     if (this.mode === 'demo') throw new Error('FTP requires the real console; leave memory lab first');
-    const remote = String(o.remote || '/'); if (!remote.startsWith('/') || /[\r\n\0]/.test(remote)) throw new Error('Enter an absolute PS4 path');
+    const remote = String(o.remote || '/'); if (!remote.startsWith('/') || /[\r\n\0]/.test(remote)) throw new Error('Enter an absolute console path');
     const ftp = new FtpClient(10000);
     try {
       await ftp.access({ host: this.profile.host, port: this.profile.ftpPort, user: 'anonymous', password: 'ps-neighbourhood', secure: false });
-      if (action === 'list') return (await ftp.list(remote)).map(f => ({ name: f.name, size: f.size, directory: f.isDirectory, modified: f.modifiedAt?.toISOString() }));
+      if (action === 'list') return (await listDirectory(ftp,remote)).map(f => ({ name: f.name, size: f.size, directory: f.isDirectory, modified: f.modifiedAt?.toISOString() }));
       if (this.transfer?.state === 'running') throw new Error('A transfer is already running');
       this.transfer = { state: 'running', action, remote, bytes: 0 };
       ftp.trackProgress(info => { this.transfer.bytes = info.bytesOverall; });
@@ -140,7 +156,7 @@ export class Workbench extends EventEmitter {
         this.transfer.local = target;
       } else if (action === 'upload') {
         if (!o.local || !(await stat(o.local)).isFile()) throw new Error('Choose a local file');
-        if ((await ftp.list(path.posix.dirname(remote))).some(f => f.name === path.posix.basename(remote))) throw new Error('A remote file already exists at that path; choose another name');
+        if ((await listDirectory(ftp,path.posix.dirname(remote))).some(f => f.name === path.posix.basename(remote))) throw new Error('A remote file already exists at that path; choose another name');
         await ftp.uploadFrom(o.local, remote);
       } else throw new Error('Unknown FTP action');
       this.transfer.state = 'complete'; this.log('FTP ' + action, remote); return this.transfer;
@@ -149,7 +165,25 @@ export class Workbench extends EventEmitter {
   }
   async payload({ local }) {
     if (this.mode === 'demo') throw new Error('Leave memory lab before sending a payload');
+    if (this.transfer?.state === 'running') throw new Error('A transfer is already running');
     const info = await stat(local); if (!info.isFile() || info.size < 1 || info.size > 32 * 1048576) throw new Error('Select a payload file of 1 byte–32 MiB');
+    if (this.profile.platform === 'ps5') {
+      const data = await readFile(local), elf = validatePS5Elf(data);
+      if (/ps5debug/i.test(path.basename(local))) {
+        // Windows may take just over two seconds to report a refused TCP port.
+        // Leave enough time to distinguish that from an unreachable console.
+        const service = await probe(this.profile.host, this.profile.debugPort, 5000);
+        if (service.open) throw new Error('A debugger is already listening. Connect to it instead of loading PS5Debug twice');
+        if (service.error !== 'ECONNREFUSED') throw new Error('Debugger state is uncertain; verify console connectivity before loading PS5Debug');
+      }
+      this.transfer = {state:'running',action:'payload',bytes:0};
+      try {
+        await transferPayload(data,{host:this.profile.host,port:this.profile.payloadPort});
+        this.transfer = {state:'complete',action:'payload',bytes:data.length};
+        const result = {...elf,bytes:data.length,sha256:createHash('sha256').update(data).digest('hex'),note:'ELF transferred; execution has not been confirmed.'};
+        this.log('PS5 ELF sent',`${path.basename(local)} · ${data.length} bytes`); return result;
+      } catch(e) {this.transfer.state='failed';this.transfer.error=e.message;throw e;}
+    }
     const hash = createHash('sha256'); for await (const b of createReadStream(local)) hash.update(b);
     const socket = net.createConnection({ host: this.profile.host, port: this.profile.payloadPort });
     socket.setTimeout(10000, () => socket.destroy(new Error('Payload transfer timed out')));
@@ -160,7 +194,7 @@ export class Workbench extends EventEmitter {
   async call(method, args = {}, source = 'desktop') {
     // Serialize connection changes and writes across UI and MCP. Scans/dumps remain
     // cancellable jobs and individual wire requests are independently serialized.
-    const controls = ['connect', 'disconnect', 'profile', 'memory_write', 'watch_add', 'watch_remove'];
+    const controls = ['connect', 'disconnect', 'profile', 'payload', 'memory_write', 'watch_add', 'watch_remove'];
     if (controls.includes(method)) {
       const run = this.controlTail.then(() => this.dispatch(method, args, source)); this.controlTail = run.catch(() => {}); return run;
     }
@@ -168,7 +202,7 @@ export class Workbench extends EventEmitter {
   }
   async dispatch(method, args, source) {
     if (method.startsWith('console_') && this.mode==='demo' && method!=='console_status')throw Error('Leave the memory lab before using console management');
-    if (source==='mcp' && ['console_action','console_load'].includes(method))throw Error('Game and power controls are available in the desktop Console page');
+    if (source==='mcp' && ['console_action','console_load','console_save_restore','console_save_discard'].includes(method))throw Error('Game, power and save restore controls are available in the desktop Console page');
     if (['pkg_install','pkg_queue_start','pkg_load','pkg_stop','console_load'].includes(method))this.console.guard();
     if (source === 'mcp' && (['pkg_load', 'pkg_install', 'pkg_control', 'pkg_stop'].includes(method)||method.startsWith('pkg_queue_'))) throw new Error('Load the receiver and control package installations in the desktop PKG installer');
     if (method.startsWith('pkg_') && this.mode === 'demo' && !['pkg_inspect', 'pkg_status', 'pkg_stop','pkg_queue_add','pkg_queue_remove','pkg_queue_clear','pkg_queue_stop'].includes(method)) throw new Error('Leave the memory lab before using the PS4 package installer');
@@ -177,14 +211,25 @@ export class Workbench extends EventEmitter {
       case 'console_status': return this.console.status();
       case 'console_refresh': return this.console.refresh();
       case 'console_backup': return this.console.startBackup(args);
+      case 'console_save_restore': return this.console.startSaveRestore(args);
+      case 'console_save_discard': return this.console.discardSaveRestore(args);
       case 'console_action': return this.console.action(args);
       case 'console_load': {
         this.console.guardTransfers();this.console.busy=true;
+        if(this.profile.platform==='ps5'){
+          try{
+            let pcAddress=args.pcAddress;
+            if(!pcAddress)pcAddress=await new Promise((resolve,reject)=>{const socket=dgram.createSocket('udp4');socket.once('error',e=>{socket.close();reject(e);});socket.connect(this.profile.payloadPort,this.profile.host,()=>{const local=socket.address().address;socket.close();resolve(local);});});
+            await this.ps5Receiver.load({host:this.profile.host,payloadPort:this.profile.payloadPort,pcAddress,port:args.receiverPort??9698});
+            const runtime=await this.ps5Receiver.runtime();if(runtime.revision!==105)throw Error('Update the PS5 companion to revision 105');
+          }finally{this.console.busy=false;}
+          return this.console.refresh();
+        }
         try {if(this.packages.receiver.ready){await this.packages.receiver.close();await new Promise(resolve=>setTimeout(resolve,250));}await this.packages.loadReceiver({...args,host:this.profile.host,payloadPort:this.profile.payloadPort});}
         finally {this.console.busy=false;}
         return this.console.refresh();
       }
-      case 'pkg_inspect': return inspectPackage(args.local);
+      case 'pkg_inspect': return this.packages.inspect(args.local);
       case 'pkg_queue_add': return this.packages.queue.addFolder(args.folder,args.recursive!==false);
       case 'pkg_queue_remove': return this.packages.queue.remove(args.id);
       case 'pkg_queue_clear': return this.packages.queue.clear();
@@ -198,7 +243,7 @@ export class Workbench extends EventEmitter {
       case 'pkg_stop': return this.packages.close();
       case 'status': return this.status();
       case 'profile': return this.setProfile(args);
-      case 'probe': return Promise.all([this.profile.debugPort, this.profile.ftpPort, this.profile.payloadPort].map(p => probe(this.profile.host, p)));
+      case 'probe': return [...await Promise.all([this.profile.debugPort, this.profile.ftpPort].map(p => probe(this.profile.host, p))), {port:this.profile.payloadPort,open:null,skipped:true,error:'Loader not probed: an empty connection may be treated as a payload'}];
       case 'connect': return this.connect(args.demo === true);
       case 'disconnect': return this.disconnect();
       case 'processes': return this.requireClient().processes();
@@ -229,7 +274,7 @@ export class Workbench extends EventEmitter {
       case 'dump_start': {
         if (this.scanner.job?.state === 'running') throw new Error('Wait for the scan to finish');
         this.log('Dump started', `PID ${args.pid}`, source);
-        return this.dumps.start(this.requireClient(), args, { host: this.profile.host, firmwareProfile: this.profile.firmware, mode: this.mode });
+        return this.dumps.start(this.requireClient(), args, { host: this.profile.host, platform:this.profile.platform, firmwareProfile: this.profile.firmware, detectedFirmware:this.client?.capabilities?.firmware??null, debugger:this.client?.capabilities?.branding??null, mode: this.mode });
       }
       case 'dump_status': return this.dumps.status();
       case 'dump_cancel': return this.dumps.cancel();

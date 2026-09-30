@@ -1,11 +1,11 @@
 {
   "name": "ps-neighbourhood",
   "productName": "PS Neighbourhood",
-  "version": "0.8.3",
+  "version": "0.9.0",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",
-  "description": "PS4 desktop workbench: PS4Debug memory scanner, MCP server, Ghidra RAM dumps, PKG installer, FTP and console manager",
+  "description": "PS4 and PS5 desktop memory workbench with MCP, Ghidra exports, FTP and payload loading; platform-specific package and console management",
   "license": "GPL-3.0-or-later",
   "engines": {
     "node": ">=24"
@@ -19,7 +19,9 @@
     "memory-scanner",
     "ghidra",
     "pkg-installer",
-    "electron"
+    "electron",
+    "ps5",
+    "ps5debug"
   ],
   "scripts": {
     "start": "electron .",

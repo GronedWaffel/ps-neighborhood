@@ -35,6 +35,10 @@ test('trainer resolves module offsets, reads fields and performs a bounded compa
 });
 
 const delay = ms => new Promise(r => setTimeout(r, ms));
+test('PS4 trainer profiles refuse PS5 before reading or writing any process',async()=>{
+ const {profile}=fixture();const calls=[];const trainer=new Trainer(async method=>{calls.push(method);return {mode:'live',profile:{platform:'ps5'}};},profile);
+ await assert.rejects(trainer.target(),/different console platform/);assert.deepEqual(calls,['status']);
+});
 test('continuous firing during write read-back does not disarm clip freeze', async () => {
   const f = fixture(); f.profile.fields[0].freeze = true; f.trainer.interval = 5; f.state.shooting = true;
   try {

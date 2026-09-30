@@ -45,7 +45,21 @@ app.whenReady().then(async () => {
     await click('[data-pkg-remove]');await until('document.querySelectorAll("[data-pkg-remove]").length===2');
     await js('document.querySelector("#toasts").replaceChildren();document.querySelector("#pkg-add-folder").scrollIntoView({block:"center"});');
     await fs.writeFile(path.join(root, 'artifacts/screenshots/pkg-installer.png'), (await win.webContents.capturePage()).toPNG());
-    assert.deepEqual(errors, []); console.log('PASS: desktop UI scan → inspect → watch → refine → RAM dump → offline scan; all pages render.');
+    await click('#top-connect');await until('document.querySelector("#top-connect").textContent.includes("Connect console")');
+    await click('[data-page="home"]');
+    await js('document.querySelector("#console-platform").value="ps5";document.querySelector("#console-platform").dispatchEvent(new Event("change",{bubbles:true}))');
+    assert.equal(await js('document.querySelector("#payload-port").value'),'9021');
+    assert.equal(await js('document.querySelector("#firmware-profile").value'),'13.60');
+    await click('#save-profile');await until('document.querySelector(".hero").textContent.includes("PLAYSTATION 5")');
+    assert.equal(backend.workbench.profile.platform,'ps5');
+    await fs.writeFile(path.join(root,'artifacts/screenshots/ps5-overview.png'),(await win.webContents.capturePage()).toPNG());
+    await click('[data-page="payload"]');assert.ok(await js('document.querySelector("#main").textContent.includes("PS5 ELF Loader")'));
+    await click('[data-page="pkg"]');assert.ok(await js('!!document.querySelector("#pkg-load") && !!document.querySelector("#pkg-install")'));assert.equal(await js('document.querySelector("#pkg-receiver-port").value'),'9698');assert.equal(await js('document.querySelector("#pkg-mode").options.length'),1);
+    assert.ok(await js('document.querySelector("#main").textContent.includes("PS5 companion")'));assert.ok(await js('!!document.querySelector("#pkg-pause") && !!document.querySelector("#pkg-resume")'));
+    await click('[data-page="console"]');assert.ok(await js('document.querySelector("#console-load").textContent.includes("PS5 companion")'));
+    await until('document.querySelector("#console-compatibility").textContent.includes("PS5")');
+    await click('[data-page="folder"]');assert.ok(await js('!!document.querySelector("#ftp-path")'));
+    assert.deepEqual(errors, []); console.log('PASS: PS4 simulated scan/dump flow and PS5 profile, ELF page, FTP page and native-control restrictions.');
     await backend.close(); win.destroy(); app.exit(0);
   } catch (e) { console.error(e.stack); try { await fs.writeFile(path.join(root, 'artifacts/screenshots/failure.png'), (await win.webContents.capturePage()).toPNG()); } catch {} await backend.close(); app.exit(1); }
 });

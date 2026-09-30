@@ -1,7 +1,7 @@
 import {DatabaseSync} from 'node:sqlite';
 import {Writable} from 'node:stream';
 
-export function readAddons(file){
+export function readAddons(file,{platform='ps4'}={}){
   const db=new DatabaseSync(file,{readOnly:true});
   try{
     if(db.prepare('PRAGMA quick_check').get().quick_check!=='ok')throw Error('Add-on catalog copy is inconsistent');
@@ -9,7 +9,7 @@ export function readAddons(file){
     if(!['title_id','dir_name','title'].every(x=>columns.has(x)))throw Error('Unrecognized add-on catalog schema');
     const result=new Map();
     for(const r of db.prepare('SELECT title_id,dir_name,title FROM addcont LIMIT 20000').all()){
-      if(!/^CUSA\d{5}$/.test(r.title_id))continue;
+      if(!(platform==='ps5'?/^(CUSA|PPSA|MOUU)\d{5}$/:/^CUSA\d{5}$/).test(r.title_id))continue;
       if(!result.has(r.title_id))result.set(r.title_id,[]);
       result.get(r.title_id).push({id:String(r.dir_name),name:String(r.title||r.dir_name)});
     }

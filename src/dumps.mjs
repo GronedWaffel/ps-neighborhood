@@ -19,14 +19,20 @@ public class ImportPSNeighbourhood extends GhidraScript {
         Language language = getLanguage(new LanguageID("x86:LE:64:default"));
         ProgramDB program = new ProgramDB(${JSON.stringify('PSN_' + manifest.id)}, language, language.getCompilerSpecByID(new CompilerSpecID("gcc")), this);
         try {
-            int tx = program.startTransaction("Import PS4 RAM");
+            int tx = program.startTransaction("Import console RAM");
             boolean success = false;
             try {
 ${segments}
                 success = true;
             } finally { program.endTransaction(tx, success); }
-            openProgram(program);
-            println("RAM layout restored. Save this program, then run Auto Analyze. Capture is sequential, not an atomic snapshot.");
+            if (isRunningHeadless()) {
+                state.getProject().getProjectData().getRootFolder().createFile(program.getName(), program, monitor);
+                println("RAM layout restored and saved in the project: " + program.getName());
+            } else {
+                openProgram(program);
+                println("RAM layout restored. Save this program, then run Auto Analyze.");
+            }
+            println("Capture is sequential, not an atomic snapshot.");
         } finally { program.release(this); }
     }
     private void load(ProgramDB p, File folder, String file, String name, String start, long size, boolean write, boolean execute) throws Exception {
@@ -96,7 +102,7 @@ export class Dumps {
       // A bundle is complete only when the manifest has been atomically committed.
       manifest.completed = new Date().toISOString();
       await writeFile(path.join(folder, 'ImportPSNeighbourhood.java'), ghidraScript(manifest));
-      await writeFile(path.join(folder, 'README.txt'), 'PS Neighbourhood RAM bundle\n\nAdd this folder to Ghidra Script Manager script directories, then run ImportPSNeighbourhood.java. Select this folder when prompted. The script creates a new x86-64 program with original virtual addresses and RWX permissions. Save it, then Auto Analyze. Verify file SHA-256 hashes against manifest.json if transporting the bundle.\n\nThese are raw mapped-memory images, not reconstructed ELF/SELF executables. Gaps are omitted and listed in the original maps. ASLR addresses apply to this capture. Reads are sequential and not atomic.\n');
+      await writeFile(path.join(folder, 'README.txt'), 'PS Neighbourhood RAM bundle\n\nAdd this folder to Ghidra Script Manager script directories, then run ImportPSNeighbourhood.java. Select this folder when prompted. The script creates a new x86-64 program with original virtual addresses and captured read/write/execute permissions. Save it, then Auto Analyze. Verify file SHA-256 hashes against manifest.json if transporting the bundle.\n\nHeadless: analyzeHeadless <project-directory> <project-name> -scriptPath <bundle-folder> -preScript ImportPSNeighbourhood.java <bundle-folder> -noanalysis\nThis saves a new PSN_<bundle-id> program in the project. Process that program separately to run analysis. Existing programs are not overwritten.\n\nThese are raw mapped-memory images, not reconstructed ELF/SELF executables. Gaps are omitted and listed in the original maps. ASLR addresses apply to this capture. Reads are sequential and not atomic.\n');
       await writeFile(path.join(folder, 'manifest.json.partial'), JSON.stringify(manifest, null, 2));
       await rename(path.join(folder, 'manifest.json.partial'), path.join(folder, 'manifest.json'));
       return { folder, manifestPath: path.join(folder, 'manifest.json'), segments: manifest.segments.length, bytes: job.total };
