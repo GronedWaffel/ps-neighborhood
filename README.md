@@ -1,5 +1,7 @@
 # PS Neighbourhood
 
+**[Download the PS5 13.60 Windows release — v0.9.0](https://github.com/GronedWaffel/ps-neighbourhood/releases/tag/v0.9.0)**. Extract the Windows ZIP and run **Start PS5 Neighbourhood.cmd**. PS4 support is included in the same download.
+
 [![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighbourhood)](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange) ![Hardware tested: PS5 13.60](https://img.shields.io/badge/hardware%20tested-PS5%2013.60-blue)
 
 **Your PS4 / PS5 memory workbench: scanning, MCP tools, Ghidra RAM exports, FTP and payload loading, plus platform-specific package and console management.**
