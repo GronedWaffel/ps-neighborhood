@@ -1,4 +1,14 @@
-# PS5 option audit — 2026-09-29
+# PS5 option audit — 2026-09-30
+
+## ShadowMount transfer follow-up (0.10.0)
+
+On PS5 13.60 with ShadowMountPlus `1.7beta2-snipers1360-r1` and companion revision 106, a PS5 folder was copied to internal storage and registered successfully. All remote file sizes matched; small-file SHA-256 readbacks also passed. The source remained unchanged. The library reported installed, managed and source available, and the user confirmed the transferred game plays correctly. External-drive transfers were not tested in this check.
+
+Real interruption/retry skipped completed files and finished the transfer. ftpsrv 0.21.1 required disabling virtual decrypted SELF mode for accurate stored executable sizes. Its missing-file SIZE response was also handled through parent-directory listing. Transfers ran roughly 60–80 MB/s on the tested gigabit link.
+
+The existing per-title registration hook was unavailable. Enabling ShadowMount's built-in `app_install_all` mode, after backing up its configuration and resetting registration retries, completed native batch registration. No etaHEN, ShadowMount or debugger reload was required. The desktop exposes this as an explicit repair action because a batch scan may register other staged applications.
+
+## Earlier 0.9.0 audit
 
 Environment: PS5 firmware 13.60, PS5Debug-NG 1.3.2, PS Neighbourhood 0.9.0, Windows x64. Hardware results apply to this environment and the tested operations, not every game or firmware. Private captures and device details are excluded from source control.
 

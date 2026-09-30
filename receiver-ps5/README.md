@@ -1,5 +1,7 @@
 # PS5 native companion
 
+Revision **106** adds a bounded ShadowMount API bridge (command 23). The desktop sends a port, a fixed operation ID and at most 2044 JSON bytes; the companion connects only to `127.0.0.1`, permits a fixed route list, and returns at most 1 MiB of HTTP response over its authenticated PC connection. No public API listener is added. The desktop validates HTTP framing and ShadowMount status before accepting replies. This retains revision 105 save support and previous storage, installer and console controls. See [ShadowMount setup](../docs/SHADOWMOUNT.md).
+
 This ELF supplies storage, application and power service calls plus experimental AppInstUtil package submission/progress. It connects back to the PC using a per-launch random token and bounded frames. Revision 103 uses PS5-specific service ABIs; it never injects code into ShellUI or reloads PS5Debug. Unknown commands and system title IDs are rejected. Patch-only removal is enabled on 13.60 for separately stored updates; removal and reinstall passed for a new Minecraft test update.
 
 SystemService/UserService/Ipmi/AppInstUtil are linked in dependency order. Installer and launch authorization changes apply only to this companion process and restore the original auth ID after each call. Package arguments remain alive for native asynchronous use. A failed or ambiguous submission is not retried automatically.

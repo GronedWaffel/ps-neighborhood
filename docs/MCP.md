@@ -2,6 +2,8 @@
 
 The server uses the official MCP TypeScript SDK and stdio transport. It is part of the app; no Python environment or `psn.mcp_server` module is needed.
 
+ShadowMount tools in 0.10.0: `psn_shadow_status` reads the library/queue/progress; `psn_shadow_refresh` refreshes the console library and storage; `psn_shadow_inspect` inspects a PC source; `psn_shadow_add` queues it without uploading. Start/cancel transfers and control games from the desktop ShadowMount page. Load companion revision 106 there first to reach the console-local API.
+
 ## Recommended configuration
 
 1. Start PS Neighbourhood and open **MCP bridge**.

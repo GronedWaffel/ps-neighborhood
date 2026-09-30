@@ -20,6 +20,7 @@ import {consolePlatform, platformFeatures, validatePS5Elf} from './platform.mjs'
 import {PS5Debug} from './ps5debug.mjs';
 import {Receiver} from './pkg-receiver.mjs';
 import {transferPayload} from './payload-transfer.mjs';
+import {ShadowMount,inspectShadowSource} from './shadowmount.mjs';
 
 export class Workbench extends EventEmitter {
   constructor(directory) {
@@ -31,10 +32,13 @@ export class Workbench extends EventEmitter {
     this.packages = new PackageInstaller({profile:()=>this.profile,ps5Receiver:this.ps5Receiver});
     this.console = new ConsoleManager({directory,profile:()=>this.profile,debuggerInfo:()=>this.client?.connected?this.client.capabilities:null,ps5Receiver:this.ps5Receiver,ps5AppInfo:title=>this.ps5AppInfo(title),packages:this.packages,log:(action,detail)=>this.log(action,detail)});
     this.watches = []; this.activity = []; this.mcpWrites = false; this.transfer = null; this.controlTail = Promise.resolve();
+    this.shadow = new ShadowMount({directory,profile:()=>this.profile,receiver:this.ps5Receiver,guard:()=>{this.console.guard();this.console.guardTransfers();if(this.transfer?.state==='running')throw Error('Wait for the current FTP/payload transfer');},log:(a,d)=>this.log(a,d)});
+    this.console.externalTransferBusy=()=>this.shadow.busy;
   }
   async init() {
     await mkdir(this.directory, { recursive: true });
     try { const saved = JSON.parse(await readFile(path.join(this.directory, 'workspace.json'), 'utf8')); this.profile = { ...this.profile, ...saved.profile }; this.watches = saved.watches || []; } catch {}
+    await this.shadow.init();
     return this;
   }
   async save() { await writeFile(path.join(this.directory, 'workspace.json'), JSON.stringify({ profile: this.profile, watches: this.watches }, null, 2)); }
@@ -45,6 +49,7 @@ export class Workbench extends EventEmitter {
   status() { return { mode: this.client?.connected ? this.mode : 'disconnected', features: platformFeatures(this.profile.platform), capabilities: this.client?.capabilities ?? { nativeScan: false, reason: this.mode === 'demo' ? 'Simulated memory lab uses host scanning' : 'No debugger detected' }, profile: this.profile, connectionId: this.connectionId, scan: this.scanner.status(), dump: this.dumps.status(), pointers: this.pointers.status(), transfer: this.transfer, mcpWrites: this.mcpWrites, activity: this.activity.slice(0, 40), watchCount: this.watches.length }; }
   requireClient() { if (!this.client?.connected) throw new Error('Connect to the console debugger or open the memory lab first'); return this.client; }
   async setProfile(p) {
+    if(this.shadow.busy||this.shadow.preparing||this.shadow.refreshing)throw Error('Wait for the ShadowMount operation before changing consoles');
     this.console.guard();
     if(this.packages.server || this.packages.queue.processing)throw Error('Stop sharing packages before changing consoles');
     if (!net.isIP(p.host)) throw new Error('Console host must be an IP address');
@@ -200,7 +205,26 @@ export class Workbench extends EventEmitter {
     }
     return this.dispatch(method, args, source);
   }
+  async loadConsole(args,shadowOnly=false) {
+        this.console.guardTransfers();this.console.busy=true;
+        if(this.profile.platform==='ps5'){
+          try{
+            let pcAddress=args.pcAddress;
+            if(!pcAddress)pcAddress=await new Promise((resolve,reject)=>{const socket=dgram.createSocket('udp4');socket.once('error',e=>{socket.close();reject(e);});socket.connect(this.profile.payloadPort,this.profile.host,()=>{const local=socket.address().address;socket.close();resolve(local);});});
+            await this.ps5Receiver.load({host:this.profile.host,payloadPort:this.profile.payloadPort,pcAddress,port:args.receiverPort??9698});
+            const runtime=await this.ps5Receiver.runtime();if(runtime.revision<105)throw Error('Update the PS5 companion to revision 106');
+          }finally{this.console.busy=false;}
+          return shadowOnly?this.shadow.refresh():this.console.refresh();
+        }
+        try {if(this.packages.receiver.ready){await this.packages.receiver.close();await new Promise(resolve=>setTimeout(resolve,250));}await this.packages.loadReceiver({...args,host:this.profile.host,payloadPort:this.profile.payloadPort});}
+        finally {this.console.busy=false;}
+        return this.console.refresh();
+      }
+
   async dispatch(method, args, source) {
+    if(method.startsWith('shadow_')&&this.mode==='demo'&&!['shadow_status','shadow_inspect'].includes(method))throw Error('Leave the memory lab before using ShadowMount');
+    if(source==='mcp'&&['shadow_start','shadow_cancel','shadow_action','shadow_scan','shadow_remove','shadow_prepare'].includes(method))throw Error('Control ShadowMount transfers and games in the desktop ShadowMount page');
+    if(this.shadow.busy&&['ftp_upload','payload','pkg_load','pkg_install','pkg_queue_start','pkg_stop','pkg_control','console_load','console_action','console_backup','console_save_restore'].includes(method))throw Error('Wait for the ShadowMount transfer or cancel it before controlling the console');
     if (method.startsWith('console_') && this.mode==='demo' && method!=='console_status')throw Error('Leave the memory lab before using console management');
     if (source==='mcp' && ['console_action','console_load','console_save_restore','console_save_discard'].includes(method))throw Error('Game, power and save restore controls are available in the desktop Console page');
     if (['pkg_install','pkg_queue_start','pkg_load','pkg_stop','console_load'].includes(method))this.console.guard();
@@ -208,6 +232,17 @@ export class Workbench extends EventEmitter {
     if (method.startsWith('pkg_') && this.mode === 'demo' && !['pkg_inspect', 'pkg_status', 'pkg_stop','pkg_queue_add','pkg_queue_remove','pkg_queue_clear','pkg_queue_stop'].includes(method)) throw new Error('Leave the memory lab before using the PS4 package installer');
     if (source === 'mcp' && ['payload', 'ftp_upload', 'profile', 'mcp_settings', 'demo_tick'].includes(method)) throw new Error('This action is available only in the desktop');
     switch (method) {
+      case 'shadow_status': return this.shadow.status();
+      case 'shadow_repair_registration': if(source==='mcp')throw Error('Repair registration from the desktop');return this.shadow.repairRegistration(args);
+      case 'shadow_prepare': return this.shadow.prepare();
+      case 'shadow_refresh': return this.shadow.refresh(args);
+      case 'shadow_inspect': {const {files,...result}=await inspectShadowSource(args.local);return result;}
+      case 'shadow_add': return this.shadow.add(args);
+      case 'shadow_remove': return this.shadow.remove(args);
+      case 'shadow_start': return this.shadow.start(args);
+      case 'shadow_cancel': return this.shadow.cancel();
+      case 'shadow_scan': return this.shadow.scan();
+      case 'shadow_action': return this.shadow.action(args);
       case 'console_status': return this.console.status();
       case 'console_refresh': return this.console.refresh();
       case 'console_backup': return this.console.startBackup(args);
@@ -215,19 +250,13 @@ export class Workbench extends EventEmitter {
       case 'console_save_discard': return this.console.discardSaveRestore(args);
       case 'console_action': return this.console.action(args);
       case 'console_load': {
-        this.console.guardTransfers();this.console.busy=true;
-        if(this.profile.platform==='ps5'){
-          try{
-            let pcAddress=args.pcAddress;
-            if(!pcAddress)pcAddress=await new Promise((resolve,reject)=>{const socket=dgram.createSocket('udp4');socket.once('error',e=>{socket.close();reject(e);});socket.connect(this.profile.payloadPort,this.profile.host,()=>{const local=socket.address().address;socket.close();resolve(local);});});
-            await this.ps5Receiver.load({host:this.profile.host,payloadPort:this.profile.payloadPort,pcAddress,port:args.receiverPort??9698});
-            const runtime=await this.ps5Receiver.runtime();if(runtime.revision!==105)throw Error('Update the PS5 companion to revision 105');
-          }finally{this.console.busy=false;}
-          return this.console.refresh();
-        }
-        try {if(this.packages.receiver.ready){await this.packages.receiver.close();await new Promise(resolve=>setTimeout(resolve,250));}await this.packages.loadReceiver({...args,host:this.profile.host,payloadPort:this.profile.payloadPort});}
-        finally {this.console.busy=false;}
-        return this.console.refresh();
+        return this.loadConsole(args,false);
+      }
+      case 'shadow_load': {
+        if(source==='mcp')throw Error('Load the companion from the desktop');
+        if(this.profile.platform!=='ps5')throw Error('Select the PS5 profile first');
+        this.console.guard();
+        return this.loadConsole(args,true);
       }
       case 'pkg_inspect': return this.packages.inspect(args.local);
       case 'pkg_queue_add': return this.packages.queue.addFolder(args.folder,args.recursive!==false);

@@ -10,6 +10,10 @@ const pid = z.number().int().min(1).max(0xffffffff), addr = z.string().regex(/^(
 const numericType = z.enum(['u8', 'i8', 'u16', 'i16', 'u32', 'i32', 'u64', 'i64', 'f32', 'f64']);
 const readShape = { pid: pid.optional(), address: addr, length: length.optional(), dumpId: z.string().optional() };
 const tools = [
+  ['shadow_status','Read the ShadowMount connection, game library, available transfer destinations and persistent transfer queue/progress. Transfers and game controls are started in the desktop ShadowMount page.',{}],
+  ['shadow_refresh','Read ShadowMount version, games, configured scan roots and drive space. Uses the loaded PS5 companion to reach its local API without exposing it to the LAN.',{port:z.number().int().min(1).max(65535).optional()}],
+  ['shadow_inspect','Inspect a local PS5 dump folder or supported ShadowMount image, returning title metadata, byte/file counts and a source fingerprint without uploading it.',{local:z.string()}],
+  ['shadow_add','Add a local PS5 dump folder or image to the transfer queue; no console files are changed. Start the queue from the desktop ShadowMount page.',{local:z.string()}],
   ['console_status', 'Read detected firmware and compatibility, console drive capacity, installed games, separate update/DLC sizes, registered add-ons, cached bundled-content evidence, saves, scan and backup progress. Refresh first for current data.', {}],
   ['console_refresh', 'Start a read-only FTP console inventory and storage scan. Poll console_status until its job completes. Capacity needs the background receiver.', {}],
   ['console_backup', 'Download encrypted save containers and metadata with SHA-256 manifests. Set decrypted=true for a PS5 save to retain an encrypted backup and export decrypted files from a staged copy through the PS5 13.60 companion. The target game must be closed. Poll console_status. Restoring edited files requires desktop confirmation.', {id:z.string(),decrypted:z.boolean().optional()}],
@@ -58,9 +62,9 @@ export async function bridgeCall(method, args) {
   const data = await response.json(); if (!response.ok) throw new Error(data.error); return data.result;
 }
 export function createMcp(call = bridgeCall) {
-  const server = new McpServer({ name: 'ps-neighbourhood', version: '0.9.0' });
+  const server = new McpServer({ name: 'ps-neighbourhood', version: '0.10.0' });
   for (const [name, description, shape] of tools) {
-    const mutation = ['console_refresh','console_backup','connect', 'disconnect', 'memory_write', 'watch_add', 'watch_remove', 'scan_start', 'scan_cancel', 'dump_start', 'dump_cancel', 'pointer_search', 'pointer_cancel', 'ftp_download'].includes(name);
+    const mutation = ['shadow_add','shadow_refresh','console_refresh','console_backup','connect', 'disconnect', 'memory_write', 'watch_add', 'watch_remove', 'scan_start', 'scan_cancel', 'dump_start', 'dump_cancel', 'pointer_search', 'pointer_cancel', 'ftp_download'].includes(name);
     server.registerTool('psn_' + name, { description, inputSchema: z.object(shape), annotations: { readOnlyHint: !mutation, destructiveHint: name === 'memory_write' || name === 'disconnect', openWorldHint: true } }, async args => {
       try { const result = await call(name, args); return { content: [{ type: 'text', text: JSON.stringify(result) }], structuredContent: { result } }; }
       catch (e) { return { content: [{ type: 'text', text: e.message }], isError: true }; }

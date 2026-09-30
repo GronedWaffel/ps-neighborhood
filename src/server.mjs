@@ -36,7 +36,7 @@ export async function startServer({ port = Number(process.env.PSN_PORT || 0), di
   const url = `http://127.0.0.1:${server.address().port}`;
   await mkdir(directory, { recursive: true });
   await writeFile(path.join(directory, 'bridge.json'), JSON.stringify({ url, token, pid: process.pid }, null, 2));
-  return { server, workbench, url, directory, close: async () => { await workbench.console.close(); await workbench.packages.close(); await workbench.packages.receiver.close(); await workbench.disconnect(); server.close(); } };
+  return { server, workbench, url, directory, close: async () => { await workbench.shadow.close(); await workbench.console.close(); await workbench.packages.close(); await workbench.packages.receiver.close(); await workbench.ps5Receiver.close(); await workbench.disconnect(); server.close(); } };
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const app = await startServer(); console.log(`PS Neighbourhood: ${app.url}`);

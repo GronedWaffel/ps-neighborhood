@@ -16,12 +16,13 @@ else app.whenReady().then(async () => {
   if (ps5 && newWorkspace) await backend.workbench.setProfile({...backend.workbench.profile,platform:'ps5',payloadPort:9021,firmware:'13.60'});
   const win = new BrowserWindow({ width: 1510, height: 1000, minWidth: 1100, minHeight: 760, title: 'PS Neighbourhood', backgroundColor: '#0b1017', autoHideMenuBar: true, webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true } });
   const sleepTimer = setInterval(() => {
-    const awake=backend.workbench.packages.server || backend.workbench.console.backup?.state==='running';
+    const awake=backend.workbench.packages.server || backend.workbench.shadow.busy || backend.workbench.console.backup?.state==='running';
     if (awake && sleepBlocker === undefined) sleepBlocker = powerSaveBlocker.start('prevent-app-suspension');
     if (!awake && sleepBlocker !== undefined) { powerSaveBlocker.stop(sleepBlocker); sleepBlocker = undefined; }
   }, 1000);
   win.on('close', event => {
     if (closing) return;
+    if(backend.workbench.shadow.busy){event.preventDefault();dialog.showMessageBoxSync(win,{message:'A ShadowMount transfer is running. Cancel it in ShadowMount before closing; completed files will be kept for retry.'});return;}
     if (backend.workbench.console.busy || backend.workbench.console.backup?.state==='running') {event.preventDefault();dialog.showMessageBoxSync(win,{message:'Wait for the console action or save backup to finish before closing.'});return;}
     if (backend.workbench.packages.busy) { event.preventDefault(); dialog.showMessageBoxSync(win, { message: 'An installation is being submitted. Wait for the result before closing.' }); return; }
     if (backend.workbench.packages.server) {
@@ -42,9 +43,9 @@ else app.whenReady().then(async () => {
   });
   ipcMain.handle('confirm-console', async (event,request) => {
     if(!trusted(event))return false;
-    const labels={launch:'Launch game',close:'Close game',uninstall:'Uninstall game',patch:'Uninstall patch only',shutdown:'Shut down PS4',restart:'Restart PS4',rest:'Enter rest mode'};
+    const labels={'shadow-register':'Enable batch registration',mount:'Mount game',unmount:'Unmount game',launch:'Launch game',close:'Close game',uninstall:'Uninstall game',patch:'Uninstall patch only',shutdown:'Shut down PS4',restart:'Restart PS4',rest:'Enter rest mode'};
     const label=labels[request?.action];if(!label)return false;
-    const detail={launch:'Launching a different game may interrupt the current session.',close:'Unsaved progress will be lost.',uninstall:'Removes the game and its installed game content. Save backups are managed separately.',patch:'Removes only the installed update, returning this game to its base version. Newer saves may require the update.',shutdown:'The console will turn off. You will need to enable the jailbreak again after booting.',restart:'The console will restart. You will need to enable the jailbreak again.',rest:'The console will suspend. Save your progress first; rest-mode support depends on your jailbreak setup.'}[request.action];
+    const detail={'shadow-register':'Backs up ShadowMount configuration and enables native batch registration on PS5 13.60. It scans all staged app folders and resets title registration and image retry counters. Use this when the per-title registration bridge fails.',mount:'Attach this game through ShadowMount. Close any running game first.',unmount:'Detach this game through ShadowMount. Close it first.',launch:'Launching a different game may interrupt the current session.',close:'Unsaved progress will be lost.',uninstall:'Removes the game and its installed game content. Save backups are managed separately.',patch:'Removes only the installed update, returning this game to its base version. Newer saves may require the update.',shutdown:'The console will turn off. You will need to enable the jailbreak again after booting.',restart:'The console will restart. You will need to enable the jailbreak again.',rest:'The console will suspend. Save your progress first; rest-mode support depends on your jailbreak setup.'}[request.action];
     const result=await dialog.showMessageBox(win,{type:'warning',buttons:['Cancel',label],defaultId:0,cancelId:0,message:label+(request.titleId?' · '+String(request.titleId).slice(0,20):'')+'?',detail});return result.response===1;
   });
   ipcMain.handle('mcp-config', event => {
@@ -53,7 +54,7 @@ else app.whenReady().then(async () => {
   });
   win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   win.webContents.on('will-navigate', (event, url) => { if (!url.startsWith(backend.url + '/')) event.preventDefault(); });
-  await win.loadURL(backend.url + (process.argv.includes('--console') ? '/#console' : process.argv.includes('--pkg') ? '/#pkg' : ''));
+  await win.loadURL(backend.url + (process.argv.includes('--shadow') ? '/#shadow' : process.argv.includes('--console') ? '/#console' : process.argv.includes('--pkg') ? '/#pkg' : ''));
   win.show();
   app.on('second-instance', () => { win.restore(); win.show(); win.focus(); });
 }).catch(e => { dialog.showErrorBox('PS Neighbourhood', e.stack || e.message); app.quit(); });

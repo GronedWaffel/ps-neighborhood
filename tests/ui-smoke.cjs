@@ -58,6 +58,12 @@ app.whenReady().then(async () => {
     assert.ok(await js('document.querySelector("#main").textContent.includes("PS5 companion")'));assert.ok(await js('!!document.querySelector("#pkg-pause") && !!document.querySelector("#pkg-resume")'));
     await click('[data-page="console"]');assert.ok(await js('document.querySelector("#console-load").textContent.includes("PS5 companion")'));
     await until('document.querySelector("#console-compatibility").textContent.includes("PS5")');
+    const game=path.join(root,'artifacts','ui-shadow-game');await fs.mkdir(path.join(game,'sce_sys'),{recursive:true});await fs.writeFile(path.join(game,'sce_sys/param.json'),JSON.stringify({titleId:'PPSA12345',titleName:'ShadowMount UI fixture'}));await fs.writeFile(path.join(game,'eboot.bin'),'fixture');
+    await click('[data-page="shadow"]');await until('!!document.querySelector("#shadow-folder")');
+    await js(`void(window.desktop={chooseFolder:async()=>${JSON.stringify(game)}})`);await click('#shadow-folder');await until('document.querySelector("#shadow-queue").textContent.includes("PPSA12345")');
+    assert.ok(await js('document.querySelector("#shadow-start").disabled'));assert.ok(await js('!!document.querySelector("#shadow-prepare")'));assert.ok(await js('!!document.querySelector("#shadow-repair")'));
+    await fs.writeFile(path.join(root,'artifacts/screenshots/shadowmount.png'),(await win.webContents.capturePage()).toPNG());
+    await click('[data-shadow-remove]');await until('document.querySelector("#shadow-queue").textContent.includes("empty")');
     await click('[data-page="folder"]');assert.ok(await js('!!document.querySelector("#ftp-path")'));
     assert.deepEqual(errors, []); console.log('PASS: PS4 simulated scan/dump flow and PS5 profile, ELF page, FTP page and native-control restrictions.');
     await backend.close(); win.destroy(); app.exit(0);

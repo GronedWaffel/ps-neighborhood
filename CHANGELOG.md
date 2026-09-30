@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0 — ShadowMount game transfers
+
+- Added a PS5 ShadowMount page for folder/image transfer queues, free-space checks, progress, cancellation and file-level retry. Incomplete games remain staged, existing games are not overwritten, and copying is distinguished from console recognition.
+- Added library refresh/rescan, mount/unmount and launch/close controls, plus MCP source inspection, queueing and status tools.
+- Companion revision 106 bridges the console-local ShadowMount API through the existing authenticated connection. No ShadowMount LAN configuration changes are needed.
+- Added a confirmed 13.60 batch-registration repair with a configuration backup, plus ftpsrv raw-file mode and missing-file compatibility fixes. Library refresh reconciles delayed recognition with completed transfers.
+- See [ShadowMount setup and transfer details](docs/SHADOWMOUNT.md).
+
 ## 0.9.0 — PS5 13.60 workbench, installer, console controls and saves
 
 - Fixed delayed ELF socket timeouts escaping into Electron's main process. Transfers now clear their timers, close their sockets, and return transport errors to the caller. Added completion, stalled-transfer, late-error and refused-connection checks.

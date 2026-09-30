@@ -16,7 +16,7 @@ if(servicesDiagnostic)args.splice(1,0,'-DPSN_SERVICE_DIAGNOSTIC');
 args[args.indexOf('main.c')]=source;args[args.length-1]='build/'+name+'.elf';
 const result=spawnSync(zig,args,{cwd:root,stdio:'inherit',env:{...process.env,ZIG_GLOBAL_CACHE_DIR:path.join(root,'build/zig-cache')}});if(result.status!==0)process.exit(result.status||1);
 const data=await readFile(path.join(root,'build/'+name+'.elf'));validatePS5Elf(data);
-const manifest={platform:'ps5',protocol:1,revision:105,sdk:'ps5-payload-dev/sdk v0.43',bytes:data.length,sha256:createHash('sha256').update(data).digest('hex'),source:'receiver-ps5/main.c',features:['storage','app-info','launch','close','uninstall','patch-13.60','power','install-by-package','save-mount-13.60','save-restore-13.60']};
+const manifest={platform:'ps5',protocol:1,revision:106,sdk:'ps5-payload-dev/sdk v0.43',bytes:data.length,sha256:createHash('sha256').update(data).digest('hex'),source:'receiver-ps5/main.c',features:['shadowmount-loopback-api','storage','app-info','launch','close','uninstall','patch-13.60','power','install-by-package','save-mount-13.60','save-restore-13.60']};
 if(servicesDiagnostic)manifest.features=['service-ABI-diagnostic'];
 if(diagnostic){manifest.source='receiver-ps5/diagnostic.c';manifest.features=['diagnostic-scratch-memory'];}
 await writeFile(path.join(root,'build/'+(diagnostic?'diagnostic-manifest.json':servicesDiagnostic?'service-diagnostic-manifest.json':'manifest.json')),JSON.stringify(manifest,null,2)+'\n');console.log(JSON.stringify(manifest));

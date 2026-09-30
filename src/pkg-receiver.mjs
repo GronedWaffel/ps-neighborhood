@@ -48,7 +48,7 @@ export class Receiver {
           try{
             while(buffered.length>=16){
               const magic=buffered.readUInt32LE(0),id=buffered.readUInt32LE(4),code=buffered.readInt32LE(8),len=buffered.readUInt32LE(12);
-              if(magic!==RESPONSE || len>2048)throw Error('Invalid receiver response');if(buffered.length<16+len)return;
+              if(magic!==RESPONSE || len>(authenticated&&this.platform==='ps5'?1048576:2048))throw Error('Invalid receiver response');if(buffered.length<16+len)return;
               const body=Buffer.from(buffered.subarray(16,16+len));buffered=buffered.subarray(16+len);
               if(!authenticated){if(id!==0||code!==0||len!==36||body.readUInt32LE(32)!==1||!timingSafeEqual(body.subarray(0,32),this.key))throw Error('Receiver authentication failed');authenticated=true;clearTimeout(handshakeTimer);this.socket=socket;this.ready=true;onHello();}
               else {const p=this.pending.get(id);if(!p)throw Error('Unexpected receiver reply');this.pending.delete(id);clearTimeout(p.timer);p.resolve({code,body});}

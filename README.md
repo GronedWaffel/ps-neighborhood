@@ -1,12 +1,14 @@
 # PS Neighbourhood
 
-**[Download the PS5 13.60 Windows release — v0.9.0](https://github.com/GronedWaffel/ps-neighbourhood/releases/tag/v0.9.0)**. Extract the Windows ZIP and run **Start PS5 Neighbourhood.cmd**. PS4 support is included in the same download.
+**[Download the Windows release — v0.10.0 with PS5 ShadowMount support](https://github.com/GronedWaffel/ps-neighbourhood/releases/tag/v0.10.0)**. Extract the Windows ZIP and run **Start PS5 Neighbourhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
 
 [![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighbourhood)](https://github.com/GronedWaffel/ps-neighbourhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange) ![Hardware tested: PS5 13.60](https://img.shields.io/badge/hardware%20tested-PS5%2013.60-blue)
 
 **Your PS4 / PS5 memory workbench: scanning, MCP tools, Ghidra RAM exports, FTP and payload loading, plus platform-specific package and console management.**
 
 PS Neighbourhood brings console tools into one Windows desktop app. Explore a running game's memory through PS4Debug or PS5Debug-NG, capture regions for offline analysis, build a trainer, or install a folder of local PKGs directly from your PC. An integrated [Model Context Protocol](https://modelcontextprotocol.io/) server gives compatible AI clients access to the same memory workflow.
+
+Version 0.10.0 adds **ShadowMount**: PS5 folder/image transfer queues, free-space checks, progress, cancellation/retry, and library mount/unmount/launch/close controls. See the [ShadowMount guide](docs/SHADOWMOUNT.md).
 
 > **PS4 compatibility: only PS4 firmware 10.01 has been hardware-tested.** Other listed PS4 firmware targets are experimental, including versions below 10.01. Individual features have their own validation limits below.
 >

@@ -1,5 +1,7 @@
 # Third-party notices
 
+ShadowMount interoperability uses the public API v1 and scan-path behavior of [drakmor/ShadowMountPlus](https://github.com/drakmor/shadowMountPlus), including the separately released 13.60 compatibility build. Credit for ShadowMountPlus belongs to drakmor and its contributors. The desktop queue, FTP transfer workflow and bounded companion API bridge here are independent GPL-3.0-or-later code. ShadowMount, etaHEN and ftpsrv binaries are not bundled in PS Neighbourhood. [ps5-payload-dev/ftpsrv](https://github.com/ps5-payload-dev/ftpsrv) 0.21.1, by John Törnblom and contributors, was used for the hardware transfer checks.
+
 PS5 save mounting ABI research used [n0llptr/Playstation-5-Save-Mounter](https://github.com/n0llptr/Playstation-5-Save-Mounter), GPL-3.0, including the PFS mount options and sealed-key ioctl interface. Our staged-copy protocol, host workflow and native implementation are provided under GPL-3.0-or-later in `receiver-ps5/saves.h` and `src/ps5-saves.mjs`. [Garlic SaveMgr](https://github.com/earthonion/garlic-savemgr) was consulted as a capability/API reference; no Garlic implementation or binary is redistributed, and no license is asserted for its public source.
 
 PS Neighbourhood uses Electron (MIT and included Chromium third-party notices), the official Model Context Protocol TypeScript SDK (MIT), basic-ftp (MIT) and Zod (MIT). Their package license files remain in the distribution. Electron's LICENSE and LICENSES.chromium.html are included at the portable build root.
