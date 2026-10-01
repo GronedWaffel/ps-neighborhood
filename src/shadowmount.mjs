@@ -59,11 +59,18 @@ export class ShadowMount {
    const configured=(settings.scan_paths||[]).filter(p=>typeof p==='string');const roots=configured.length?configured:defaultRoots;
    const destinations=(storage.destinations||[]).filter(d=>!d.read_only&&roots.some(r=>sourcePath(d.path)===sourcePath(r)||sourcePath(d.path).startsWith(sourcePath(r)+'/')));
    // 1.7beta2 compares resolved destinations with unresolved scan roots and can
-   // omit /data/homebrew. Use the explicitly prepared canonical directory and
-   // its real /user filesystem report, never inferred external-drive capacity.
+   // omit /data/homebrew. Discover the canonical directory on the console,
+   // not from a flag saved by a previous PC installation.
    const internal=(storage.mounts||[]).find(m=>m.mount_point==='/user'&&!m.read_only&&m.available_bytes>0);
-   if(this.internalReady===host&&internal&&roots.some(r=>sourcePath(r)==='/data/homebrew')&&!destinations.some(d=>sourcePath(d.path)==='/data/homebrew'))destinations.push({...internal,path:'/user/data/homebrew'});
-   this.snapshot={host,connected:true,version:version.shadowmount_version,capabilities:version.capabilities||[],games:library.games||[],destinations,storage:storage.mounts||[],scanPaths:roots,updatedAt:time()};
+   const internalStorage={path:'/user/data/homebrew',canPrepare:Boolean(internal&&roots.some(r=>sourcePath(r)==='/data/homebrew'))};
+   if(internalStorage.canPrepare&&!destinations.some(d=>sourcePath(d.path)==='/data/homebrew')){
+    // A separate read-only FTP session cannot disturb an active transfer.
+    const c=this.clientFactory(),profile={...this.profile()};
+    try{await c.access({host,port:profile.ftpPort,user:'anonymous',password:'ps-neighborhood'});await c.cd(internalStorage.path);internalStorage.exists=true;destinations.push({...internal,path:internalStorage.path});}
+    catch(e){internalStorage.exists=false;if(Number(e.code)!==550)internalStorage.error='Could not check internal storage over FTP: '+e.message;}
+    finally{c.close();}
+   }
+   this.snapshot={host,connected:true,version:version.shadowmount_version,capabilities:version.capabilities||[],games:library.games||[],destinations,internalStorage,storage:storage.mounts||[],scanPaths:roots,updatedAt:time()};
    let reconciled=false;for(const item of this.items){if(item.host===host&&item.state==='complete'&&!item.registered&&item.target&&this.snapshot.games.some(g=>sourcePath(g.path)===sourcePath(item.target)&&(item.kind==='image'||g.title_id===item.titleId))){item.registered=true;delete item.registrationNote;reconciled=true;if(this.job?.id===item.id&&this.job.state==='complete')this.job.phase='copied · recognized by ShadowMount';}}
    if(reconciled)await this.save();return this.status();
   }catch(e){this.snapshot={...this.snapshot,host,connected:false,error:e.message};throw e;}finally{this.refreshing=false;}
@@ -71,7 +78,7 @@ export class ShadowMount {
  async add({local}){this.requirePS5();if(this.busy||this.preparing)throw Error('Wait for the current operation');this.preparing=true;try{const source=await inspectShadowSource(local);const existing=this.items.find(i=>i.fingerprint===source.fingerprint&&i.host===this.profile().host);if(existing)return this.status();this.items.push({...source,id:randomUUID(),host:this.profile().host,state:'queued',processed:0,completedFiles:{},createdAt:time()});await this.save();return this.status();}finally{this.preparing=false;}}
  async prepare(){
   this.requirePS5();this.guard();if(this.busy||this.preparing||this.refreshing)throw Error('Wait for the current operation');this.busy=true;
-  try{await this.refresh();if(!this.snapshot.scanPaths.some(r=>sourcePath(r)==='/data/homebrew'))throw Error('Custom ShadowMount scan paths exclude /data/homebrew; choose an existing destination');this.runProfile={...this.profile()};await this.ftp(c=>c.ensureDir('/user/data/homebrew'));this.internalReady=this.runProfile.host;await this.save();return await this.refresh();}finally{this.busy=false;}
+  try{await this.refresh();if(!this.snapshot.scanPaths.some(r=>sourcePath(r)==='/data/homebrew'))throw Error('Custom ShadowMount scan paths exclude /data/homebrew; choose an existing destination');if(!this.snapshot.internalStorage.canPrepare)throw Error('Internal storage is read-only, full, or unavailable');this.runProfile={...this.profile()};await this.ftp(c=>c.ensureDir('/user/data/homebrew'));const result=await this.refresh();if(!result.destinations.some(d=>sourcePath(d.path)==='/data/homebrew'))throw Error(result.internalStorage.error||'Could not confirm the internal game folder');return result;}finally{this.busy=false;}
  }
  async repairRegistration({confirmation}={}){
   this.requirePS5();this.guard();if(confirmation!=='batch-registration')throw Error('Confirm batch registration of staged console apps');
@@ -101,10 +108,10 @@ export class ShadowMount {
   }finally{this.busy=false;}
  }
  async remove({id}){if(this.busy||this.preparing)throw Error('Wait for the current operation');const item=this.items.find(i=>i.id===id);if(item?.staging&&!['complete'].includes(item.state))throw Error('This item has resumable files on the console. Keep it queued and retry; no files were deleted.');this.items=this.items.filter(i=>i.id!==id);await this.save();return this.status();}
- start({destination}){
+ start({destination,id}){
   this.requirePS5();this.guard();if(this.busy||this.preparing||this.refreshing)throw Error('Wait for the current operation');shadowPath(destination);
   if(!this.snapshot.connected||this.snapshot.host!==this.profile().host||!this.snapshot.destinations.some(d=>d.path===destination))throw Error('Refresh ShadowMount and choose an available destination');
-  const pending=this.items.filter(i=>i.host===this.profile().host&&!['complete'].includes(i.state));if(!pending.length)throw Error('Add a game folder or image first');
+  const pending=this.items.filter(i=>i.host===this.profile().host&&(!id||i.id===id)&&!['complete'].includes(i.state));if(!pending.length)throw Error('Add a game folder or image first');
   if(pending.some(i=>i.destination&&i.destination!==destination))throw Error('Resume interrupted transfers to their original destination');
   this.busy=true;this.cancelled=false;this.runProfile={...this.profile()};
   this.running=this.run(pending,destination).catch(e=>{this.error=e.message;}).finally(async()=>{this.busy=false;this.activeClient=null;this.log('ShadowMount transfer',this.job?.state||'finished');await this.save().catch(e=>{this.error=e.message;});});return this.status();
@@ -154,7 +161,7 @@ export class ShadowMount {
  }
  async copyItem(c,item){
   const receipt='.psn-transfer.json';
-  const checkInstalled=async()=>{if(item.kind==='folder'&&!item.published&&await this.exists(c,'/user/app/'+item.titleId))throw Error('This title is already installed on the console. Its installation was preserved; manage it in the console library before transferring another copy.');};
+  const checkInstalled=async()=>{if(item.titleId&&!item.published&&await this.exists(c,'/user/app/'+item.titleId))throw Error('This title is already installed on the console. Its installation was preserved; manage it in the console library before transferring another copy.');};
   await checkInstalled();
   if(item.published){if(!await this.exists(c,item.target))throw Error('Published destination disappeared');const saved=await this.remoteJson(c,(item.kind==='image'?item.staging:item.target)+'/'+receipt);if(saved.id!==item.id||saved.fingerprint!==item.fingerprint)throw Error('Destination ownership does not match this transfer');}
   else{

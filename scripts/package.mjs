@@ -5,6 +5,8 @@ import { spawnSync } from 'node:child_process';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
+const converterBuild = spawnSync(process.execPath, ['scripts/build-pkg-converter.mjs'], { cwd: root, stdio: 'inherit' });
+if (converterBuild.error || converterBuild.status !== 0) throw converterBuild.error || Error('PKG converter build failed');
 const gtaBuild = spawnSync(process.execPath, ['scripts/build-gta-bridge.mjs'], { cwd: root, stdio: 'inherit' });
 if (gtaBuild.error || gtaBuild.status !== 0) throw gtaBuild.error || Error('GTA trainer bridge build failed');
 const out = path.join(process.env.PSN_PACKAGE_DIR ? path.resolve(process.env.PSN_PACKAGE_DIR) : path.join(root, 'dist'), `PS-Neighborhood-${pkg.version}-win-x64`);
@@ -21,6 +23,8 @@ await rename(path.join(out, 'electron.exe'), path.join(out, 'PS Neighborhood.exe
 const app = path.join(out, 'resources/app'); await mkdir(app, { recursive: true });
 for (const name of ['desktop', 'src', 'ui', 'trainers', 'docs', 'package.json', 'README.md', 'CONTRIBUTING.md', 'CHANGELOG.md', 'LICENSE', 'THIRD-PARTY-NOTICES.md']) await cp(path.join(root, name), path.join(app, name), { recursive: true });
 await mkdir(path.join(app,'scripts'),{recursive:true});
+await cp(path.join(root,'converter'),path.join(app,'converter'),{recursive:true,filter:source=>!path.relative(path.join(root,'converter'),source).split(path.sep).some(p=>p==='bin'||p==='obj')});
+await cp(path.join(root,'scripts/build-pkg-converter.mjs'),path.join(app,'scripts/build-pkg-converter.mjs'));
 for(const name of ['verify-ghidra.ps1','prepare-ghidra-validation.mjs'])await cp(path.join(root,'scripts',name),path.join(app,'scripts',name));
 await cp(path.join(root, 'scripts/build-gta-bridge.mjs'), path.join(app, 'scripts/build-gta-bridge.mjs'));
 await cp(path.join(root, 'scripts/build-gta-vehicles.mjs'), path.join(app, 'scripts/build-gta-vehicles.mjs'));

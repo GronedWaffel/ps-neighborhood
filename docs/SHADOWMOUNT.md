@@ -2,7 +2,7 @@
 
 Select the PS5 profile, enter the console IP and FTP port, and open **ShadowMount**. Start your compatible ShadowMount payload on the console. **Load PS5 companion** connects to ShadowMount's local API without exposing its unauthenticated API to the network. It reuses an already connected companion; it does not load etaHEN, kstuff, or ShadowMount.
 
-Use **Prepare internal storage** if no internal destination is shown. It creates the standard homebrew folder and remembers preparation for that console. On builds that omit the `/data` alias from their storage response, the app uses `/user/data/homebrew` and the console's actual `/user` capacity report. Refresh discovers existing writable internal, USB, and extended-storage destinations reported by ShadowMount. Custom scan paths are respected. The API port defaults to 10101.
+Existing internal game folders are discovered over FTP, including on a fresh PC installation. Use **Prepare internal storage** if the folder is missing; the same button is available inside the conversion window. On builds that omit the `/data` alias from their storage response, the app checks `/user/data/homebrew` and uses the console's actual `/user` capacity report. It does not rely on previously saved preparation flags. Refresh also discovers writable USB and extended-storage destinations reported by ShadowMount. Custom scan paths and read-only mounts are respected. The API port defaults to 10101.
 
 Add a PS5 dump folder containing `sce_sys/param.json` and `eboot.bin`, or a `.ffpkg` / `.exfat` image. `.ffpfs` and `.ffpfsc` are accepted as experimental ShadowMount formats. Standard `.pkg` files belong in **PKG installer**. File transfer does not remove encryption, supply licenses, or guarantee that a particular dump can run.
 

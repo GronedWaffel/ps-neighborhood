@@ -16,12 +16,13 @@ else app.whenReady().then(async () => {
   if (ps5 && newWorkspace) await backend.workbench.setProfile({...backend.workbench.profile,platform:'ps5',payloadPort:9021,firmware:'13.60'});
   const win = new BrowserWindow({ width: 1510, height: 1000, minWidth: 1100, minHeight: 760, title: 'PS Neighborhood', backgroundColor: '#0b1017', autoHideMenuBar: true, webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true } });
   const sleepTimer = setInterval(() => {
-    const awake=backend.workbench.packages.server || backend.workbench.shadow.busy || backend.workbench.console.backup?.state==='running';
+    const awake=backend.workbench.packages.server || backend.workbench.shadow.busy || backend.workbench.conversion.busy || backend.workbench.console.backup?.state==='running';
     if (awake && sleepBlocker === undefined) sleepBlocker = powerSaveBlocker.start('prevent-app-suspension');
     if (!awake && sleepBlocker !== undefined) { powerSaveBlocker.stop(sleepBlocker); sleepBlocker = undefined; }
   }, 1000);
   win.on('close', event => {
     if (closing) return;
+    if(backend.workbench.conversion.busy){event.preventDefault();dialog.showMessageBoxSync(win,{message:'A PKG conversion is running. Cancel it in PKG installer before closing.'});return;}
     if(backend.workbench.shadow.busy){event.preventDefault();dialog.showMessageBoxSync(win,{message:'A ShadowMount transfer is running. Cancel it in ShadowMount before closing; completed files will be kept for retry.'});return;}
     if (backend.workbench.console.busy || backend.workbench.console.backup?.state==='running') {event.preventDefault();dialog.showMessageBoxSync(win,{message:'Wait for the console action or save backup to finish before closing.'});return;}
     if (backend.workbench.packages.busy) { event.preventDefault(); dialog.showMessageBoxSync(win, { message: 'An installation is being submitted. Wait for the result before closing.' }); return; }

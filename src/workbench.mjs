@@ -1,3 +1,4 @@
+import appInfo from '../package.json' with {type:'json'};
 import { EventEmitter } from 'node:events';
 import { mkdir, readFile, writeFile, stat, open, rename } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
@@ -21,6 +22,7 @@ import {PS5Debug} from './ps5debug.mjs';
 import {Receiver} from './pkg-receiver.mjs';
 import {transferPayload} from './payload-transfer.mjs';
 import {ShadowMount,inspectShadowSource} from './shadowmount.mjs';
+import {PackageConversion} from './pkg-conversion.mjs';
 
 export class Workbench extends EventEmitter {
   constructor(directory) {
@@ -34,11 +36,13 @@ export class Workbench extends EventEmitter {
     this.watches = []; this.activity = []; this.mcpWrites = false; this.transfer = null; this.controlTail = Promise.resolve();
     this.shadow = new ShadowMount({directory,profile:()=>this.profile,receiver:this.ps5Receiver,guard:()=>{this.console.guard();this.console.guardTransfers();if(this.transfer?.state==='running')throw Error('Wait for the current FTP/payload transfer');},log:(a,d)=>this.log(a,d)});
     this.console.externalTransferBusy=()=>this.shadow.busy;
+    this.conversion = new PackageConversion({directory,profile:()=>this.profile,shadow:this.shadow,guard:()=>{this.console.guard();this.console.guardTransfers();if(this.shadow.busy||this.shadow.preparing||this.shadow.refreshing||this.transfer?.state==='running')throw Error('Wait for the current transfer or ShadowMount operation');}});
   }
   async init() {
     await mkdir(this.directory, { recursive: true });
     try { const saved = JSON.parse(await readFile(path.join(this.directory, 'workspace.json'), 'utf8')); this.profile = { ...this.profile, ...saved.profile }; this.watches = saved.watches || []; } catch {}
     await this.shadow.init();
+    await this.conversion.init();
     return this;
   }
   async save() { await writeFile(path.join(this.directory, 'workspace.json'), JSON.stringify({ profile: this.profile, watches: this.watches }, null, 2)); }
@@ -46,9 +50,10 @@ export class Workbench extends EventEmitter {
     const entry = { time: new Date().toISOString(), action, detail, source }; this.activity.unshift(entry); this.activity.length = Math.min(200, this.activity.length);
     this.emit('activity', entry);
   }
-  status() { return { mode: this.client?.connected ? this.mode : 'disconnected', features: platformFeatures(this.profile.platform), capabilities: this.client?.capabilities ?? { nativeScan: false, reason: this.mode === 'demo' ? 'Simulated memory lab uses host scanning' : 'No debugger detected' }, profile: this.profile, connectionId: this.connectionId, scan: this.scanner.status(), dump: this.dumps.status(), pointers: this.pointers.status(), transfer: this.transfer, mcpWrites: this.mcpWrites, activity: this.activity.slice(0, 40), watchCount: this.watches.length }; }
+  status() { return { version:appInfo.version, mode: this.client?.connected ? this.mode : 'disconnected', features: platformFeatures(this.profile.platform), capabilities: this.client?.capabilities ?? { nativeScan: false, reason: this.mode === 'demo' ? 'Simulated memory lab uses host scanning' : 'No debugger detected' }, profile: this.profile, connectionId: this.connectionId, scan: this.scanner.status(), dump: this.dumps.status(), pointers: this.pointers.status(), transfer: this.transfer, mcpWrites: this.mcpWrites, activity: this.activity.slice(0, 40), watchCount: this.watches.length }; }
   requireClient() { if (!this.client?.connected) throw new Error('Connect to the console debugger or open the memory lab first'); return this.client; }
   async setProfile(p) {
+    if(this.conversion.busy)throw Error('Wait for package conversion before changing consoles');
     if(this.shadow.busy||this.shadow.preparing||this.shadow.refreshing)throw Error('Wait for the ShadowMount operation before changing consoles');
     this.console.guard();
     if(this.packages.server || this.packages.queue.processing)throw Error('Stop sharing packages before changing consoles');
@@ -222,6 +227,9 @@ export class Workbench extends EventEmitter {
       }
 
   async dispatch(method, args, source) {
+    if(method.startsWith('conversion_')&&source==='mcp'&&method!=='conversion_status')throw Error('Review and control package conversion in the desktop app');
+    if(method.startsWith('conversion_')&&this.mode==='demo'&&method!=='conversion_status')throw Error('Leave the memory lab before converting packages');
+    if(this.conversion.busy&&['shadow_start','shadow_prepare','shadow_add','shadow_remove','shadow_action','shadow_load','shadow_repair_registration','ftp_upload','payload','pkg_load','pkg_install','pkg_queue_start','console_load','console_action','console_backup','console_save_restore'].includes(method))throw Error('Wait for package conversion or cancel it before starting another console operation');
     if(method.startsWith('shadow_')&&this.mode==='demo'&&!['shadow_status','shadow_inspect'].includes(method))throw Error('Leave the memory lab before using ShadowMount');
     if(source==='mcp'&&['shadow_start','shadow_cancel','shadow_action','shadow_scan','shadow_remove','shadow_prepare'].includes(method))throw Error('Control ShadowMount transfers and games in the desktop ShadowMount page');
     if(this.shadow.busy&&['ftp_upload','payload','pkg_load','pkg_install','pkg_queue_start','pkg_stop','pkg_control','console_load','console_action','console_backup','console_save_restore'].includes(method))throw Error('Wait for the ShadowMount transfer or cancel it before controlling the console');
@@ -232,6 +240,12 @@ export class Workbench extends EventEmitter {
     if (method.startsWith('pkg_') && this.mode === 'demo' && !['pkg_inspect', 'pkg_status', 'pkg_stop','pkg_queue_add','pkg_queue_remove','pkg_queue_clear','pkg_queue_stop'].includes(method)) throw new Error('Leave the memory lab before using the PS4 package installer');
     if (source === 'mcp' && ['payload', 'ftp_upload', 'profile', 'mcp_settings', 'demo_tick'].includes(method)) throw new Error('This action is available only in the desktop');
     switch (method) {
+      case 'pkg_queue_native': return this.packages.queue.useNative(args.id);
+      case 'conversion_plan': return this.conversion.plan(args);
+      case 'conversion_start': return this.conversion.start(args);
+      case 'conversion_status': return this.conversion.status();
+      case 'conversion_cancel': return this.conversion.cancel();
+      case 'conversion_transfer': return this.conversion.transfer(args);
       case 'shadow_status': return this.shadow.status();
       case 'shadow_repair_registration': if(source==='mcp')throw Error('Repair registration from the desktop');return this.shadow.repairRegistration(args);
       case 'shadow_prepare': return this.shadow.prepare();

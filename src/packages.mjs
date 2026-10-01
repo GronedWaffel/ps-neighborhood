@@ -21,6 +21,7 @@ export async function inspectPackage(local, {platform='ps4'}={}) {
     if(magic===0x7f464948||(magic===0x7f434e54&&['PPSA','MOUU'].includes(header.subarray(0x47,0x4b).toString()))){
       if(platform!=='ps5')throw Error('A PS5 package requires the PS5 console profile');
       let base=0n;
+      const signing=magic===0x7f464948?(header[5]===0?'debug':header[5]===128?'retail':'unknown'):'unknown';
       if(magic===0x7f464948){
         if(header.readUInt16LE(6)!==3||![0,128].includes(header[5]))throw Error('Unsupported PS5 finalized-image version');
         base=header.readBigUInt64LE(0x58);
@@ -35,7 +36,7 @@ export async function inspectPackage(local, {platform='ps4'}={}) {
       const bodyStart=header.readBigUInt64BE(0x20),bodySize=header.readBigUInt64BE(0x28);
       if(![0x20,0x21,0x22,0x26].includes(type))throw Error('Unsupported PS5 game package type');
       if(!count||count>4096||BigInt(table)+BigInt(count)*32n>bodyStart+bodySize||bodyStart<0x80n||!bodySize||base+bodyStart+bodySize>BigInt(st.size))throw Error('PS5 package metadata is truncated or invalid');
-      return {local:path.resolve(local),name:path.basename(local),size:st.size,mtimeMs:st.mtimeMs,platform:'ps5',contentId,titleId:contentId.slice(7,16),kind:(flags&0x40100000)?'Patch':[0x21,0x22].includes(type)?'Add-on':'Game / app',type,validation:'Header and image bounds; content integrity is checked by the console'};
+      return {local:path.resolve(local),name:path.basename(local),size:st.size,mtimeMs:st.mtimeMs,platform:'ps5',contentId,titleId:contentId.slice(7,16),kind:(flags&0x40100000)?'Patch':[0x21,0x22].includes(type)?'Add-on':'Game / app',type,signing,packageFormat:magic===0x7f464948?'ps5-fih':'ps5-cnt',shadowConvertible:signing==='debug'&&type===0x20&&!(flags&0x40100000)&&contentId.slice(7,11)==='PPSA',validation:'Header and image bounds; content integrity is checked by the console'};
     }
     if (header.readUInt32BE(0) !== 0x7f434e54) throw Error('This is not a PS4 PKG (missing CNT header)');
     const declaredSize = header.readBigUInt64BE(0x430);

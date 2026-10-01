@@ -6,6 +6,9 @@ dist/
 artifacts/
 research/
 tools/
+converter/build/
+converter/**/bin/
+converter/**/obj/
 receiver/build/
 receiver-ps5/build/
 .env
@@ -21,6 +24,7 @@ receiver-ps5/build/
 !trainers/gta5-story/profiles/*/gta-bridge.bin
 *.exe
 *.dll
+!converter/vendor/PS5PKGTool/ThirdParty/ProsperoPkgTool/ProsperoPkgTool.dll
 *.pdb
 *.pyc
 __pycache__/

@@ -1,0 +1,10 @@
+ProsperoPkgTool engine (clean-room reimplementation, MIT License)
+Copyright (c) 2026 pearlxcore
+
+Vendored managed library consumed by PS5PKGTool.Core.
+Source project: C:\Users\User\source\repos\ProsperoPkgTool
+Built: 2026-09-17 (Release, local working tree; NAPS native-span and indexed sparse-page compatibility)
+Target: net10.0
+SHA-256 (ProsperoPkgTool.dll): 729D7542666AD21FC3344006D1A81257E18E40DCA0F1A5B32D78E2966388E425
+
+

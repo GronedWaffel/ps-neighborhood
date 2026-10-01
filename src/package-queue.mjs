@@ -28,7 +28,7 @@ export class PackageQueue {
       for(const local of files.sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))) {
         const canonical=await realpath(local);if(known.has(key(canonical)))continue;
         known.add(key(canonical));
-        try { const pkg=await this.inspect(canonical);added.push({...pkg,id:randomUUID(),relative:path.relative(root,local),state:'queued'}); }
+        try { const pkg=await this.inspect(canonical);added.push({...pkg,id:randomUUID(),relative:path.relative(root,local),state:pkg.shadowConvertible?'choose method':'queued'}); }
         catch(e) { added.push({id:randomUUID(),local:canonical,name:path.basename(local),relative:path.relative(root,local),state:'invalid',error:e.message}); }
       }
       if(this.items.length+added.length>1000)throw Error('Queue is limited to 1,000 packages');
@@ -42,8 +42,10 @@ export class PackageQueue {
     if(item?.state==='active')throw Error('The current download is active; use Pause or Stop sharing');
     this.items=this.items.filter(i=>i.id!==id);return this.status();
   }
+  useNative(id) {const item=this.items.find(i=>i.id===id);if(!item||item.state!=='choose method')throw Error('This package is not awaiting a method choice');item.state='queued';return this.status();}
   clear() { if(this.running||this.scanning||this.processing)throw Error('Wait for the current download before clearing the queue');this.items=[];this.state='idle';this.error=undefined;return this.status(); }
   start(options) {
+    if(this.items.some(i=>i.state==='choose method'))throw Error('Choose conversion or native installation for the PS5 fPKGs before starting this queue');
     if(this.running||this.scanning||this.processing)throw Error('The queue is already running or scanning');
     if(this.installer.busy)throw Error('Wait for the current submission');
     if(this.installer.job?.queueItemId && this.installer.job.state==='paused')throw Error('Resume the current download first');
@@ -56,6 +58,7 @@ export class PackageQueue {
   stop() { this.running=false;if(this.state==='running')this.state='stopping after current download';return this.status(); }
   async run() {
     while(this.running) {
+      if(this.items.some(i=>i.state==='choose method')){this.state='waiting for package method choice';return;}
       const item=this.items.find(i=>i.state==='queued');
       if(!item){this.state='downloads complete';return;}
       item.state='active';

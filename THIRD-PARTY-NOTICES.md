@@ -12,6 +12,8 @@ The PS4Debug client uses documented wire protocol facts from jogolden/ps4debug a
 
 The generated Ghidra importer uses Ghidra public APIs. Ghidra is a separate installation and is not redistributed.
 
+The PS5 package converter uses pearlxcore's PS5PKGTool extraction/PFSC sources (GPL-3.0), its clean-room ProsperoPkgTool managed engine (MIT), SvenGDK's UFS2 implementation (BSD-2-Clause), and Powzix/q3k's ooz decompressor (GPL-3.0-or-later). The decoder is built from open source; no proprietary Oodle DLL is redistributed. Pinned revisions, modifications, complete licenses, and build details are in [converter/NOTICE.md](converter/NOTICE.md).
+
 The console receiver's loader metadata definitions and packed-library symbol lookup are adapted from ps4-payload-dev/sdk, Copyright (C) 2025 John Törnblom, GPL-3.0-or-later (https://github.com/ps4-payload-dev/sdk). Original notices and corresponding adapted source accompany the receiver. Application and power API references include LightningMods/Itemzflow, LightningMods/PS4-daemon-writeup, OpenOrbis and Scene-Collective/ps4-payload-sdk; see receiver/README.md.
 
 The background PKG receiver is distributed with its complete corresponding source and GPL-3.0-or-later license under `receiver/`. It includes credential and module-loader helpers from marcussacana/DirectPackageInstaller (commit ca7bade66737fede3b0e7bad73b665e0a4d4ff39), incorporating ps4-libjbc and flatz's loader. See receiver/README.md for attribution and local modifications. GoldHEN itself is not redistributed. The receiver requires an already enabled compatible GoldHEN environment.

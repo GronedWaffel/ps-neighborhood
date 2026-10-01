@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Neighborhood builds only extraction, not the GUI, encoders or alternate backend. -->
+    <Compile Include="Models/SonyPkgModels.cs" />
+    <Compile Include="Parsers/Sony*.cs" />
+    <Compile Include="Builders/SonyDebugPackageCredentials.cs" />
+    <Compile Include="Services/SonyPackageExtraction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PS5PKGTool.Ffpfsc\PS5PKGTool.Ffpfsc.csproj" />
+    <ProjectReference Include="..\PS5PKGTool.Ufs2\PS5PKGTool.Ufs2.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ProsperoPkgTool">
+      <HintPath>..\PS5PKGTool\ThirdParty\ProsperoPkgTool\ProsperoPkgTool.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.12.1 — Connection and first-run storage fixes
+
+- Show live transfer byte counts in the converter while a large image is copying, instead of waiting for the entire file to finish before updating progress.
+- Connect console and Check services save the entered IP and ports automatically. Failed connections and background polling preserve edits.
+- Discover existing internal ShadowMount game folders over FTP on fresh installations, without relying on saved preparation state. Check real internal free space and respect custom scan paths and read-only mounts.
+- Find conversion destinations automatically and prepare a missing internal game folder directly in the conversion window. FTP failures leave local conversion available; successful refreshes clear storage warnings.
+
+## 0.12.0 — PS5 fPKG conversion for ShadowMount
+
+- Detect finalized debug PS5 base-game packages in the PKG installer and ShadowMount source picker. Offer conversion or native installation, and hold folder-import entries for an explicit method choice.
+- Bundle a self-contained converter with an open-source decoder. Preserve the original PKG, restore separate CNT metadata, build FFPFSC, verify every block, and compare decoded/source SHA-256 before transfer.
+- Add working-space checks, progress, cancellation, saved verification receipts and optional automatic transfer of only the converted image. Existing installations remain protected and interrupted FTP copies can resume.
+- This is a ShadowMount workaround for native PS5 fPKG launch limitations, not a native etaHEN/kstuff compatibility patch. See [conversion instructions and scope](docs/PS5-PKG-CONVERSION.md).
+
 ## 0.11.0 — GTA V Story Mode in-game menu
 
 - Added the controller-operated GTA V menu, installed through PS5Debug-NG with executable fingerprint checks. Supports PPSA04263 01.000.000 and PPSA04264 01.010.002 with separate native maps, player offsets and mission profiles.

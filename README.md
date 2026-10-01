@@ -1,6 +1,6 @@
 # PS Neighborhood
 
-**[Download the Windows release — v0.11.0 with GTA V in-game menu](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.11.0)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
+**[Download the Windows release — v0.12.1 with PS5 fPKG conversion](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.12.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
 
 **GTA V Story Mode menu:** connect PS Neighborhood to PS5Debug-NG, enable **Allow MCP compare-and-write**, enter Story Mode, then run **GTA V In-Game Menu.cmd**. Press **L1 + D-pad Right** to open it. It runs inside GTA and continues after closing the PC app. Supports the fingerprinted PS5 builds **PPSA04263 01.000.000** and **PPSA04264 01.010.002**; other builds are refused. Full source, build instructions and feature details are in [trainers/gta5-story](trainers/gta5-story/README.md).
 
@@ -11,6 +11,8 @@
 PS Neighborhood brings console tools into one Windows desktop app. Explore a running game's memory through PS4Debug or PS5Debug-NG, capture regions for offline analysis, build a trainer, or install a folder of local PKGs directly from your PC. An integrated [Model Context Protocol](https://modelcontextprotocol.io/) server gives compatible AI clients access to the same memory workflow.
 
 Version 0.10.0 adds **ShadowMount**: PS5 folder/image transfer queues, free-space checks, progress, cancellation/retry, and library mount/unmount/launch/close controls. See the [ShadowMount guide](docs/SHADOWMOUNT.md).
+
+Version 0.12.1 includes **PS5 fPKG → ShadowMount conversion**: select a supported debug base-game PKG, review the conversion prompt, then extract, verify and optionally transfer automatically. Existing internal folders are discovered on fresh installations, with storage preparation available in the conversion window and live transfer progress. Native launch support remains limited on 13.60; conversion does not guarantee every game. [Conversion guide](docs/PS5-PKG-CONVERSION.md).
 
 > **PS4 compatibility: only PS4 firmware 10.01 has been hardware-tested.** Other listed PS4 firmware targets are experimental, including versions below 10.01. Individual features have their own validation limits below.
 >
@@ -112,6 +114,8 @@ Requires **Windows x64**, **Node.js 24 or newer**, npm, and **Zig 0.14.1** for t
 
 For PS5 builds and portable packaging, also obtain the [PS5 payload SDK v0.43](https://github.com/ps5-payload-dev/sdk/releases/tag/v0.43). See [PS5 companion build instructions](receiver-ps5/README.md).
 
+The bundled PKG converter additionally requires **.NET 10 SDK** at build time. Set `PSN_DOTNET` to its executable if needed and `PSN_ZIG` to Zig 0.14.1, then run `node scripts/build-pkg-converter.mjs`. Portable packaging runs this automatically; end users do not need .NET installed.
+
 From a checkout, in PowerShell:
 
 ```powershell
@@ -134,7 +138,7 @@ node node_modules/electron/cli.js tests/ui-smoke.cjs
 npm run package
 ```
 
-Output: `dist/PS-Neighborhood-0.10.1-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
+Output: `dist/PS-Neighborhood-0.12.0-win-x64/`. Packaging refuses to overwrite an existing version's folder. Keep that folder outside Git. Source launchers start the source checkout; portable launchers start their accompanying executable.
 
 ## Contributing
 
