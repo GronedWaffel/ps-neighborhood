@@ -1,0 +1,5292 @@
+{
+  "source": "https://github.com/DurtyFree/gta-v-data-dumps/blob/master/vehicles.json",
+  "note": "Model identifiers, display labels and classes. Runtime registration checks filter this reference catalogue for the supported game build. Trains and tow-only trailers are excluded from the regular spawn-and-enter list.",
+  "vehicles": [
+    {
+      "name": "adder",
+      "hash": 3078201489,
+      "label": "Adder",
+      "class": 7
+    },
+    {
+      "name": "airbus",
+      "hash": 1283517198,
+      "label": "Airport Bus",
+      "class": 17
+    },
+    {
+      "name": "airtug",
+      "hash": 1560980623,
+      "label": "Airtug",
+      "class": 11
+    },
+    {
+      "name": "akula",
+      "hash": 1181327175,
+      "label": "Akula",
+      "class": 15
+    },
+    {
+      "name": "akuma",
+      "hash": 1672195559,
+      "label": "Akuma",
+      "class": 8
+    },
+    {
+      "name": "aleutian",
+      "hash": 4256087847,
+      "label": "Aleutian",
+      "class": 2
+    },
+    {
+      "name": "alkonost",
+      "hash": 3929093893,
+      "label": "RO-86 Alkonost",
+      "class": 16
+    },
+    {
+      "name": "alpha",
+      "hash": 767087018,
+      "label": "Alpha",
+      "class": 6
+    },
+    {
+      "name": "alphaz1",
+      "hash": 2771347558,
+      "label": "Alpha-Z1",
+      "class": 16
+    },
+    {
+      "name": "ambulance",
+      "hash": 1171614426,
+      "label": "Ambulance",
+      "class": 18
+    },
+    {
+      "name": "annihilator",
+      "hash": 837858166,
+      "label": "Annihilator",
+      "class": 15
+    },
+    {
+      "name": "annihilator2",
+      "hash": 295054921,
+      "label": "Annihilator Stealth",
+      "class": 15
+    },
+    {
+      "name": "apc",
+      "hash": 562680400,
+      "label": "APC",
+      "class": 19
+    },
+    {
+      "name": "arbitergt",
+      "hash": 1549009676,
+      "label": "Arbiter GT",
+      "class": 4
+    },
+    {
+      "name": "ardent",
+      "hash": 159274291,
+      "label": "Ardent",
+      "class": 5
+    },
+    {
+      "name": "asbo",
+      "hash": 1118611807,
+      "label": "Asbo",
+      "class": 0
+    },
+    {
+      "name": "asea",
+      "hash": 2485144969,
+      "label": "Asea [asea]",
+      "class": 1
+    },
+    {
+      "name": "asea2",
+      "hash": 2487343317,
+      "label": "Asea [asea2]",
+      "class": 1
+    },
+    {
+      "name": "asterope",
+      "hash": 2391954683,
+      "label": "Asterope",
+      "class": 1
+    },
+    {
+      "name": "asterope2",
+      "hash": 3553846961,
+      "label": "Asterope GZ",
+      "class": 1
+    },
+    {
+      "name": "astrale",
+      "hash": 1596736441,
+      "label": "Astrale",
+      "class": 5
+    },
+    {
+      "name": "astron",
+      "hash": 629969764,
+      "label": "Astron",
+      "class": 2
+    },
+    {
+      "name": "astron2",
+      "hash": 2803699023,
+      "label": "Astron Custom",
+      "class": 2
+    },
+    {
+      "name": "autarch",
+      "hash": 3981782132,
+      "label": "Autarch",
+      "class": 7
+    },
+    {
+      "name": "avarus",
+      "hash": 2179174271,
+      "label": "Avarus",
+      "class": 8
+    },
+    {
+      "name": "avenger",
+      "hash": 2176659152,
+      "label": "Avenger [avenger]",
+      "class": 16
+    },
+    {
+      "name": "avenger2",
+      "hash": 408970549,
+      "label": "Avenger [avenger2]",
+      "class": 16
+    },
+    {
+      "name": "avenger3",
+      "hash": 3868033424,
+      "label": "Avenger [avenger3]",
+      "class": 16
+    },
+    {
+      "name": "avenger4",
+      "hash": 4225674290,
+      "label": "Avenger [avenger4]",
+      "class": 16
+    },
+    {
+      "name": "avisa",
+      "hash": 2588363614,
+      "label": "Avisa",
+      "class": 14
+    },
+    {
+      "name": "bagger",
+      "hash": 2154536131,
+      "label": "Bagger",
+      "class": 8
+    },
+    {
+      "name": "baller",
+      "hash": 3486135912,
+      "label": "Baller [Baller]",
+      "class": 2
+    },
+    {
+      "name": "baller2",
+      "hash": 142944341,
+      "label": "Baller [baller2]",
+      "class": 2
+    },
+    {
+      "name": "baller3",
+      "hash": 1878062887,
+      "label": "Baller LE",
+      "class": 2
+    },
+    {
+      "name": "baller4",
+      "hash": 634118882,
+      "label": "Baller LE LWB",
+      "class": 2
+    },
+    {
+      "name": "baller5",
+      "hash": 470404958,
+      "label": "Baller LE (Armored)",
+      "class": 2
+    },
+    {
+      "name": "baller6",
+      "hash": 666166960,
+      "label": "Baller LE LWB (Armored)",
+      "class": 2
+    },
+    {
+      "name": "baller7",
+      "hash": 359875117,
+      "label": "Baller ST",
+      "class": 2
+    },
+    {
+      "name": "baller8",
+      "hash": 3431608412,
+      "label": "Baller ST-D",
+      "class": 2
+    },
+    {
+      "name": "banshee",
+      "hash": 3253274834,
+      "label": "Banshee",
+      "class": 6
+    },
+    {
+      "name": "banshee2",
+      "hash": 633712403,
+      "label": "Banshee 900R",
+      "class": 7
+    },
+    {
+      "name": "banshee3",
+      "hash": 3634959571,
+      "label": "Banshee GTS",
+      "class": 6
+    },
+    {
+      "name": "barracks",
+      "hash": 3471458123,
+      "label": "Barracks [BARRACKS]",
+      "class": 19
+    },
+    {
+      "name": "barracks2",
+      "hash": 1074326203,
+      "label": "Barracks Semi",
+      "class": 19
+    },
+    {
+      "name": "barracks3",
+      "hash": 630371791,
+      "label": "Barracks [BARRACKS3]",
+      "class": 19
+    },
+    {
+      "name": "barrage",
+      "hash": 4081974053,
+      "label": "Barrage",
+      "class": 19
+    },
+    {
+      "name": "bati",
+      "hash": 4180675781,
+      "label": "Bati 801",
+      "class": 8
+    },
+    {
+      "name": "bati2",
+      "hash": 3403504941,
+      "label": "Bati 801RR",
+      "class": 8
+    },
+    {
+      "name": "benson",
+      "hash": 2053223216,
+      "label": "Benson",
+      "class": 20
+    },
+    {
+      "name": "benson2",
+      "hash": 728350375,
+      "label": "Benson (Cluckin' Bell)",
+      "class": 20
+    },
+    {
+      "name": "besra",
+      "hash": 1824333165,
+      "label": "Besra",
+      "class": 16
+    },
+    {
+      "name": "bestiagts",
+      "hash": 1274868363,
+      "label": "Bestia GTS",
+      "class": 6
+    },
+    {
+      "name": "bf400",
+      "hash": 86520421,
+      "label": "BF400",
+      "class": 8
+    },
+    {
+      "name": "bfinjection",
+      "hash": 1126868326,
+      "label": "Injection",
+      "class": 9
+    },
+    {
+      "name": "biff",
+      "hash": 850991848,
+      "label": "Biff",
+      "class": 20
+    },
+    {
+      "name": "bifta",
+      "hash": 3945366167,
+      "label": "Bifta",
+      "class": 9
+    },
+    {
+      "name": "bison",
+      "hash": 4278019151,
+      "label": "Bison [bison]",
+      "class": 12
+    },
+    {
+      "name": "bison2",
+      "hash": 2072156101,
+      "label": "Bison [Bison2]",
+      "class": 12
+    },
+    {
+      "name": "bison3",
+      "hash": 1739845664,
+      "label": "Bison [Bison3]",
+      "class": 12
+    },
+    {
+      "name": "bjxl",
+      "hash": 850565707,
+      "label": "BeeJay XL",
+      "class": 2
+    },
+    {
+      "name": "blade",
+      "hash": 3089165662,
+      "label": "Blade",
+      "class": 4
+    },
+    {
+      "name": "blazer",
+      "hash": 2166734073,
+      "label": "Blazer",
+      "class": 9
+    },
+    {
+      "name": "blazer2",
+      "hash": 4246935337,
+      "label": "Blazer Lifeguard",
+      "class": 9
+    },
+    {
+      "name": "blazer3",
+      "hash": 3025077634,
+      "label": "Hot Rod Blazer",
+      "class": 9
+    },
+    {
+      "name": "blazer4",
+      "hash": 3854198872,
+      "label": "Street Blazer",
+      "class": 9
+    },
+    {
+      "name": "blazer5",
+      "hash": 2704629607,
+      "label": "Blazer Aqua",
+      "class": 9
+    },
+    {
+      "name": "blimp",
+      "hash": 4143991942,
+      "label": "Atomic Blimp",
+      "class": 16
+    },
+    {
+      "name": "blimp2",
+      "hash": 3681241380,
+      "label": "Xero Blimp",
+      "class": 16
+    },
+    {
+      "name": "blimp3",
+      "hash": 3987008919,
+      "label": "Blimp",
+      "class": 16
+    },
+    {
+      "name": "blista",
+      "hash": 3950024287,
+      "label": "Blista",
+      "class": 0
+    },
+    {
+      "name": "blista2",
+      "hash": 1039032026,
+      "label": "Blista Compact",
+      "class": 6
+    },
+    {
+      "name": "blista3",
+      "hash": 3703315515,
+      "label": "Go Go Monkey Blista",
+      "class": 6
+    },
+    {
+      "name": "bmx",
+      "hash": 1131912276,
+      "label": "BMX",
+      "class": 13
+    },
+    {
+      "name": "bobcatxl",
+      "hash": 1069929536,
+      "label": "Bobcat XL",
+      "class": 12
+    },
+    {
+      "name": "bodhi2",
+      "hash": 2859047862,
+      "label": "Bodhi",
+      "class": 9
+    },
+    {
+      "name": "bombushka",
+      "hash": 4262088844,
+      "label": "RM-10 Bombushka",
+      "class": 16
+    },
+    {
+      "name": "boor",
+      "hash": 996383885,
+      "label": "Boor",
+      "class": 9
+    },
+    {
+      "name": "boxville",
+      "hash": 2307837162,
+      "label": "Boxville [boxville]",
+      "class": 12
+    },
+    {
+      "name": "boxville2",
+      "hash": 4061868990,
+      "label": "Boxville [boxville2]",
+      "class": 12
+    },
+    {
+      "name": "boxville3",
+      "hash": 121658888,
+      "label": "Boxville [boxville3]",
+      "class": 12
+    },
+    {
+      "name": "boxville4",
+      "hash": 444171386,
+      "label": "Boxville [boxville4]",
+      "class": 12
+    },
+    {
+      "name": "boxville5",
+      "hash": 682434785,
+      "label": "Armored Boxville",
+      "class": 12
+    },
+    {
+      "name": "boxville6",
+      "hash": 3452201761,
+      "label": "Boxville (LSDS)",
+      "class": 12
+    },
+    {
+      "name": "brawler",
+      "hash": 2815302597,
+      "label": "Brawler",
+      "class": 9
+    },
+    {
+      "name": "brickade",
+      "hash": 3989239879,
+      "label": "Brickade",
+      "class": 17
+    },
+    {
+      "name": "brickade2",
+      "hash": 2718380883,
+      "label": "Brickade 6x6",
+      "class": 17
+    },
+    {
+      "name": "brigham",
+      "hash": 3640468689,
+      "label": "Brigham",
+      "class": 4
+    },
+    {
+      "name": "brioso",
+      "hash": 1549126457,
+      "label": "Brioso R/A",
+      "class": 0
+    },
+    {
+      "name": "brioso2",
+      "hash": 1429622905,
+      "label": "Brioso 300",
+      "class": 0
+    },
+    {
+      "name": "brioso3",
+      "hash": 15214558,
+      "label": "Brioso 300 Widebody",
+      "class": 0
+    },
+    {
+      "name": "broadway",
+      "hash": 2361724968,
+      "label": "Broadway",
+      "class": 4
+    },
+    {
+      "name": "bruiser",
+      "hash": 668439077,
+      "label": "Apocalypse Bruiser",
+      "class": 9
+    },
+    {
+      "name": "bruiser2",
+      "hash": 2600885406,
+      "label": "Future Shock Bruiser",
+      "class": 9
+    },
+    {
+      "name": "bruiser3",
+      "hash": 2252616474,
+      "label": "Nightmare Bruiser",
+      "class": 9
+    },
+    {
+      "name": "brutus",
+      "hash": 2139203625,
+      "label": "Apocalypse Brutus",
+      "class": 9
+    },
+    {
+      "name": "brutus2",
+      "hash": 2403970600,
+      "label": "Future Shock Brutus",
+      "class": 9
+    },
+    {
+      "name": "brutus3",
+      "hash": 2038858402,
+      "label": "Nightmare Brutus",
+      "class": 9
+    },
+    {
+      "name": "btype",
+      "hash": 117401876,
+      "label": "Roosevelt",
+      "class": 5
+    },
+    {
+      "name": "btype2",
+      "hash": 3463132580,
+      "label": "Franken Stange",
+      "class": 5
+    },
+    {
+      "name": "btype3",
+      "hash": 3692679425,
+      "label": "Roosevelt Valor",
+      "class": 5
+    },
+    {
+      "name": "buccaneer",
+      "hash": 3612755468,
+      "label": "Buccaneer",
+      "class": 4
+    },
+    {
+      "name": "buccaneer2",
+      "hash": 3281516360,
+      "label": "Buccaneer Custom",
+      "class": 4
+    },
+    {
+      "name": "buffalo",
+      "hash": 3990165190,
+      "label": "Buffalo",
+      "class": 6
+    },
+    {
+      "name": "buffalo2",
+      "hash": 736902334,
+      "label": "Buffalo S",
+      "class": 6
+    },
+    {
+      "name": "buffalo3",
+      "hash": 237764926,
+      "label": "Sprunk Buffalo",
+      "class": 6
+    },
+    {
+      "name": "buffalo4",
+      "hash": 3675036420,
+      "label": "Buffalo STX",
+      "class": 4
+    },
+    {
+      "name": "buffalo5",
+      "hash": 165968051,
+      "label": "Buffalo EVX",
+      "class": 4
+    },
+    {
+      "name": "bulldozer",
+      "hash": 1886712733,
+      "label": "Dozer",
+      "class": 10
+    },
+    {
+      "name": "bullet",
+      "hash": 2598821281,
+      "label": "Bullet",
+      "class": 7
+    },
+    {
+      "name": "burrito",
+      "hash": 2948279460,
+      "label": "Burrito [Burrito]",
+      "class": 12
+    },
+    {
+      "name": "burrito2",
+      "hash": 3387490166,
+      "label": "Bugstars Burrito",
+      "class": 12
+    },
+    {
+      "name": "burrito3",
+      "hash": 2551651283,
+      "label": "Burrito [burrito3]",
+      "class": 12
+    },
+    {
+      "name": "burrito4",
+      "hash": 893081117,
+      "label": "Burrito [Burrito4]",
+      "class": 12
+    },
+    {
+      "name": "burrito5",
+      "hash": 1132262048,
+      "label": "Burrito [burrito5]",
+      "class": 12
+    },
+    {
+      "name": "bus",
+      "hash": 3581397346,
+      "label": "Bus",
+      "class": 17
+    },
+    {
+      "name": "buzzard",
+      "hash": 788747387,
+      "label": "Buzzard Attack Chopper",
+      "class": 15
+    },
+    {
+      "name": "buzzard2",
+      "hash": 745926877,
+      "label": "Buzzard",
+      "class": 15
+    },
+    {
+      "name": "caddy",
+      "hash": 1147287684,
+      "label": "Caddy [caddy]",
+      "class": 11
+    },
+    {
+      "name": "caddy2",
+      "hash": 3757070668,
+      "label": "Caddy [Caddy2]",
+      "class": 11
+    },
+    {
+      "name": "caddy3",
+      "hash": 3525819835,
+      "label": "Caddy [caddy3]",
+      "class": 11
+    },
+    {
+      "name": "calico",
+      "hash": 3101054893,
+      "label": "Calico GTF",
+      "class": 6
+    },
+    {
+      "name": "camper",
+      "hash": 1876516712,
+      "label": "Camper",
+      "class": 12
+    },
+    {
+      "name": "caracara",
+      "hash": 1254014755,
+      "label": "Caracara",
+      "class": 9
+    },
+    {
+      "name": "caracara2",
+      "hash": 2945871676,
+      "label": "Caracara 4x4",
+      "class": 9
+    },
+    {
+      "name": "carbonizzare",
+      "hash": 2072687711,
+      "label": "Carbonizzare",
+      "class": 6
+    },
+    {
+      "name": "carbonrs",
+      "hash": 11251904,
+      "label": "Carbon RS",
+      "class": 8
+    },
+    {
+      "name": "cargobob",
+      "hash": 4244420235,
+      "label": "Cargobob [Cargobob]",
+      "class": 15
+    },
+    {
+      "name": "cargobob2",
+      "hash": 1621617168,
+      "label": "Cargobob [cargobob2]",
+      "class": 15
+    },
+    {
+      "name": "cargobob3",
+      "hash": 1394036463,
+      "label": "Cargobob [Cargobob3]",
+      "class": 15
+    },
+    {
+      "name": "cargobob4",
+      "hash": 2025593404,
+      "label": "Cargobob [Cargobob4]",
+      "class": 15
+    },
+    {
+      "name": "cargobob5",
+      "hash": 3942284983,
+      "label": "DH-7 Iron Mule",
+      "class": 15
+    },
+    {
+      "name": "cargoplane",
+      "hash": 368211810,
+      "label": "Cargo Plane [cargoplane]",
+      "class": 16
+    },
+    {
+      "name": "cargoplane2",
+      "hash": 2336777441,
+      "label": "Cargo Plane [cargoplane2]",
+      "class": 16
+    },
+    {
+      "name": "casco",
+      "hash": 941800958,
+      "label": "Casco",
+      "class": 5
+    },
+    {
+      "name": "castigator",
+      "hash": 1307736079,
+      "label": "Castigator",
+      "class": 2
+    },
+    {
+      "name": "cavalcade",
+      "hash": 2006918058,
+      "label": "Cavalcade [cavalcade]",
+      "class": 2
+    },
+    {
+      "name": "cavalcade2",
+      "hash": 3505073125,
+      "label": "Cavalcade [cavalcade2]",
+      "class": 2
+    },
+    {
+      "name": "cavalcade3",
+      "hash": 3265236814,
+      "label": "Cavalcade XL",
+      "class": 2
+    },
+    {
+      "name": "cerberus",
+      "hash": 3493417227,
+      "label": "Apocalypse Cerberus",
+      "class": 20
+    },
+    {
+      "name": "cerberus2",
+      "hash": 679453769,
+      "label": "Future Shock Cerberus",
+      "class": 20
+    },
+    {
+      "name": "cerberus3",
+      "hash": 1909700336,
+      "label": "Nightmare Cerberus",
+      "class": 20
+    },
+    {
+      "name": "champion",
+      "hash": 3379732821,
+      "label": "Champion",
+      "class": 7
+    },
+    {
+      "name": "chavosv6",
+      "hash": 1992041063,
+      "label": "Chavos V6 [chavosv6]",
+      "class": 1
+    },
+    {
+      "name": "cheburek",
+      "hash": 3306466016,
+      "label": "Cheburek [cheburek]",
+      "class": 5
+    },
+    {
+      "name": "cheetah",
+      "hash": 2983812512,
+      "label": "Cheetah",
+      "class": 7
+    },
+    {
+      "name": "cheetah2",
+      "hash": 223240013,
+      "label": "Cheetah Classic",
+      "class": 5
+    },
+    {
+      "name": "cheetah3",
+      "hash": 471399650,
+      "label": "LSCM Cheetah Classic",
+      "class": 5
+    },
+    {
+      "name": "chernobog",
+      "hash": 3602674979,
+      "label": "Chernobog",
+      "class": 19
+    },
+    {
+      "name": "chimera",
+      "hash": 6774487,
+      "label": "Chimera",
+      "class": 8
+    },
+    {
+      "name": "chino",
+      "hash": 349605904,
+      "label": "Chino",
+      "class": 4
+    },
+    {
+      "name": "chino2",
+      "hash": 2933279331,
+      "label": "Chino Custom",
+      "class": 4
+    },
+    {
+      "name": "cinquemila",
+      "hash": 2767531027,
+      "label": "Cinquemila",
+      "class": 1
+    },
+    {
+      "name": "cliffhanger",
+      "hash": 390201602,
+      "label": "Cliffhanger",
+      "class": 8
+    },
+    {
+      "name": "clique",
+      "hash": 2728360112,
+      "label": "Clique",
+      "class": 4
+    },
+    {
+      "name": "clique2",
+      "hash": 3315674721,
+      "label": "Clique Wagon",
+      "class": 4
+    },
+    {
+      "name": "club",
+      "hash": 2196012677,
+      "label": "Club",
+      "class": 0
+    },
+    {
+      "name": "coach",
+      "hash": 2222034228,
+      "label": "Dashound",
+      "class": 17
+    },
+    {
+      "name": "cog55",
+      "hash": 906642318,
+      "label": "Cognoscenti 55",
+      "class": 1
+    },
+    {
+      "name": "cog552",
+      "hash": 704435172,
+      "label": "Cognoscenti 55 (Armored)",
+      "class": 1
+    },
+    {
+      "name": "cogcabrio",
+      "hash": 330661258,
+      "label": "Cognoscenti Cabrio",
+      "class": 3
+    },
+    {
+      "name": "cognoscenti",
+      "hash": 2264796000,
+      "label": "Cognoscenti",
+      "class": 1
+    },
+    {
+      "name": "cognoscenti2",
+      "hash": 3690124666,
+      "label": "Cognoscenti (Armored)",
+      "class": 1
+    },
+    {
+      "name": "comet2",
+      "hash": 3249425686,
+      "label": "Comet",
+      "class": 6
+    },
+    {
+      "name": "comet3",
+      "hash": 2272483501,
+      "label": "Comet Retro Custom",
+      "class": 6
+    },
+    {
+      "name": "comet4",
+      "hash": 1561920505,
+      "label": "Comet Safari",
+      "class": 6
+    },
+    {
+      "name": "comet5",
+      "hash": 661493923,
+      "label": "Comet SR",
+      "class": 6
+    },
+    {
+      "name": "comet6",
+      "hash": 2568944644,
+      "label": "Comet S2",
+      "class": 6
+    },
+    {
+      "name": "comet7",
+      "hash": 1141395928,
+      "label": "Comet S2 Cabrio",
+      "class": 6
+    },
+    {
+      "name": "conada",
+      "hash": 3817135397,
+      "label": "Conada",
+      "class": 15
+    },
+    {
+      "name": "conada2",
+      "hash": 2635962482,
+      "label": "Weaponized Conada",
+      "class": 15
+    },
+    {
+      "name": "contender",
+      "hash": 683047626,
+      "label": "Contender",
+      "class": 2
+    },
+    {
+      "name": "coquette",
+      "hash": 108773431,
+      "label": "Coquette",
+      "class": 6
+    },
+    {
+      "name": "coquette2",
+      "hash": 1011753235,
+      "label": "Coquette Classic",
+      "class": 5
+    },
+    {
+      "name": "coquette3",
+      "hash": 784565758,
+      "label": "Coquette BlackFin",
+      "class": 4
+    },
+    {
+      "name": "coquette4",
+      "hash": 2566281822,
+      "label": "Coquette D10",
+      "class": 6
+    },
+    {
+      "name": "coquette5",
+      "hash": 2336538363,
+      "label": "Coquette D1",
+      "class": 5
+    },
+    {
+      "name": "coquette6",
+      "hash": 127317925,
+      "label": "Coquette D5",
+      "class": 6
+    },
+    {
+      "name": "corsita",
+      "hash": 3540279623,
+      "label": "Corsita",
+      "class": 6
+    },
+    {
+      "name": "coureur",
+      "hash": 610429990,
+      "label": "La Coureuse",
+      "class": 6
+    },
+    {
+      "name": "cruiser",
+      "hash": 448402357,
+      "label": "Cruiser",
+      "class": 13
+    },
+    {
+      "name": "crusader",
+      "hash": 321739290,
+      "label": "Crusader",
+      "class": 19
+    },
+    {
+      "name": "cuban800",
+      "hash": 3650256867,
+      "label": "Cuban 800",
+      "class": 16
+    },
+    {
+      "name": "cutter",
+      "hash": 3288047904,
+      "label": "Cutter",
+      "class": 10
+    },
+    {
+      "name": "cyclone",
+      "hash": 1392481335,
+      "label": "Cyclone",
+      "class": 7
+    },
+    {
+      "name": "cyclone2",
+      "hash": 386089410,
+      "label": "Cyclone II",
+      "class": 7
+    },
+    {
+      "name": "cypher",
+      "hash": 1755697647,
+      "label": "Cypher [cypher]",
+      "class": 6
+    },
+    {
+      "name": "daemon",
+      "hash": 2006142190,
+      "label": "Daemon",
+      "class": 8
+    },
+    {
+      "name": "daemon2",
+      "hash": 2890830793,
+      "label": "Daemon Custom",
+      "class": 8
+    },
+    {
+      "name": "deathbike",
+      "hash": 4267640610,
+      "label": "Apocalypse Deathbike",
+      "class": 8
+    },
+    {
+      "name": "deathbike2",
+      "hash": 2482017624,
+      "label": "Future Shock Deathbike",
+      "class": 8
+    },
+    {
+      "name": "deathbike3",
+      "hash": 2920466844,
+      "label": "Nightmare Deathbike",
+      "class": 8
+    },
+    {
+      "name": "defiler",
+      "hash": 822018448,
+      "label": "Defiler",
+      "class": 8
+    },
+    {
+      "name": "deity",
+      "hash": 1532171089,
+      "label": "Deity",
+      "class": 1
+    },
+    {
+      "name": "deluxo",
+      "hash": 1483171323,
+      "label": "Deluxo",
+      "class": 5
+    },
+    {
+      "name": "deveste",
+      "hash": 1591739866,
+      "label": "Deveste Eight",
+      "class": 7
+    },
+    {
+      "name": "deviant",
+      "hash": 1279262537,
+      "label": "Deviant",
+      "class": 4
+    },
+    {
+      "name": "diablous",
+      "hash": 4055125828,
+      "label": "Diabolus",
+      "class": 8
+    },
+    {
+      "name": "diablous2",
+      "hash": 1790834270,
+      "label": "Diabolus Custom",
+      "class": 8
+    },
+    {
+      "name": "dilettante",
+      "hash": 3164157193,
+      "label": "Dilettante [dilettante]",
+      "class": 0
+    },
+    {
+      "name": "dilettante2",
+      "hash": 1682114128,
+      "label": "Dilettante [dilettante2]",
+      "class": 0
+    },
+    {
+      "name": "dinghy",
+      "hash": 1033245328,
+      "label": "Dinghy [Dinghy]",
+      "class": 14
+    },
+    {
+      "name": "dinghy2",
+      "hash": 276773164,
+      "label": "Dinghy [dinghy2]",
+      "class": 14
+    },
+    {
+      "name": "dinghy3",
+      "hash": 509498602,
+      "label": "Dinghy [dinghy3]",
+      "class": 14
+    },
+    {
+      "name": "dinghy4",
+      "hash": 867467158,
+      "label": "Dinghy [dinghy4]",
+      "class": 14
+    },
+    {
+      "name": "dinghy5",
+      "hash": 3314393930,
+      "label": "Weaponized Dinghy",
+      "class": 14
+    },
+    {
+      "name": "dloader",
+      "hash": 1770332643,
+      "label": "Duneloader",
+      "class": 9
+    },
+    {
+      "name": "docktug",
+      "hash": 3410276810,
+      "label": "Docktug",
+      "class": 11
+    },
+    {
+      "name": "dodo",
+      "hash": 3393804037,
+      "label": "Dodo",
+      "class": 16
+    },
+    {
+      "name": "dominator",
+      "hash": 80636076,
+      "label": "Dominator",
+      "class": 4
+    },
+    {
+      "name": "dominator10",
+      "hash": 1579902654,
+      "label": "Dominator FX [dominator10]",
+      "class": 4
+    },
+    {
+      "name": "dominator2",
+      "hash": 3379262425,
+      "label": "Pisswasser Dominator",
+      "class": 4
+    },
+    {
+      "name": "dominator3",
+      "hash": 3308022675,
+      "label": "Dominator GTX",
+      "class": 4
+    },
+    {
+      "name": "dominator4",
+      "hash": 3606777648,
+      "label": "Apocalypse Dominator",
+      "class": 4
+    },
+    {
+      "name": "dominator5",
+      "hash": 2919906639,
+      "label": "Future Shock Dominator",
+      "class": 4
+    },
+    {
+      "name": "dominator6",
+      "hash": 3001042683,
+      "label": "Nightmare Dominator",
+      "class": 4
+    },
+    {
+      "name": "dominator7",
+      "hash": 426742808,
+      "label": "Dominator ASP",
+      "class": 4
+    },
+    {
+      "name": "dominator8",
+      "hash": 736672010,
+      "label": "Dominator GTT",
+      "class": 4
+    },
+    {
+      "name": "dominator9",
+      "hash": 3853757601,
+      "label": "Dominator GT [dominator9]",
+      "class": 4
+    },
+    {
+      "name": "dorado",
+      "hash": 3526923154,
+      "label": "Dorado",
+      "class": 2
+    },
+    {
+      "name": "double",
+      "hash": 2623969160,
+      "label": "Double-T",
+      "class": 8
+    },
+    {
+      "name": "drafter",
+      "hash": 686471183,
+      "label": "8F Drafter",
+      "class": 6
+    },
+    {
+      "name": "draugur",
+      "hash": 3526730918,
+      "label": "Draugur",
+      "class": 9
+    },
+    {
+      "name": "driftchavosv6",
+      "hash": 457814204,
+      "label": "Chavos V6 [driftchavosv6]",
+      "class": 1
+    },
+    {
+      "name": "driftcheburek",
+      "hash": 2828274931,
+      "label": "Cheburek [driftcheburek]",
+      "class": 5
+    },
+    {
+      "name": "driftcypher",
+      "hash": 258105345,
+      "label": "Cypher [driftcypher]",
+      "class": 6
+    },
+    {
+      "name": "driftdominator10",
+      "hash": 3355365473,
+      "label": "Dominator FX [driftdominator10]",
+      "class": 4
+    },
+    {
+      "name": "driftdominator9",
+      "hash": 3439117103,
+      "label": "Dominator GT [driftdominator9]",
+      "class": 4
+    },
+    {
+      "name": "drifteuros",
+      "hash": 821121576,
+      "label": "Euros [drifteuros]",
+      "class": 6
+    },
+    {
+      "name": "driftfr36",
+      "hash": 2815031719,
+      "label": "FR36 [driftfr36]",
+      "class": 3
+    },
+    {
+      "name": "driftfuto",
+      "hash": 4113404654,
+      "label": "Futo GTX [driftfuto]",
+      "class": 6
+    },
+    {
+      "name": "driftfuto2",
+      "hash": 3005741670,
+      "label": "Futo [driftfuto2]",
+      "class": 6
+    },
+    {
+      "name": "driftgauntlet4",
+      "hash": 3933619103,
+      "label": "Gauntlet Hellfire [driftgauntlet4]",
+      "class": 4
+    },
+    {
+      "name": "drifthardy",
+      "hash": 3893408850,
+      "label": "Hardy [drifthardy]",
+      "class": 1
+    },
+    {
+      "name": "driftjester",
+      "hash": 2531693357,
+      "label": "Jester RR [driftjester]",
+      "class": 6
+    },
+    {
+      "name": "driftjester3",
+      "hash": 3932276298,
+      "label": "Jester Classic [driftjester3]",
+      "class": 5
+    },
+    {
+      "name": "driftkeitora",
+      "hash": 2739875593,
+      "label": "Keitora [driftkeitora]",
+      "class": 11
+    },
+    {
+      "name": "driftl352",
+      "hash": 2312533665,
+      "label": "Drift Walton L35",
+      "class": 9
+    },
+    {
+      "name": "driftnebula",
+      "hash": 1690421418,
+      "label": "Nebula Turbo [driftnebula]",
+      "class": 5
+    },
+    {
+      "name": "driftremus",
+      "hash": 2670883828,
+      "label": "Remus [driftremus]",
+      "class": 6
+    },
+    {
+      "name": "driftrt3000",
+      "hash": 1730644782,
+      "label": "RT3000 [driftrt3000]",
+      "class": 6
+    },
+    {
+      "name": "driftsentinel",
+      "hash": 3308310822,
+      "label": "Sentinel Classic Widebody [driftsentinel]",
+      "class": 6
+    },
+    {
+      "name": "driftsentinel2",
+      "hash": 3288768346,
+      "label": "Sentinel XS [driftsentinel2]",
+      "class": 3
+    },
+    {
+      "name": "drifttampa",
+      "hash": 2598648200,
+      "label": "Drift Tampa [drifttampa]",
+      "class": 6
+    },
+    {
+      "name": "driftvorschlag",
+      "hash": 4151380270,
+      "label": "Vorschlaghammer [driftvorschlag]",
+      "class": 1
+    },
+    {
+      "name": "driftyosemite",
+      "hash": 2613313775,
+      "label": "Drift Yosemite [driftyosemite]",
+      "class": 4
+    },
+    {
+      "name": "driftzr350",
+      "hash": 1923534526,
+      "label": "ZR350 [driftzr350]",
+      "class": 6
+    },
+    {
+      "name": "dubsta",
+      "hash": 1177543287,
+      "label": "Dubsta [dubsta]",
+      "class": 2
+    },
+    {
+      "name": "dubsta2",
+      "hash": 3900892662,
+      "label": "Dubsta [dubsta2]",
+      "class": 2
+    },
+    {
+      "name": "dubsta3",
+      "hash": 3057713523,
+      "label": "Dubsta 6x6",
+      "class": 9
+    },
+    {
+      "name": "dukes",
+      "hash": 723973206,
+      "label": "Dukes",
+      "class": 4
+    },
+    {
+      "name": "dukes2",
+      "hash": 3968823444,
+      "label": "Duke O'Death",
+      "class": 4
+    },
+    {
+      "name": "dukes3",
+      "hash": 2134119907,
+      "label": "Beater Dukes",
+      "class": 4
+    },
+    {
+      "name": "dump",
+      "hash": 2164484578,
+      "label": "Dump",
+      "class": 10
+    },
+    {
+      "name": "dune",
+      "hash": 2633113103,
+      "label": "Dune Buggy",
+      "class": 9
+    },
+    {
+      "name": "dune2",
+      "hash": 534258863,
+      "label": "Space Docker",
+      "class": 9
+    },
+    {
+      "name": "dune3",
+      "hash": 1897744184,
+      "label": "Dune FAV",
+      "class": 9
+    },
+    {
+      "name": "dune4",
+      "hash": 3467805257,
+      "label": "Ramp Buggy [dune4]",
+      "class": 9
+    },
+    {
+      "name": "dune5",
+      "hash": 3982671785,
+      "label": "Ramp Buggy [dune5]",
+      "class": 9
+    },
+    {
+      "name": "duster",
+      "hash": 970356638,
+      "label": "Duster",
+      "class": 16
+    },
+    {
+      "name": "duster2",
+      "hash": 84351789,
+      "label": "Duster 300-H",
+      "class": 16
+    },
+    {
+      "name": "dynasty",
+      "hash": 310284501,
+      "label": "Dynasty",
+      "class": 5
+    },
+    {
+      "name": "elegy",
+      "hash": 196747873,
+      "label": "Elegy Retro Custom",
+      "class": 6
+    },
+    {
+      "name": "elegy2",
+      "hash": 3728579874,
+      "label": "Elegy RH8",
+      "class": 6
+    },
+    {
+      "name": "ellie",
+      "hash": 3027423925,
+      "label": "Ellie",
+      "class": 4
+    },
+    {
+      "name": "emerus",
+      "hash": 1323778901,
+      "label": "Emerus",
+      "class": 7
+    },
+    {
+      "name": "emperor",
+      "hash": 3609690755,
+      "label": "Emperor [emperor]",
+      "class": 1
+    },
+    {
+      "name": "emperor2",
+      "hash": 2411965148,
+      "label": "Emperor [Emperor2]",
+      "class": 1
+    },
+    {
+      "name": "emperor3",
+      "hash": 3053254478,
+      "label": "Emperor [emperor3]",
+      "class": 1
+    },
+    {
+      "name": "enduro",
+      "hash": 1753414259,
+      "label": "Enduro",
+      "class": 8
+    },
+    {
+      "name": "entity2",
+      "hash": 2174267100,
+      "label": "Entity XXR",
+      "class": 7
+    },
+    {
+      "name": "entity3",
+      "hash": 1748565021,
+      "label": "Entity MT",
+      "class": 7
+    },
+    {
+      "name": "entityxf",
+      "hash": 3003014393,
+      "label": "Entity XF",
+      "class": 7
+    },
+    {
+      "name": "envisage",
+      "hash": 1121330119,
+      "label": "Envisage",
+      "class": 6
+    },
+    {
+      "name": "esskey",
+      "hash": 2035069708,
+      "label": "Esskey",
+      "class": 8
+    },
+    {
+      "name": "eudora",
+      "hash": 3045179290,
+      "label": "Eudora",
+      "class": 4
+    },
+    {
+      "name": "euros",
+      "hash": 2038480341,
+      "label": "Euros [Euros]",
+      "class": 6
+    },
+    {
+      "name": "eurosx32",
+      "hash": 3295372994,
+      "label": "Euros X32",
+      "class": 3
+    },
+    {
+      "name": "everon",
+      "hash": 2538945576,
+      "label": "Everon",
+      "class": 9
+    },
+    {
+      "name": "everon2",
+      "hash": 4163619118,
+      "label": "Hotring Everon",
+      "class": 6
+    },
+    {
+      "name": "everon3",
+      "hash": 554408685,
+      "label": "Everon RS",
+      "class": 2
+    },
+    {
+      "name": "exemplar",
+      "hash": 4289813342,
+      "label": "Exemplar",
+      "class": 3
+    },
+    {
+      "name": "f620",
+      "hash": 3703357000,
+      "label": "F620",
+      "class": 3
+    },
+    {
+      "name": "faction",
+      "hash": 2175389151,
+      "label": "Faction",
+      "class": 4
+    },
+    {
+      "name": "faction2",
+      "hash": 2504420315,
+      "label": "Faction Custom 1",
+      "class": 4
+    },
+    {
+      "name": "faction3",
+      "hash": 2255212070,
+      "label": "Faction Custom Donk",
+      "class": 4
+    },
+    {
+      "name": "fagaloa",
+      "hash": 1617472902,
+      "label": "Fagaloa",
+      "class": 5
+    },
+    {
+      "name": "faggio",
+      "hash": 2452219115,
+      "label": "Faggio Sport",
+      "class": 8
+    },
+    {
+      "name": "faggio2",
+      "hash": 55628203,
+      "label": "Faggio",
+      "class": 8
+    },
+    {
+      "name": "faggio3",
+      "hash": 3005788552,
+      "label": "Faggio Mod",
+      "class": 8
+    },
+    {
+      "name": "fbi",
+      "hash": 1127131465,
+      "label": "FIB [FBI]",
+      "class": 18
+    },
+    {
+      "name": "fbi2",
+      "hash": 2647026068,
+      "label": "FIB [FBI2]",
+      "class": 18
+    },
+    {
+      "name": "fcr",
+      "hash": 627535535,
+      "label": "FCR 1000",
+      "class": 8
+    },
+    {
+      "name": "fcr2",
+      "hash": 3537231886,
+      "label": "FCR 1000 Custom",
+      "class": 8
+    },
+    {
+      "name": "felon",
+      "hash": 3903372712,
+      "label": "Felon",
+      "class": 3
+    },
+    {
+      "name": "felon2",
+      "hash": 4205676014,
+      "label": "Felon GT",
+      "class": 3
+    },
+    {
+      "name": "feltzer2",
+      "hash": 2299640309,
+      "label": "Feltzer",
+      "class": 6
+    },
+    {
+      "name": "feltzer3",
+      "hash": 2728226064,
+      "label": "Feltzer Classic",
+      "class": 5
+    },
+    {
+      "name": "firebolt",
+      "hash": 3321950518,
+      "label": "Firebolt ASP",
+      "class": 9
+    },
+    {
+      "name": "firetruk",
+      "hash": 1938952078,
+      "label": "Fire Truck",
+      "class": 18
+    },
+    {
+      "name": "fixter",
+      "hash": 3458454463,
+      "label": "Fixter",
+      "class": 13
+    },
+    {
+      "name": "flashgt",
+      "hash": 3035832600,
+      "label": "Flash GT",
+      "class": 6
+    },
+    {
+      "name": "flatbed",
+      "hash": 1353720154,
+      "label": "Flatbed",
+      "class": 10
+    },
+    {
+      "name": "flatbed2",
+      "hash": 2412056353,
+      "label": "Custom Flatbed",
+      "class": 10
+    },
+    {
+      "name": "fmj",
+      "hash": 1426219628,
+      "label": "FMJ",
+      "class": 7
+    },
+    {
+      "name": "fmj2",
+      "hash": 3287642921,
+      "label": "FMJ MK V",
+      "class": 7
+    },
+    {
+      "name": "forklift",
+      "hash": 1491375716,
+      "label": "Forklift",
+      "class": 11
+    },
+    {
+      "name": "formula",
+      "hash": 340154634,
+      "label": "PR4",
+      "class": 22
+    },
+    {
+      "name": "formula2",
+      "hash": 2334210311,
+      "label": "R88",
+      "class": 22
+    },
+    {
+      "name": "fq2",
+      "hash": 3157435195,
+      "label": "FQ 2",
+      "class": 2
+    },
+    {
+      "name": "fr36",
+      "hash": 3829141989,
+      "label": "FR36 [fr36]",
+      "class": 3
+    },
+    {
+      "name": "freecrawler",
+      "hash": 4240635011,
+      "label": "Freecrawler",
+      "class": 9
+    },
+    {
+      "name": "frogger",
+      "hash": 744705981,
+      "label": "Frogger [Frogger]",
+      "class": 15
+    },
+    {
+      "name": "frogger2",
+      "hash": 1949211328,
+      "label": "Frogger [frogger2]",
+      "class": 15
+    },
+    {
+      "name": "fugitive",
+      "hash": 1909141499,
+      "label": "Fugitive",
+      "class": 1
+    },
+    {
+      "name": "furia",
+      "hash": 960812448,
+      "label": "Furia",
+      "class": 7
+    },
+    {
+      "name": "furoregt",
+      "hash": 3205927392,
+      "label": "Furore GT",
+      "class": 6
+    },
+    {
+      "name": "fusilade",
+      "hash": 499169875,
+      "label": "Fusilade",
+      "class": 6
+    },
+    {
+      "name": "futo",
+      "hash": 2016857647,
+      "label": "Futo [futo]",
+      "class": 6
+    },
+    {
+      "name": "futo2",
+      "hash": 2787736776,
+      "label": "Futo GTX [futo2]",
+      "class": 6
+    },
+    {
+      "name": "gargoyle",
+      "hash": 741090084,
+      "label": "Gargoyle",
+      "class": 8
+    },
+    {
+      "name": "gauntlet",
+      "hash": 2494797253,
+      "label": "Gauntlet",
+      "class": 4
+    },
+    {
+      "name": "gauntlet2",
+      "hash": 349315417,
+      "label": "Redwood Gauntlet",
+      "class": 4
+    },
+    {
+      "name": "gauntlet3",
+      "hash": 722226637,
+      "label": "Gauntlet Classic",
+      "class": 4
+    },
+    {
+      "name": "gauntlet4",
+      "hash": 1934384720,
+      "label": "Gauntlet Hellfire [gauntlet4]",
+      "class": 4
+    },
+    {
+      "name": "gauntlet5",
+      "hash": 2172320429,
+      "label": "Gauntlet Classic Custom",
+      "class": 4
+    },
+    {
+      "name": "gauntlet6",
+      "hash": 1336514315,
+      "label": "Hotring Hellfire",
+      "class": 6
+    },
+    {
+      "name": "gb200",
+      "hash": 1909189272,
+      "label": "GB200",
+      "class": 6
+    },
+    {
+      "name": "gburrito",
+      "hash": 2549763894,
+      "label": "Gang Burrito [gburrito]",
+      "class": 12
+    },
+    {
+      "name": "gburrito2",
+      "hash": 296357396,
+      "label": "Gang Burrito [gburrito2]",
+      "class": 12
+    },
+    {
+      "name": "glendale",
+      "hash": 75131841,
+      "label": "Glendale",
+      "class": 1
+    },
+    {
+      "name": "glendale2",
+      "hash": 3381377750,
+      "label": "Glendale Custom",
+      "class": 1
+    },
+    {
+      "name": "gp1",
+      "hash": 1234311532,
+      "label": "GP1",
+      "class": 7
+    },
+    {
+      "name": "granger",
+      "hash": 2519238556,
+      "label": "Granger",
+      "class": 2
+    },
+    {
+      "name": "granger2",
+      "hash": 4033620423,
+      "label": "Granger 3600LX",
+      "class": 2
+    },
+    {
+      "name": "greenwood",
+      "hash": 40817712,
+      "label": "Greenwood",
+      "class": 4
+    },
+    {
+      "name": "gresley",
+      "hash": 2751205197,
+      "label": "Gresley",
+      "class": 2
+    },
+    {
+      "name": "growler",
+      "hash": 1304459735,
+      "label": "Growler",
+      "class": 6
+    },
+    {
+      "name": "gt500",
+      "hash": 2215179066,
+      "label": "GT500",
+      "class": 5
+    },
+    {
+      "name": "gt750",
+      "hash": 1380582820,
+      "label": "GT750",
+      "class": 5
+    },
+    {
+      "name": "guardian",
+      "hash": 2186977100,
+      "label": "Guardian",
+      "class": 10
+    },
+    {
+      "name": "habanero",
+      "hash": 884422927,
+      "label": "Habanero",
+      "class": 2
+    },
+    {
+      "name": "hakuchou",
+      "hash": 1265391242,
+      "label": "Hakuchou",
+      "class": 8
+    },
+    {
+      "name": "hakuchou2",
+      "hash": 4039289119,
+      "label": "Hakuchou Drag",
+      "class": 8
+    },
+    {
+      "name": "halftrack",
+      "hash": 4262731174,
+      "label": "Half-track",
+      "class": 19
+    },
+    {
+      "name": "handler",
+      "hash": 444583674,
+      "label": "Dock Handler",
+      "class": 10
+    },
+    {
+      "name": "hardy",
+      "hash": 1580292663,
+      "label": "Hardy [hardy]",
+      "class": 1
+    },
+    {
+      "name": "hauler",
+      "hash": 1518533038,
+      "label": "Hauler",
+      "class": 20
+    },
+    {
+      "name": "hauler2",
+      "hash": 387748548,
+      "label": "Hauler Custom",
+      "class": 20
+    },
+    {
+      "name": "havok",
+      "hash": 2310691317,
+      "label": "Havok",
+      "class": 15
+    },
+    {
+      "name": "hellion",
+      "hash": 3932816511,
+      "label": "Hellion",
+      "class": 9
+    },
+    {
+      "name": "hermes",
+      "hash": 15219735,
+      "label": "Hermes",
+      "class": 4
+    },
+    {
+      "name": "hexer",
+      "hash": 301427732,
+      "label": "Hexer",
+      "class": 8
+    },
+    {
+      "name": "hotknife",
+      "hash": 37348240,
+      "label": "Hotknife",
+      "class": 4
+    },
+    {
+      "name": "hotring",
+      "hash": 1115909093,
+      "label": "Hotring Sabre",
+      "class": 6
+    },
+    {
+      "name": "howard",
+      "hash": 3287439187,
+      "label": "Howard NX-25",
+      "class": 16
+    },
+    {
+      "name": "hunter",
+      "hash": 4252008158,
+      "label": "FH-1 Hunter",
+      "class": 15
+    },
+    {
+      "name": "huntley",
+      "hash": 486987393,
+      "label": "Huntley S",
+      "class": 2
+    },
+    {
+      "name": "hustler",
+      "hash": 600450546,
+      "label": "Hustler",
+      "class": 4
+    },
+    {
+      "name": "hydra",
+      "hash": 970385471,
+      "label": "Hydra",
+      "class": 16
+    },
+    {
+      "name": "ignus",
+      "hash": 2850852987,
+      "label": "Ignus",
+      "class": 7
+    },
+    {
+      "name": "ignus2",
+      "hash": 956849991,
+      "label": "Weaponized Ignus",
+      "class": 7
+    },
+    {
+      "name": "imorgon",
+      "hash": 3162245632,
+      "label": "Imorgon",
+      "class": 6
+    },
+    {
+      "name": "impaler",
+      "hash": 2198276962,
+      "label": "Impaler",
+      "class": 4
+    },
+    {
+      "name": "impaler2",
+      "hash": 1009171724,
+      "label": "Apocalypse Impaler",
+      "class": 4
+    },
+    {
+      "name": "impaler3",
+      "hash": 2370166601,
+      "label": "Future Shock Impaler",
+      "class": 4
+    },
+    {
+      "name": "impaler4",
+      "hash": 2550461639,
+      "label": "Nightmare Impaler",
+      "class": 4
+    },
+    {
+      "name": "impaler5",
+      "hash": 3816328113,
+      "label": "Impaler SZ",
+      "class": 4
+    },
+    {
+      "name": "impaler6",
+      "hash": 4116524922,
+      "label": "Impaler LX",
+      "class": 4
+    },
+    {
+      "name": "imperator",
+      "hash": 444994115,
+      "label": "Apocalypse Imperator",
+      "class": 4
+    },
+    {
+      "name": "imperator2",
+      "hash": 1637620610,
+      "label": "Future Shock Imperator",
+      "class": 4
+    },
+    {
+      "name": "imperator3",
+      "hash": 3539435063,
+      "label": "Nightmare Imperator",
+      "class": 4
+    },
+    {
+      "name": "inductor",
+      "hash": 3397143273,
+      "label": "Inductor",
+      "class": 13
+    },
+    {
+      "name": "inductor2",
+      "hash": 2311345272,
+      "label": "Junk Energy Inductor",
+      "class": 13
+    },
+    {
+      "name": "infernus",
+      "hash": 418536135,
+      "label": "Infernus",
+      "class": 7
+    },
+    {
+      "name": "infernus2",
+      "hash": 2889029532,
+      "label": "Infernus Classic",
+      "class": 5
+    },
+    {
+      "name": "ingot",
+      "hash": 3005245074,
+      "label": "Ingot",
+      "class": 1
+    },
+    {
+      "name": "innovation",
+      "hash": 4135840458,
+      "label": "Innovation",
+      "class": 8
+    },
+    {
+      "name": "insurgent",
+      "hash": 2434067162,
+      "label": "Insurgent Pick-Up",
+      "class": 9
+    },
+    {
+      "name": "insurgent2",
+      "hash": 2071877360,
+      "label": "Insurgent",
+      "class": 9
+    },
+    {
+      "name": "insurgent3",
+      "hash": 2370534026,
+      "label": "Insurgent Pick-Up Custom",
+      "class": 9
+    },
+    {
+      "name": "intruder",
+      "hash": 886934177,
+      "label": "Intruder",
+      "class": 1
+    },
+    {
+      "name": "issi2",
+      "hash": 3117103977,
+      "label": "Issi",
+      "class": 0
+    },
+    {
+      "name": "issi3",
+      "hash": 931280609,
+      "label": "Issi Classic",
+      "class": 0
+    },
+    {
+      "name": "issi4",
+      "hash": 628003514,
+      "label": "Apocalypse Issi",
+      "class": 0
+    },
+    {
+      "name": "issi5",
+      "hash": 1537277726,
+      "label": "Future Shock Issi",
+      "class": 0
+    },
+    {
+      "name": "issi6",
+      "hash": 1239571361,
+      "label": "Nightmare Issi",
+      "class": 0
+    },
+    {
+      "name": "issi7",
+      "hash": 1854776567,
+      "label": "Issi Sport",
+      "class": 6
+    },
+    {
+      "name": "issi8",
+      "hash": 1550581940,
+      "label": "Issi Rally",
+      "class": 2
+    },
+    {
+      "name": "itali2",
+      "hash": 893780296,
+      "label": "Itali Classic",
+      "class": 5
+    },
+    {
+      "name": "italigtb",
+      "hash": 2246633323,
+      "label": "Itali GTB",
+      "class": 7
+    },
+    {
+      "name": "italigtb2",
+      "hash": 3812247419,
+      "label": "Itali GTB Custom",
+      "class": 7
+    },
+    {
+      "name": "italigto",
+      "hash": 3963499524,
+      "label": "Itali GTO",
+      "class": 6
+    },
+    {
+      "name": "italirsx",
+      "hash": 3145241962,
+      "label": "Itali RSX",
+      "class": 6
+    },
+    {
+      "name": "iwagen",
+      "hash": 662793086,
+      "label": "I-Wagen",
+      "class": 2
+    },
+    {
+      "name": "jackal",
+      "hash": 3670438162,
+      "label": "Jackal",
+      "class": 3
+    },
+    {
+      "name": "jb700",
+      "hash": 1051415893,
+      "label": "JB 700",
+      "class": 5
+    },
+    {
+      "name": "jb7002",
+      "hash": 394110044,
+      "label": "JB 700W",
+      "class": 5
+    },
+    {
+      "name": "jester",
+      "hash": 2997294755,
+      "label": "Jester",
+      "class": 6
+    },
+    {
+      "name": "jester2",
+      "hash": 3188613414,
+      "label": "Jester (Racecar)",
+      "class": 6
+    },
+    {
+      "name": "jester3",
+      "hash": 4080061290,
+      "label": "Jester Classic [jester3]",
+      "class": 6
+    },
+    {
+      "name": "jester4",
+      "hash": 2712905841,
+      "label": "Jester RR [jester4]",
+      "class": 6
+    },
+    {
+      "name": "jester5",
+      "hash": 1484920335,
+      "label": "Jester RR Widebody",
+      "class": 6
+    },
+    {
+      "name": "jet",
+      "hash": 1058115860,
+      "label": "Jet",
+      "class": 16
+    },
+    {
+      "name": "jetmax",
+      "hash": 861409633,
+      "label": "Jetmax",
+      "class": 14
+    },
+    {
+      "name": "journey",
+      "hash": 4174679674,
+      "label": "Journey",
+      "class": 12
+    },
+    {
+      "name": "journey2",
+      "hash": 2667889793,
+      "label": "Journey II",
+      "class": 12
+    },
+    {
+      "name": "jubilee",
+      "hash": 461465043,
+      "label": "Jubilee",
+      "class": 2
+    },
+    {
+      "name": "jugular",
+      "hash": 4086055493,
+      "label": "Jugular",
+      "class": 6
+    },
+    {
+      "name": "kalahari",
+      "hash": 92612664,
+      "label": "Kalahari",
+      "class": 9
+    },
+    {
+      "name": "kamacho",
+      "hash": 4173521127,
+      "label": "Kamacho",
+      "class": 9
+    },
+    {
+      "name": "kanjo",
+      "hash": 409049982,
+      "label": "Blista Kanjo",
+      "class": 0
+    },
+    {
+      "name": "kanjosj",
+      "hash": 4230891418,
+      "label": "Kanjo SJ",
+      "class": 3
+    },
+    {
+      "name": "keitora",
+      "hash": 3892551591,
+      "label": "Keitora [keitora]",
+      "class": 11
+    },
+    {
+      "name": "khamelion",
+      "hash": 544021352,
+      "label": "Khamelion",
+      "class": 6
+    },
+    {
+      "name": "khanjali",
+      "hash": 2859440138,
+      "label": "TM-02 Khanjali",
+      "class": 19
+    },
+    {
+      "name": "komoda",
+      "hash": 3460613305,
+      "label": "Komoda",
+      "class": 6
+    },
+    {
+      "name": "kosatka",
+      "hash": 1336872304,
+      "label": "Kosatka",
+      "class": 14
+    },
+    {
+      "name": "krieger",
+      "hash": 3630826055,
+      "label": "Krieger",
+      "class": 7
+    },
+    {
+      "name": "kuruma",
+      "hash": 2922118804,
+      "label": "Kuruma",
+      "class": 6
+    },
+    {
+      "name": "kuruma2",
+      "hash": 410882957,
+      "label": "Kuruma (Armored)",
+      "class": 6
+    },
+    {
+      "name": "l35",
+      "hash": 2531292011,
+      "label": "Walton L35",
+      "class": 9
+    },
+    {
+      "name": "l352",
+      "hash": 691148275,
+      "label": "Walton L35 Stock",
+      "class": 9
+    },
+    {
+      "name": "landstalker",
+      "hash": 1269098716,
+      "label": "Landstalker",
+      "class": 2
+    },
+    {
+      "name": "landstalker2",
+      "hash": 3456868130,
+      "label": "Landstalker XL",
+      "class": 2
+    },
+    {
+      "name": "lazer",
+      "hash": 3013282534,
+      "label": "P-996 LAZER",
+      "class": 16
+    },
+    {
+      "name": "le7b",
+      "hash": 3062131285,
+      "label": "RE-7B",
+      "class": 7
+    },
+    {
+      "name": "lectro",
+      "hash": 640818791,
+      "label": "Lectro",
+      "class": 8
+    },
+    {
+      "name": "lguard",
+      "hash": 469291905,
+      "label": "Lifeguard",
+      "class": 18
+    },
+    {
+      "name": "limo2",
+      "hash": 4180339789,
+      "label": "Turreted Limo",
+      "class": 1
+    },
+    {
+      "name": "lm87",
+      "hash": 4284049613,
+      "label": "LM87",
+      "class": 7
+    },
+    {
+      "name": "locust",
+      "hash": 3353694737,
+      "label": "Locust",
+      "class": 6
+    },
+    {
+      "name": "longfin",
+      "hash": 1861786828,
+      "label": "Longfin",
+      "class": 14
+    },
+    {
+      "name": "luiva",
+      "hash": 3356898886,
+      "label": "Luiva",
+      "class": 7
+    },
+    {
+      "name": "lurcher",
+      "hash": 2068293287,
+      "label": "Lurcher",
+      "class": 4
+    },
+    {
+      "name": "luxor",
+      "hash": 621481054,
+      "label": "Luxor",
+      "class": 16
+    },
+    {
+      "name": "luxor2",
+      "hash": 3080673438,
+      "label": "Luxor Deluxe",
+      "class": 16
+    },
+    {
+      "name": "lynx",
+      "hash": 482197771,
+      "label": "Lynx",
+      "class": 6
+    },
+    {
+      "name": "mamba",
+      "hash": 2634021974,
+      "label": "Mamba",
+      "class": 5
+    },
+    {
+      "name": "mammatus",
+      "hash": 2548391185,
+      "label": "Mammatus",
+      "class": 16
+    },
+    {
+      "name": "manana",
+      "hash": 2170765704,
+      "label": "Manana",
+      "class": 5
+    },
+    {
+      "name": "manana2",
+      "hash": 1717532765,
+      "label": "Manana Custom",
+      "class": 4
+    },
+    {
+      "name": "manchez",
+      "hash": 2771538552,
+      "label": "Manchez",
+      "class": 8
+    },
+    {
+      "name": "manchez2",
+      "hash": 1086534307,
+      "label": "Manchez Scout",
+      "class": 8
+    },
+    {
+      "name": "manchez3",
+      "hash": 1384502824,
+      "label": "Manchez Scout C",
+      "class": 8
+    },
+    {
+      "name": "marquis",
+      "hash": 3251507587,
+      "label": "Marquis",
+      "class": 14
+    },
+    {
+      "name": "marshall",
+      "hash": 1233534620,
+      "label": "Marshall",
+      "class": 9
+    },
+    {
+      "name": "massacro",
+      "hash": 4152024626,
+      "label": "Massacro",
+      "class": 6
+    },
+    {
+      "name": "massacro2",
+      "hash": 3663206819,
+      "label": "Massacro (Racecar)",
+      "class": 6
+    },
+    {
+      "name": "maverick",
+      "hash": 2634305738,
+      "label": "Maverick",
+      "class": 15
+    },
+    {
+      "name": "maverick2",
+      "hash": 347619240,
+      "label": "Higgins Helitours Maverick",
+      "class": 15
+    },
+    {
+      "name": "menacer",
+      "hash": 2044532910,
+      "label": "Menacer",
+      "class": 9
+    },
+    {
+      "name": "mesa",
+      "hash": 914654722,
+      "label": "Mesa [MESA]",
+      "class": 2
+    },
+    {
+      "name": "mesa2",
+      "hash": 3546958660,
+      "label": "Mesa [mesa2]",
+      "class": 2
+    },
+    {
+      "name": "mesa3",
+      "hash": 2230595153,
+      "label": "Mesa [MESA3]",
+      "class": 9
+    },
+    {
+      "name": "michelli",
+      "hash": 1046206681,
+      "label": "Michelli GT",
+      "class": 5
+    },
+    {
+      "name": "microlight",
+      "hash": 2531412055,
+      "label": "Ultralight",
+      "class": 16
+    },
+    {
+      "name": "miljet",
+      "hash": 165154707,
+      "label": "Miljet",
+      "class": 16
+    },
+    {
+      "name": "minimus",
+      "hash": 3193860278,
+      "label": "Minimus",
+      "class": 1
+    },
+    {
+      "name": "minitank",
+      "hash": 3040635986,
+      "label": "Invade and Persuade Tank",
+      "class": 19
+    },
+    {
+      "name": "minivan",
+      "hash": 3984502180,
+      "label": "Minivan",
+      "class": 12
+    },
+    {
+      "name": "minivan2",
+      "hash": 3168702960,
+      "label": "Minivan Custom",
+      "class": 12
+    },
+    {
+      "name": "mixer",
+      "hash": 3510150843,
+      "label": "Mixer [Mixer]",
+      "class": 10
+    },
+    {
+      "name": "mixer2",
+      "hash": 475220373,
+      "label": "Mixer [Mixer2]",
+      "class": 10
+    },
+    {
+      "name": "mogul",
+      "hash": 3545667823,
+      "label": "Mogul",
+      "class": 16
+    },
+    {
+      "name": "molotok",
+      "hash": 1565978651,
+      "label": "V-65 Molotok",
+      "class": 16
+    },
+    {
+      "name": "monroe",
+      "hash": 3861591579,
+      "label": "Monroe",
+      "class": 5
+    },
+    {
+      "name": "monster",
+      "hash": 3449006043,
+      "label": "Monster",
+      "class": 9
+    },
+    {
+      "name": "monster3",
+      "hash": 1721676810,
+      "label": "Apocalypse Sasquatch",
+      "class": 9
+    },
+    {
+      "name": "monster4",
+      "hash": 840387324,
+      "label": "Future Shock Sasquatch",
+      "class": 9
+    },
+    {
+      "name": "monster5",
+      "hash": 3579220348,
+      "label": "Nightmare Sasquatch",
+      "class": 9
+    },
+    {
+      "name": "monstrociti",
+      "hash": 802856453,
+      "label": "MonstroCiti",
+      "class": 9
+    },
+    {
+      "name": "moonbeam",
+      "hash": 525509695,
+      "label": "Moonbeam",
+      "class": 4
+    },
+    {
+      "name": "moonbeam2",
+      "hash": 1896491931,
+      "label": "Moonbeam Custom",
+      "class": 4
+    },
+    {
+      "name": "mower",
+      "hash": 1783355638,
+      "label": "Lawn Mower",
+      "class": 11
+    },
+    {
+      "name": "mule",
+      "hash": 904750859,
+      "label": "Mule [Mule]",
+      "class": 20
+    },
+    {
+      "name": "mule2",
+      "hash": 3244501995,
+      "label": "Mule [Mule2]",
+      "class": 20
+    },
+    {
+      "name": "mule3",
+      "hash": 2242229361,
+      "label": "Mule [Mule3]",
+      "class": 20
+    },
+    {
+      "name": "mule4",
+      "hash": 1945374990,
+      "label": "Mule Custom",
+      "class": 20
+    },
+    {
+      "name": "mule5",
+      "hash": 1343932732,
+      "label": "Mule [mule5]",
+      "class": 20
+    },
+    {
+      "name": "nebula",
+      "hash": 3412338231,
+      "label": "Nebula Turbo [nebula]",
+      "class": 5
+    },
+    {
+      "name": "nemesis",
+      "hash": 3660088182,
+      "label": "Nemesis",
+      "class": 8
+    },
+    {
+      "name": "neo",
+      "hash": 2674840994,
+      "label": "Neo",
+      "class": 6
+    },
+    {
+      "name": "neon",
+      "hash": 2445973230,
+      "label": "Neon",
+      "class": 6
+    },
+    {
+      "name": "nero",
+      "hash": 1034187331,
+      "label": "Nero",
+      "class": 7
+    },
+    {
+      "name": "nero2",
+      "hash": 1093792632,
+      "label": "Nero Custom",
+      "class": 7
+    },
+    {
+      "name": "nightblade",
+      "hash": 2688780135,
+      "label": "Nightblade",
+      "class": 8
+    },
+    {
+      "name": "nightshade",
+      "hash": 2351681756,
+      "label": "Nightshade",
+      "class": 4
+    },
+    {
+      "name": "nightshark",
+      "hash": 433954513,
+      "label": "Nightshark",
+      "class": 9
+    },
+    {
+      "name": "nimbus",
+      "hash": 2999939664,
+      "label": "Nimbus",
+      "class": 16
+    },
+    {
+      "name": "ninef",
+      "hash": 1032823388,
+      "label": "9F",
+      "class": 6
+    },
+    {
+      "name": "ninef2",
+      "hash": 2833484545,
+      "label": "9F Cabrio",
+      "class": 6
+    },
+    {
+      "name": "niobe",
+      "hash": 1881415402,
+      "label": "Niobe",
+      "class": 6
+    },
+    {
+      "name": "nokota",
+      "hash": 1036591958,
+      "label": "P-45 Nokota",
+      "class": 16
+    },
+    {
+      "name": "novak",
+      "hash": 2465530446,
+      "label": "Novak",
+      "class": 2
+    },
+    {
+      "name": "omnis",
+      "hash": 3517794615,
+      "label": "Omnis",
+      "class": 6
+    },
+    {
+      "name": "omnisegt",
+      "hash": 3789743831,
+      "label": "Omnis e-GT",
+      "class": 6
+    },
+    {
+      "name": "openwheel1",
+      "hash": 1492612435,
+      "label": "BR8",
+      "class": 22
+    },
+    {
+      "name": "openwheel2",
+      "hash": 1181339704,
+      "label": "DR1",
+      "class": 22
+    },
+    {
+      "name": "oppressor",
+      "hash": 884483972,
+      "label": "Oppressor",
+      "class": 8
+    },
+    {
+      "name": "oppressor2",
+      "hash": 2069146067,
+      "label": "Oppressor Mk II",
+      "class": 8
+    },
+    {
+      "name": "oracle",
+      "hash": 1348744438,
+      "label": "Oracle XS",
+      "class": 3
+    },
+    {
+      "name": "oracle2",
+      "hash": 3783366066,
+      "label": "Oracle",
+      "class": 3
+    },
+    {
+      "name": "osiris",
+      "hash": 1987142870,
+      "label": "Osiris",
+      "class": 7
+    },
+    {
+      "name": "outlaw",
+      "hash": 408825843,
+      "label": "Outlaw",
+      "class": 9
+    },
+    {
+      "name": "packer",
+      "hash": 569305213,
+      "label": "Packer",
+      "class": 20
+    },
+    {
+      "name": "panthere",
+      "hash": 2100457220,
+      "label": "Panthere",
+      "class": 6
+    },
+    {
+      "name": "panto",
+      "hash": 3863274624,
+      "label": "Panto",
+      "class": 0
+    },
+    {
+      "name": "paradise",
+      "hash": 1488164764,
+      "label": "Paradise",
+      "class": 12
+    },
+    {
+      "name": "paragon",
+      "hash": 3847255899,
+      "label": "Paragon R",
+      "class": 6
+    },
+    {
+      "name": "paragon2",
+      "hash": 1416466158,
+      "label": "Paragon R (Armored)",
+      "class": 6
+    },
+    {
+      "name": "paragon3",
+      "hash": 3348919626,
+      "label": "Paragon S",
+      "class": 6
+    },
+    {
+      "name": "pariah",
+      "hash": 867799010,
+      "label": "Pariah",
+      "class": 6
+    },
+    {
+      "name": "patriot",
+      "hash": 3486509883,
+      "label": "Patriot",
+      "class": 2
+    },
+    {
+      "name": "patriot2",
+      "hash": 3874056184,
+      "label": "Patriot Stretch",
+      "class": 2
+    },
+    {
+      "name": "patriot3",
+      "hash": 3624880708,
+      "label": "Patriot Mil-Spec",
+      "class": 9
+    },
+    {
+      "name": "patrolboat",
+      "hash": 4018222598,
+      "label": "Kurtz 31 Patrol Boat",
+      "class": 14
+    },
+    {
+      "name": "pbus",
+      "hash": 2287941233,
+      "label": "Police Prison Bus",
+      "class": 18
+    },
+    {
+      "name": "pbus2",
+      "hash": 345756458,
+      "label": "Festival Bus",
+      "class": 17
+    },
+    {
+      "name": "pcj",
+      "hash": 3385765638,
+      "label": "PCJ 600",
+      "class": 8
+    },
+    {
+      "name": "penetrator",
+      "hash": 2536829930,
+      "label": "Penetrator",
+      "class": 7
+    },
+    {
+      "name": "penumbra",
+      "hash": 3917501776,
+      "label": "Penumbra",
+      "class": 6
+    },
+    {
+      "name": "penumbra2",
+      "hash": 3663644634,
+      "label": "Penumbra FF",
+      "class": 6
+    },
+    {
+      "name": "peyote",
+      "hash": 1830407356,
+      "label": "Peyote",
+      "class": 5
+    },
+    {
+      "name": "peyote2",
+      "hash": 2490551588,
+      "label": "Peyote Gasser",
+      "class": 4
+    },
+    {
+      "name": "peyote3",
+      "hash": 1107404867,
+      "label": "Peyote Custom",
+      "class": 5
+    },
+    {
+      "name": "pfister811",
+      "hash": 2465164804,
+      "label": "811",
+      "class": 7
+    },
+    {
+      "name": "phantom",
+      "hash": 2157618379,
+      "label": "Phantom [Phantom]",
+      "class": 20
+    },
+    {
+      "name": "phantom2",
+      "hash": 2645431192,
+      "label": "Phantom Wedge",
+      "class": 20
+    },
+    {
+      "name": "phantom3",
+      "hash": 177270108,
+      "label": "Phantom Custom",
+      "class": 20
+    },
+    {
+      "name": "phantom4",
+      "hash": 4165683409,
+      "label": "Phantom [Phantom4]",
+      "class": 20
+    },
+    {
+      "name": "phoenix",
+      "hash": 2199527893,
+      "label": "Phoenix",
+      "class": 4
+    },
+    {
+      "name": "picador",
+      "hash": 1507916787,
+      "label": "Picador",
+      "class": 4
+    },
+    {
+      "name": "pigalle",
+      "hash": 1078682497,
+      "label": "Pigalle",
+      "class": 5
+    },
+    {
+      "name": "pipistrello",
+      "hash": 4071505793,
+      "label": "Pipistrello",
+      "class": 7
+    },
+    {
+      "name": "pizzaboy",
+      "hash": 1968807591,
+      "label": "Pizza Boy",
+      "class": 8
+    },
+    {
+      "name": "polbuffalo",
+      "hash": 287906327,
+      "label": "Buffalo Cruiser",
+      "class": 18
+    },
+    {
+      "name": "polbuffalo6",
+      "hash": 617517171,
+      "label": "Buffalo STX Pursuit",
+      "class": 18
+    },
+    {
+      "name": "polcaracara",
+      "hash": 2346018232,
+      "label": "Caracara Pursuit",
+      "class": 18
+    },
+    {
+      "name": "polcoquette4",
+      "hash": 2042703219,
+      "label": "Coquette D10 Pursuit",
+      "class": 18
+    },
+    {
+      "name": "poldominator10",
+      "hash": 3521165271,
+      "label": "Dominator FX Interceptor",
+      "class": 18
+    },
+    {
+      "name": "poldorado",
+      "hash": 2666966727,
+      "label": "Dorado Cruiser",
+      "class": 18
+    },
+    {
+      "name": "polfaction2",
+      "hash": 1891140410,
+      "label": "Outreach Faction",
+      "class": 18
+    },
+    {
+      "name": "polgauntlet",
+      "hash": 3061199846,
+      "label": "Gauntlet Interceptor",
+      "class": 18
+    },
+    {
+      "name": "polgreenwood",
+      "hash": 1737348074,
+      "label": "Greenwood Cruiser",
+      "class": 18
+    },
+    {
+      "name": "police",
+      "hash": 2046537925,
+      "label": "Police Cruiser [police]",
+      "class": 18
+    },
+    {
+      "name": "police2",
+      "hash": 2667966721,
+      "label": "Police Cruiser [police2]",
+      "class": 18
+    },
+    {
+      "name": "police3",
+      "hash": 1912215274,
+      "label": "Police Cruiser [police3]",
+      "class": 18
+    },
+    {
+      "name": "police4",
+      "hash": 2321795001,
+      "label": "Unmarked Cruiser",
+      "class": 18
+    },
+    {
+      "name": "police5",
+      "hash": 2620582743,
+      "label": "Stanier LE Cruiser",
+      "class": 18
+    },
+    {
+      "name": "policeb",
+      "hash": 4260343491,
+      "label": "Police Bike [policeb]",
+      "class": 18
+    },
+    {
+      "name": "policeb2",
+      "hash": 2373455159,
+      "label": "Police Bike [policeb2]",
+      "class": 18
+    },
+    {
+      "name": "policeold1",
+      "hash": 2758042359,
+      "label": "Police Rancher",
+      "class": 18
+    },
+    {
+      "name": "policeold2",
+      "hash": 2515846680,
+      "label": "Police Roadcruiser",
+      "class": 18
+    },
+    {
+      "name": "policet",
+      "hash": 456714581,
+      "label": "Police Transporter",
+      "class": 18
+    },
+    {
+      "name": "policet3",
+      "hash": 2850111293,
+      "label": "Burrito (Bail Enforcement)",
+      "class": 18
+    },
+    {
+      "name": "polimpaler5",
+      "hash": 1249425552,
+      "label": "Impaler SZ Cruiser",
+      "class": 18
+    },
+    {
+      "name": "polimpaler6",
+      "hash": 1452003510,
+      "label": "Impaler LX Cruiser",
+      "class": 18
+    },
+    {
+      "name": "polmav",
+      "hash": 353883353,
+      "label": "Police Maverick",
+      "class": 15
+    },
+    {
+      "name": "polterminus",
+      "hash": 2973836112,
+      "label": "Terminus Patrol",
+      "class": 18
+    },
+    {
+      "name": "pony",
+      "hash": 4175309224,
+      "label": "Pony [pony]",
+      "class": 12
+    },
+    {
+      "name": "pony2",
+      "hash": 943752001,
+      "label": "Pony [pony2]",
+      "class": 12
+    },
+    {
+      "name": "postlude",
+      "hash": 4000288633,
+      "label": "Postlude",
+      "class": 3
+    },
+    {
+      "name": "pounder",
+      "hash": 2112052861,
+      "label": "Pounder",
+      "class": 20
+    },
+    {
+      "name": "pounder2",
+      "hash": 1653666139,
+      "label": "Pounder Custom",
+      "class": 20
+    },
+    {
+      "name": "powersurge",
+      "hash": 2908631255,
+      "label": "Powersurge",
+      "class": 8
+    },
+    {
+      "name": "prairie",
+      "hash": 2844316578,
+      "label": "Prairie",
+      "class": 0
+    },
+    {
+      "name": "pranger",
+      "hash": 741586030,
+      "label": "Park Ranger",
+      "class": 18
+    },
+    {
+      "name": "predator",
+      "hash": 3806844075,
+      "label": "Police Predator",
+      "class": 14
+    },
+    {
+      "name": "premier",
+      "hash": 2411098011,
+      "label": "Premier",
+      "class": 1
+    },
+    {
+      "name": "previon",
+      "hash": 1416471345,
+      "label": "Previon",
+      "class": 3
+    },
+    {
+      "name": "primo",
+      "hash": 3144368207,
+      "label": "Primo",
+      "class": 1
+    },
+    {
+      "name": "primo2",
+      "hash": 2254540506,
+      "label": "Primo Custom",
+      "class": 1
+    },
+    {
+      "name": "prototipo",
+      "hash": 2123327359,
+      "label": "X80 Proto",
+      "class": 7
+    },
+    {
+      "name": "pyro",
+      "hash": 2908775872,
+      "label": "Pyro",
+      "class": 16
+    },
+    {
+      "name": "r300",
+      "hash": 1076201208,
+      "label": "300R",
+      "class": 6
+    },
+    {
+      "name": "radi",
+      "hash": 2643899483,
+      "label": "Radius",
+      "class": 2
+    },
+    {
+      "name": "raiden",
+      "hash": 2765724541,
+      "label": "Raiden",
+      "class": 6
+    },
+    {
+      "name": "raiju",
+      "hash": 239897677,
+      "label": "F-160 Raiju",
+      "class": 16
+    },
+    {
+      "name": "rallytruck",
+      "hash": 2191146052,
+      "label": "Dune",
+      "class": 17
+    },
+    {
+      "name": "rancherxl",
+      "hash": 1645267888,
+      "label": "Rancher XL [RancherXL]",
+      "class": 9
+    },
+    {
+      "name": "rancherxl2",
+      "hash": 1933662059,
+      "label": "Rancher XL [rancherxl2]",
+      "class": 9
+    },
+    {
+      "name": "rapidgt",
+      "hash": 2360515092,
+      "label": "Rapid GT [RapidGT]",
+      "class": 6
+    },
+    {
+      "name": "rapidgt2",
+      "hash": 1737773231,
+      "label": "Rapid GT [RapidGT2]",
+      "class": 6
+    },
+    {
+      "name": "rapidgt3",
+      "hash": 2049897956,
+      "label": "Rapid GT Classic",
+      "class": 5
+    },
+    {
+      "name": "rapidgt4",
+      "hash": 1761301369,
+      "label": "Rapid GT X",
+      "class": 6
+    },
+    {
+      "name": "raptor",
+      "hash": 3620039993,
+      "label": "Raptor",
+      "class": 6
+    },
+    {
+      "name": "ratbike",
+      "hash": 1873600305,
+      "label": "Rat Bike",
+      "class": 8
+    },
+    {
+      "name": "ratel",
+      "hash": 3758861739,
+      "label": "Ratel",
+      "class": 9
+    },
+    {
+      "name": "ratloader",
+      "hash": 3627815886,
+      "label": "Rat-Loader",
+      "class": 4
+    },
+    {
+      "name": "ratloader2",
+      "hash": 3705788919,
+      "label": "Rat-Truck",
+      "class": 4
+    },
+    {
+      "name": "rcbandito",
+      "hash": 4008920556,
+      "label": "RC Bandito",
+      "class": 9
+    },
+    {
+      "name": "reaper",
+      "hash": 234062309,
+      "label": "Reaper",
+      "class": 7
+    },
+    {
+      "name": "rebel",
+      "hash": 3087195462,
+      "label": "Rusty Rebel",
+      "class": 9
+    },
+    {
+      "name": "rebel2",
+      "hash": 2249373259,
+      "label": "Rebel",
+      "class": 9
+    },
+    {
+      "name": "rebla",
+      "hash": 83136452,
+      "label": "Rebla GTS",
+      "class": 2
+    },
+    {
+      "name": "reever",
+      "hash": 1993851908,
+      "label": "Reever",
+      "class": 8
+    },
+    {
+      "name": "regina",
+      "hash": 4280472072,
+      "label": "Regina",
+      "class": 1
+    },
+    {
+      "name": "remus",
+      "hash": 1377217886,
+      "label": "Remus [remus]",
+      "class": 6
+    },
+    {
+      "name": "rentalbus",
+      "hash": 3196165219,
+      "label": "Rental Shuttle Bus",
+      "class": 17
+    },
+    {
+      "name": "retinue",
+      "hash": 1841130506,
+      "label": "Retinue",
+      "class": 5
+    },
+    {
+      "name": "retinue2",
+      "hash": 2031587082,
+      "label": "Retinue Mk II",
+      "class": 5
+    },
+    {
+      "name": "revolter",
+      "hash": 3884762073,
+      "label": "Revolter",
+      "class": 6
+    },
+    {
+      "name": "rhapsody",
+      "hash": 841808271,
+      "label": "Rhapsody",
+      "class": 0
+    },
+    {
+      "name": "rhinehart",
+      "hash": 2439462158,
+      "label": "Rhinehart",
+      "class": 1
+    },
+    {
+      "name": "rhino",
+      "hash": 782665360,
+      "label": "Rhino Tank",
+      "class": 19
+    },
+    {
+      "name": "riata",
+      "hash": 2762269779,
+      "label": "Riata",
+      "class": 9
+    },
+    {
+      "name": "riot",
+      "hash": 3089277354,
+      "label": "Police Riot",
+      "class": 18
+    },
+    {
+      "name": "riot2",
+      "hash": 2601952180,
+      "label": "RCV",
+      "class": 18
+    },
+    {
+      "name": "ripley",
+      "hash": 3448987385,
+      "label": "Ripley",
+      "class": 11
+    },
+    {
+      "name": "rocoto",
+      "hash": 2136773105,
+      "label": "Rocoto",
+      "class": 2
+    },
+    {
+      "name": "rogue",
+      "hash": 3319621991,
+      "label": "Rogue",
+      "class": 16
+    },
+    {
+      "name": "romero",
+      "hash": 627094268,
+      "label": "Romero Hearse",
+      "class": 1
+    },
+    {
+      "name": "rrocket",
+      "hash": 916547552,
+      "label": "Rampant Rocket",
+      "class": 8
+    },
+    {
+      "name": "rt3000",
+      "hash": 3842363289,
+      "label": "RT3000 [rt3000]",
+      "class": 6
+    },
+    {
+      "name": "rubble",
+      "hash": 2589662668,
+      "label": "Rubble",
+      "class": 10
+    },
+    {
+      "name": "ruffian",
+      "hash": 3401388520,
+      "label": "Ruffian",
+      "class": 8
+    },
+    {
+      "name": "ruiner",
+      "hash": 4067225593,
+      "label": "Ruiner [ruiner]",
+      "class": 4
+    },
+    {
+      "name": "ruiner2",
+      "hash": 941494461,
+      "label": "Ruiner 2000",
+      "class": 4
+    },
+    {
+      "name": "ruiner3",
+      "hash": 777714999,
+      "label": "Ruiner [ruiner3]",
+      "class": 4
+    },
+    {
+      "name": "ruiner4",
+      "hash": 1706945532,
+      "label": "Ruiner ZZ-8",
+      "class": 4
+    },
+    {
+      "name": "rumpo",
+      "hash": 1162065741,
+      "label": "Rumpo [rumpo]",
+      "class": 12
+    },
+    {
+      "name": "rumpo2",
+      "hash": 2518351607,
+      "label": "Rumpo [rumpo2]",
+      "class": 12
+    },
+    {
+      "name": "rumpo3",
+      "hash": 1475773103,
+      "label": "Rumpo Custom",
+      "class": 12
+    },
+    {
+      "name": "ruston",
+      "hash": 719660200,
+      "label": "Ruston",
+      "class": 6
+    },
+    {
+      "name": "s80",
+      "hash": 3970348707,
+      "label": "S80RR",
+      "class": 7
+    },
+    {
+      "name": "s95",
+      "hash": 1133471123,
+      "label": "S95",
+      "class": 6
+    },
+    {
+      "name": "sabregt",
+      "hash": 2609945748,
+      "label": "Sabre Turbo",
+      "class": 4
+    },
+    {
+      "name": "sabregt2",
+      "hash": 223258115,
+      "label": "Sabre Turbo Custom",
+      "class": 4
+    },
+    {
+      "name": "sadler",
+      "hash": 3695398481,
+      "label": "Sadler [Sadler]",
+      "class": 11
+    },
+    {
+      "name": "sadler2",
+      "hash": 734217681,
+      "label": "Sadler [sadler2]",
+      "class": 11
+    },
+    {
+      "name": "sanchez",
+      "hash": 788045382,
+      "label": "Sanchez (livery)",
+      "class": 8
+    },
+    {
+      "name": "sanchez2",
+      "hash": 2841686334,
+      "label": "Sanchez",
+      "class": 8
+    },
+    {
+      "name": "sanctus",
+      "hash": 1491277511,
+      "label": "Sanctus",
+      "class": 8
+    },
+    {
+      "name": "sandking",
+      "hash": 3105951696,
+      "label": "Sandking XL",
+      "class": 9
+    },
+    {
+      "name": "sandking2",
+      "hash": 989381445,
+      "label": "Sandking SWB",
+      "class": 9
+    },
+    {
+      "name": "savage",
+      "hash": 4212341271,
+      "label": "Savage",
+      "class": 15
+    },
+    {
+      "name": "savestra",
+      "hash": 903794909,
+      "label": "Savestra",
+      "class": 5
+    },
+    {
+      "name": "sc1",
+      "hash": 1352136073,
+      "label": "SC1",
+      "class": 7
+    },
+    {
+      "name": "scarab",
+      "hash": 3147997943,
+      "label": "Apocalypse Scarab",
+      "class": 19
+    },
+    {
+      "name": "scarab2",
+      "hash": 1542143200,
+      "label": "Future Shock Scarab",
+      "class": 19
+    },
+    {
+      "name": "scarab3",
+      "hash": 3715219435,
+      "label": "Nightmare Scarab",
+      "class": 19
+    },
+    {
+      "name": "schafter2",
+      "hash": 3039514899,
+      "label": "Schafter",
+      "class": 1
+    },
+    {
+      "name": "schafter3",
+      "hash": 2809443750,
+      "label": "Schafter V12",
+      "class": 6
+    },
+    {
+      "name": "schafter4",
+      "hash": 1489967196,
+      "label": "Schafter LWB",
+      "class": 6
+    },
+    {
+      "name": "schafter5",
+      "hash": 3406724313,
+      "label": "Schafter V12 (Armored)",
+      "class": 1
+    },
+    {
+      "name": "schafter6",
+      "hash": 1922255844,
+      "label": "Schafter LWB (Armored)",
+      "class": 1
+    },
+    {
+      "name": "schlagen",
+      "hash": 3787471536,
+      "label": "Schlagen GT",
+      "class": 6
+    },
+    {
+      "name": "schwarzer",
+      "hash": 3548084598,
+      "label": "Schwartzer",
+      "class": 6
+    },
+    {
+      "name": "scorcher",
+      "hash": 4108429845,
+      "label": "Scorcher",
+      "class": 13
+    },
+    {
+      "name": "scramjet",
+      "hash": 3656405053,
+      "label": "Scramjet",
+      "class": 7
+    },
+    {
+      "name": "scrap",
+      "hash": 2594165727,
+      "label": "Scrap Truck",
+      "class": 11
+    },
+    {
+      "name": "seabreeze",
+      "hash": 3902291871,
+      "label": "Seabreeze",
+      "class": 16
+    },
+    {
+      "name": "seashark",
+      "hash": 3264692260,
+      "label": "Seashark [seashark]",
+      "class": 14
+    },
+    {
+      "name": "seashark2",
+      "hash": 3678636260,
+      "label": "Seashark [seashark2]",
+      "class": 14
+    },
+    {
+      "name": "seashark3",
+      "hash": 3983945033,
+      "label": "Seashark [seashark3]",
+      "class": 14
+    },
+    {
+      "name": "seasparrow",
+      "hash": 3568198617,
+      "label": "Sea Sparrow",
+      "class": 15
+    },
+    {
+      "name": "seasparrow2",
+      "hash": 1229411063,
+      "label": "Sparrow [seasparrow2]",
+      "class": 15
+    },
+    {
+      "name": "seasparrow3",
+      "hash": 1593933419,
+      "label": "Sparrow [seasparrow3]",
+      "class": 15
+    },
+    {
+      "name": "seminole",
+      "hash": 1221512915,
+      "label": "Seminole",
+      "class": 2
+    },
+    {
+      "name": "seminole2",
+      "hash": 2484160806,
+      "label": "Seminole Frontier",
+      "class": 2
+    },
+    {
+      "name": "sentinel",
+      "hash": 1349725314,
+      "label": "Sentinel XS [sentinel]",
+      "class": 3
+    },
+    {
+      "name": "sentinel2",
+      "hash": 873639469,
+      "label": "Sentinel [sentinel2]",
+      "class": 3
+    },
+    {
+      "name": "sentinel3",
+      "hash": 1104234922,
+      "label": "Sentinel [sentinel3]",
+      "class": 6
+    },
+    {
+      "name": "sentinel4",
+      "hash": 2938086457,
+      "label": "Sentinel Classic Widebody [sentinel4]",
+      "class": 6
+    },
+    {
+      "name": "sentinel5",
+      "hash": 2709293299,
+      "label": "Sentinel GTS",
+      "class": 6
+    },
+    {
+      "name": "sentinel6",
+      "hash": 3936328504,
+      "label": "Sentinel XS4",
+      "class": 1
+    },
+    {
+      "name": "serrano",
+      "hash": 1337041428,
+      "label": "Serrano",
+      "class": 2
+    },
+    {
+      "name": "seven70",
+      "hash": 2537130571,
+      "label": "Seven-70",
+      "class": 6
+    },
+    {
+      "name": "shamal",
+      "hash": 3080461301,
+      "label": "Shamal",
+      "class": 16
+    },
+    {
+      "name": "sheava",
+      "hash": 819197656,
+      "label": "ETR1",
+      "class": 7
+    },
+    {
+      "name": "sheriff",
+      "hash": 2611638396,
+      "label": "Sheriff Cruiser",
+      "class": 18
+    },
+    {
+      "name": "sheriff2",
+      "hash": 1922257928,
+      "label": "Sheriff SUV",
+      "class": 18
+    },
+    {
+      "name": "shinobi",
+      "hash": 1353120668,
+      "label": "Shinobi",
+      "class": 8
+    },
+    {
+      "name": "shotaro",
+      "hash": 3889340782,
+      "label": "Shotaro",
+      "class": 8
+    },
+    {
+      "name": "skylift",
+      "hash": 1044954915,
+      "label": "Skylift",
+      "class": 15
+    },
+    {
+      "name": "slamtruck",
+      "hash": 3249056020,
+      "label": "Slamtruck",
+      "class": 11
+    },
+    {
+      "name": "slamvan",
+      "hash": 729783779,
+      "label": "Slamvan",
+      "class": 4
+    },
+    {
+      "name": "slamvan2",
+      "hash": 833469436,
+      "label": "Lost Slamvan",
+      "class": 4
+    },
+    {
+      "name": "slamvan3",
+      "hash": 1119641113,
+      "label": "Slamvan Custom",
+      "class": 4
+    },
+    {
+      "name": "slamvan4",
+      "hash": 2233918197,
+      "label": "Apocalypse Slamvan",
+      "class": 4
+    },
+    {
+      "name": "slamvan5",
+      "hash": 373261600,
+      "label": "Future Shock Slamvan",
+      "class": 4
+    },
+    {
+      "name": "slamvan6",
+      "hash": 1742022738,
+      "label": "Nightmare Slamvan",
+      "class": 4
+    },
+    {
+      "name": "sm722",
+      "hash": 775514032,
+      "label": "SM722",
+      "class": 6
+    },
+    {
+      "name": "sovereign",
+      "hash": 743478836,
+      "label": "Sovereign",
+      "class": 8
+    },
+    {
+      "name": "specter",
+      "hash": 1886268224,
+      "label": "Specter",
+      "class": 6
+    },
+    {
+      "name": "specter2",
+      "hash": 1074745671,
+      "label": "Specter Custom",
+      "class": 6
+    },
+    {
+      "name": "speeder",
+      "hash": 231083307,
+      "label": "Speeder [speeder]",
+      "class": 14
+    },
+    {
+      "name": "speeder2",
+      "hash": 437538602,
+      "label": "Speeder [speeder2]",
+      "class": 14
+    },
+    {
+      "name": "speedo",
+      "hash": 3484649228,
+      "label": "Speedo",
+      "class": 12
+    },
+    {
+      "name": "speedo2",
+      "hash": 728614474,
+      "label": "Clown Van",
+      "class": 12
+    },
+    {
+      "name": "speedo4",
+      "hash": 219613597,
+      "label": "Speedo Custom [speedo4]",
+      "class": 12
+    },
+    {
+      "name": "speedo5",
+      "hash": 4250167832,
+      "label": "Speedo Custom [speedo5]",
+      "class": 12
+    },
+    {
+      "name": "squaddie",
+      "hash": 4192631813,
+      "label": "Squaddie",
+      "class": 2
+    },
+    {
+      "name": "squalo",
+      "hash": 400514754,
+      "label": "Squalo",
+      "class": 14
+    },
+    {
+      "name": "stafford",
+      "hash": 321186144,
+      "label": "Stafford",
+      "class": 1
+    },
+    {
+      "name": "stalion",
+      "hash": 1923400478,
+      "label": "Stallion",
+      "class": 4
+    },
+    {
+      "name": "stalion2",
+      "hash": 3893323758,
+      "label": "Burger Shot Stallion",
+      "class": 4
+    },
+    {
+      "name": "stanier",
+      "hash": 2817386317,
+      "label": "Stanier",
+      "class": 1
+    },
+    {
+      "name": "starling",
+      "hash": 2594093022,
+      "label": "LF-22 Starling",
+      "class": 16
+    },
+    {
+      "name": "stinger",
+      "hash": 1545842587,
+      "label": "Stinger",
+      "class": 5
+    },
+    {
+      "name": "stingergt",
+      "hash": 2196019706,
+      "label": "Stinger GT",
+      "class": 5
+    },
+    {
+      "name": "stingertt",
+      "hash": 1447690049,
+      "label": "Itali GTO Stinger TT",
+      "class": 6
+    },
+    {
+      "name": "stockade",
+      "hash": 1747439474,
+      "label": "Stockade [stockade]",
+      "class": 20
+    },
+    {
+      "name": "stockade3",
+      "hash": 4080511798,
+      "label": "Stockade [stockade3]",
+      "class": 20
+    },
+    {
+      "name": "stockade4",
+      "hash": 1089816240,
+      "label": "Bobcat Security Stockade",
+      "class": 20
+    },
+    {
+      "name": "stratum",
+      "hash": 1723137093,
+      "label": "Stratum",
+      "class": 1
+    },
+    {
+      "name": "streamer216",
+      "hash": 191916658,
+      "label": "Streamer216",
+      "class": 16
+    },
+    {
+      "name": "streiter",
+      "hash": 1741861769,
+      "label": "Streiter",
+      "class": 6
+    },
+    {
+      "name": "stretch",
+      "hash": 2333339779,
+      "label": "Stretch",
+      "class": 1
+    },
+    {
+      "name": "strikeforce",
+      "hash": 1692272545,
+      "label": "B-11 Strikeforce",
+      "class": 16
+    },
+    {
+      "name": "stromberg",
+      "hash": 886810209,
+      "label": "Stromberg",
+      "class": 5
+    },
+    {
+      "name": "stryder",
+      "hash": 301304410,
+      "label": "Stryder",
+      "class": 8
+    },
+    {
+      "name": "stunt",
+      "hash": 2172210288,
+      "label": "Mallard",
+      "class": 16
+    },
+    {
+      "name": "submersible",
+      "hash": 771711535,
+      "label": "Submersible",
+      "class": 14
+    },
+    {
+      "name": "submersible2",
+      "hash": 3228633070,
+      "label": "Kraken",
+      "class": 14
+    },
+    {
+      "name": "sugoi",
+      "hash": 987469656,
+      "label": "Sugoi",
+      "class": 6
+    },
+    {
+      "name": "sultan",
+      "hash": 970598228,
+      "label": "Sultan",
+      "class": 6
+    },
+    {
+      "name": "sultan2",
+      "hash": 872704284,
+      "label": "Sultan Classic",
+      "class": 6
+    },
+    {
+      "name": "sultan3",
+      "hash": 4003946083,
+      "label": "Sultan RS Classic",
+      "class": 6
+    },
+    {
+      "name": "sultanrs",
+      "hash": 3999278268,
+      "label": "Sultan RS",
+      "class": 7
+    },
+    {
+      "name": "suntrap",
+      "hash": 4012021193,
+      "label": "Suntrap",
+      "class": 14
+    },
+    {
+      "name": "superd",
+      "hash": 1123216662,
+      "label": "Super Diamond",
+      "class": 1
+    },
+    {
+      "name": "supervolito",
+      "hash": 710198397,
+      "label": "SuperVolito",
+      "class": 15
+    },
+    {
+      "name": "supervolito2",
+      "hash": 2623428164,
+      "label": "SuperVolito Carbon",
+      "class": 15
+    },
+    {
+      "name": "surano",
+      "hash": 384071873,
+      "label": "Surano",
+      "class": 6
+    },
+    {
+      "name": "surfer",
+      "hash": 699456151,
+      "label": "Surfer [SURFER]",
+      "class": 12
+    },
+    {
+      "name": "surfer2",
+      "hash": 2983726598,
+      "label": "Surfer [Surfer2]",
+      "class": 12
+    },
+    {
+      "name": "surfer3",
+      "hash": 3259477733,
+      "label": "Surfer Custom",
+      "class": 12
+    },
+    {
+      "name": "surge",
+      "hash": 2400073108,
+      "label": "Surge",
+      "class": 1
+    },
+    {
+      "name": "suzume",
+      "hash": 687627128,
+      "label": "Suzume",
+      "class": 7
+    },
+    {
+      "name": "swift",
+      "hash": 3955379698,
+      "label": "Swift",
+      "class": 15
+    },
+    {
+      "name": "swift2",
+      "hash": 1075432268,
+      "label": "Swift Deluxe",
+      "class": 15
+    },
+    {
+      "name": "swinger",
+      "hash": 500482303,
+      "label": "Swinger",
+      "class": 5
+    },
+    {
+      "name": "t20",
+      "hash": 1663218586,
+      "label": "T20",
+      "class": 7
+    },
+    {
+      "name": "taco",
+      "hash": 1951180813,
+      "label": "Taco Van",
+      "class": 12
+    },
+    {
+      "name": "tahoma",
+      "hash": 3833117047,
+      "label": "Tahoma Coupe",
+      "class": 4
+    },
+    {
+      "name": "tailgater",
+      "hash": 3286105550,
+      "label": "Tailgater",
+      "class": 1
+    },
+    {
+      "name": "tailgater2",
+      "hash": 3050505892,
+      "label": "Tailgater S",
+      "class": 1
+    },
+    {
+      "name": "taipan",
+      "hash": 3160260734,
+      "label": "Taipan",
+      "class": 7
+    },
+    {
+      "name": "tampa",
+      "hash": 972671128,
+      "label": "Tampa",
+      "class": 4
+    },
+    {
+      "name": "tampa2",
+      "hash": 3223586949,
+      "label": "Drift Tampa [tampa2]",
+      "class": 6
+    },
+    {
+      "name": "tampa3",
+      "hash": 3084515313,
+      "label": "Weaponized Tampa",
+      "class": 4
+    },
+    {
+      "name": "tampa4",
+      "hash": 2786546796,
+      "label": "Tampa GT",
+      "class": 4
+    },
+    {
+      "name": "taxi",
+      "hash": 3338918751,
+      "label": "Taxi",
+      "class": 17
+    },
+    {
+      "name": "technical",
+      "hash": 2198148358,
+      "label": "Technical",
+      "class": 9
+    },
+    {
+      "name": "technical2",
+      "hash": 1180875963,
+      "label": "Technical Aqua",
+      "class": 9
+    },
+    {
+      "name": "technical3",
+      "hash": 1356124575,
+      "label": "Technical Custom",
+      "class": 9
+    },
+    {
+      "name": "tempesta",
+      "hash": 272929391,
+      "label": "Tempesta",
+      "class": 7
+    },
+    {
+      "name": "tenf",
+      "hash": 3400983137,
+      "label": "10F",
+      "class": 6
+    },
+    {
+      "name": "tenf2",
+      "hash": 274946574,
+      "label": "10F Widebody",
+      "class": 6
+    },
+    {
+      "name": "terbyte",
+      "hash": 2306538597,
+      "label": "Terrorbyte",
+      "class": 20
+    },
+    {
+      "name": "terminus",
+      "hash": 167522317,
+      "label": "Terminus",
+      "class": 9
+    },
+    {
+      "name": "tezeract",
+      "hash": 1031562256,
+      "label": "Tezeract",
+      "class": 7
+    },
+    {
+      "name": "thrax",
+      "hash": 1044193113,
+      "label": "Thrax",
+      "class": 7
+    },
+    {
+      "name": "thrust",
+      "hash": 1836027715,
+      "label": "Thrust",
+      "class": 8
+    },
+    {
+      "name": "thruster",
+      "hash": 1489874736,
+      "label": "Thruster",
+      "class": 19
+    },
+    {
+      "name": "tigon",
+      "hash": 2936769864,
+      "label": "Tigon",
+      "class": 7
+    },
+    {
+      "name": "tiptruck",
+      "hash": 48339065,
+      "label": "Tipper [TipTruck]",
+      "class": 10
+    },
+    {
+      "name": "tiptruck2",
+      "hash": 3347205726,
+      "label": "Tipper [TipTruck2]",
+      "class": 10
+    },
+    {
+      "name": "titan",
+      "hash": 1981688531,
+      "label": "Titan",
+      "class": 16
+    },
+    {
+      "name": "titan2",
+      "hash": 858355070,
+      "label": "Titan 250 D",
+      "class": 16
+    },
+    {
+      "name": "toreador",
+      "hash": 1455990255,
+      "label": "Toreador",
+      "class": 5
+    },
+    {
+      "name": "torero",
+      "hash": 1504306544,
+      "label": "Torero",
+      "class": 5
+    },
+    {
+      "name": "torero2",
+      "hash": 4129572538,
+      "label": "Torero XO",
+      "class": 7
+    },
+    {
+      "name": "tornado",
+      "hash": 464687292,
+      "label": "Tornado [tornado]",
+      "class": 5
+    },
+    {
+      "name": "tornado2",
+      "hash": 1531094468,
+      "label": "Tornado [tornado2]",
+      "class": 5
+    },
+    {
+      "name": "tornado3",
+      "hash": 1762279763,
+      "label": "Tornado [tornado3]",
+      "class": 5
+    },
+    {
+      "name": "tornado4",
+      "hash": 2261744861,
+      "label": "Tornado [tornado4]",
+      "class": 5
+    },
+    {
+      "name": "tornado5",
+      "hash": 2497353967,
+      "label": "Tornado Custom",
+      "class": 5
+    },
+    {
+      "name": "tornado6",
+      "hash": 2736567667,
+      "label": "Tornado Rat Rod",
+      "class": 5
+    },
+    {
+      "name": "toro",
+      "hash": 1070967343,
+      "label": "Toro [toro]",
+      "class": 14
+    },
+    {
+      "name": "toro2",
+      "hash": 908897389,
+      "label": "Toro [toro2]",
+      "class": 14
+    },
+    {
+      "name": "toros",
+      "hash": 3126015148,
+      "label": "Toros",
+      "class": 2
+    },
+    {
+      "name": "tourbus",
+      "hash": 1941029835,
+      "label": "Tour Bus",
+      "class": 17
+    },
+    {
+      "name": "towtruck",
+      "hash": 2971866336,
+      "label": "Tow Truck [TOWTRUCK]",
+      "class": 11
+    },
+    {
+      "name": "towtruck2",
+      "hash": 3852654278,
+      "label": "Tow Truck [Towtruck2]",
+      "class": 11
+    },
+    {
+      "name": "towtruck3",
+      "hash": 3623402354,
+      "label": "Tow Truck [towtruck3]",
+      "class": 11
+    },
+    {
+      "name": "towtruck4",
+      "hash": 3392937977,
+      "label": "Tow Truck [towtruck4]",
+      "class": 11
+    },
+    {
+      "name": "tractor",
+      "hash": 1641462412,
+      "label": "Tractor",
+      "class": 11
+    },
+    {
+      "name": "tractor2",
+      "hash": 2218488798,
+      "label": "Fieldmaster [tractor2]",
+      "class": 11
+    },
+    {
+      "name": "tractor3",
+      "hash": 1445631933,
+      "label": "Fieldmaster [tractor3]",
+      "class": 11
+    },
+    {
+      "name": "trash",
+      "hash": 1917016601,
+      "label": "Trashmaster [Trash]",
+      "class": 17
+    },
+    {
+      "name": "trash2",
+      "hash": 3039269212,
+      "label": "Trashmaster [trash2]",
+      "class": 17
+    },
+    {
+      "name": "tribike",
+      "hash": 1127861609,
+      "label": "Whippet Race Bike",
+      "class": 13
+    },
+    {
+      "name": "tribike2",
+      "hash": 3061159916,
+      "label": "Endurex Race Bike",
+      "class": 13
+    },
+    {
+      "name": "tribike3",
+      "hash": 3894672200,
+      "label": "Tri-Cycles Race Bike",
+      "class": 13
+    },
+    {
+      "name": "trophytruck",
+      "hash": 101905590,
+      "label": "Trophy Truck",
+      "class": 9
+    },
+    {
+      "name": "trophytruck2",
+      "hash": 3631668194,
+      "label": "Desert Raid",
+      "class": 9
+    },
+    {
+      "name": "tropic",
+      "hash": 290013743,
+      "label": "Tropic [tropic]",
+      "class": 14
+    },
+    {
+      "name": "tropic2",
+      "hash": 1448677353,
+      "label": "Tropic [tropic2]",
+      "class": 14
+    },
+    {
+      "name": "tropos",
+      "hash": 1887331236,
+      "label": "Tropos Rallye",
+      "class": 6
+    },
+    {
+      "name": "tug",
+      "hash": 2194326579,
+      "label": "Tug",
+      "class": 14
+    },
+    {
+      "name": "tula",
+      "hash": 1043222410,
+      "label": "Tula",
+      "class": 16
+    },
+    {
+      "name": "tulip",
+      "hash": 1456744817,
+      "label": "Tulip",
+      "class": 4
+    },
+    {
+      "name": "tulip2",
+      "hash": 268758436,
+      "label": "Tulip M-100",
+      "class": 4
+    },
+    {
+      "name": "turismo2",
+      "hash": 3312836369,
+      "label": "Turismo Classic",
+      "class": 5
+    },
+    {
+      "name": "turismo3",
+      "hash": 4171974011,
+      "label": "Turismo Omaggio",
+      "class": 7
+    },
+    {
+      "name": "turismor",
+      "hash": 408192225,
+      "label": "Turismo R",
+      "class": 7
+    },
+    {
+      "name": "tyrant",
+      "hash": 3918533058,
+      "label": "Tyrant",
+      "class": 7
+    },
+    {
+      "name": "tyrus",
+      "hash": 2067820283,
+      "label": "Tyrus",
+      "class": 7
+    },
+    {
+      "name": "uranus",
+      "hash": 1534326199,
+      "label": "Uranus LozSpeed",
+      "class": 5
+    },
+    {
+      "name": "utillitruck",
+      "hash": 516990260,
+      "label": "Utility Truck [utillitruck]",
+      "class": 11
+    },
+    {
+      "name": "utillitruck2",
+      "hash": 887537515,
+      "label": "Utility Truck [utillitruck2]",
+      "class": 11
+    },
+    {
+      "name": "utillitruck3",
+      "hash": 2132890591,
+      "label": "Utility Truck [Utillitruck3]",
+      "class": 11
+    },
+    {
+      "name": "vacca",
+      "hash": 338562499,
+      "label": "Vacca",
+      "class": 7
+    },
+    {
+      "name": "vader",
+      "hash": 4154065143,
+      "label": "Vader",
+      "class": 8
+    },
+    {
+      "name": "vagner",
+      "hash": 1939284556,
+      "label": "Vagner",
+      "class": 7
+    },
+    {
+      "name": "vagrant",
+      "hash": 740289177,
+      "label": "Vagrant",
+      "class": 9
+    },
+    {
+      "name": "valkyrie",
+      "hash": 2694714877,
+      "label": "Valkyrie",
+      "class": 15
+    },
+    {
+      "name": "valkyrie2",
+      "hash": 1543134283,
+      "label": "Valkyrie MOD.0",
+      "class": 15
+    },
+    {
+      "name": "vamos",
+      "hash": 4245851645,
+      "label": "Vamos",
+      "class": 4
+    },
+    {
+      "name": "vectre",
+      "hash": 2754593701,
+      "label": "Vectre",
+      "class": 6
+    },
+    {
+      "name": "velum",
+      "hash": 2621610858,
+      "label": "Velum",
+      "class": 16
+    },
+    {
+      "name": "velum2",
+      "hash": 1077420264,
+      "label": "Velum 5-Seater",
+      "class": 16
+    },
+    {
+      "name": "verlierer2",
+      "hash": 1102544804,
+      "label": "Verlierer",
+      "class": 6
+    },
+    {
+      "name": "verus",
+      "hash": 298565713,
+      "label": "Verus",
+      "class": 9
+    },
+    {
+      "name": "vestra",
+      "hash": 1341619767,
+      "label": "Vestra",
+      "class": 16
+    },
+    {
+      "name": "vetir",
+      "hash": 2014313426,
+      "label": "Vetir",
+      "class": 19
+    },
+    {
+      "name": "veto",
+      "hash": 3437611258,
+      "label": "Veto Classic",
+      "class": 6
+    },
+    {
+      "name": "veto2",
+      "hash": 2802050217,
+      "label": "Veto Modern",
+      "class": 6
+    },
+    {
+      "name": "vigero",
+      "hash": 3469130167,
+      "label": "Vigero",
+      "class": 4
+    },
+    {
+      "name": "vigero2",
+      "hash": 2536587772,
+      "label": "Vigero ZX",
+      "class": 4
+    },
+    {
+      "name": "vigero3",
+      "hash": 372621319,
+      "label": "Vigero ZX Convertible",
+      "class": 4
+    },
+    {
+      "name": "vigilante",
+      "hash": 3052358707,
+      "label": "Vigilante",
+      "class": 7
+    },
+    {
+      "name": "vindicator",
+      "hash": 2941886209,
+      "label": "Vindicator",
+      "class": 8
+    },
+    {
+      "name": "virgo",
+      "hash": 3796912450,
+      "label": "Virgo",
+      "class": 4
+    },
+    {
+      "name": "virgo2",
+      "hash": 3395457658,
+      "label": "Virgo Classic Custom",
+      "class": 4
+    },
+    {
+      "name": "virgo3",
+      "hash": 16646064,
+      "label": "Virgo Classic",
+      "class": 4
+    },
+    {
+      "name": "virtue",
+      "hash": 669204833,
+      "label": "Virtue",
+      "class": 7
+    },
+    {
+      "name": "viseris",
+      "hash": 3903371924,
+      "label": "Viseris",
+      "class": 5
+    },
+    {
+      "name": "visione",
+      "hash": 3296789504,
+      "label": "Visione",
+      "class": 7
+    },
+    {
+      "name": "vivanite",
+      "hash": 2922168362,
+      "label": "Vivanite [vivanite]",
+      "class": 2
+    },
+    {
+      "name": "vivanite2",
+      "hash": 507621923,
+      "label": "Vivanite [vivanite2]",
+      "class": 17
+    },
+    {
+      "name": "volatol",
+      "hash": 447548909,
+      "label": "Volatol",
+      "class": 16
+    },
+    {
+      "name": "volatus",
+      "hash": 2449479409,
+      "label": "Volatus",
+      "class": 15
+    },
+    {
+      "name": "voltic",
+      "hash": 2672523198,
+      "label": "Voltic",
+      "class": 7
+    },
+    {
+      "name": "voltic2",
+      "hash": 989294410,
+      "label": "Rocket Voltic",
+      "class": 7
+    },
+    {
+      "name": "voodoo",
+      "hash": 2006667053,
+      "label": "Voodoo Custom",
+      "class": 4
+    },
+    {
+      "name": "voodoo2",
+      "hash": 523724515,
+      "label": "Voodoo",
+      "class": 4
+    },
+    {
+      "name": "vorschlaghammer",
+      "hash": 3054795149,
+      "label": "Vorschlaghammer [vorschlaghammer]",
+      "class": 1
+    },
+    {
+      "name": "vortex",
+      "hash": 3685342204,
+      "label": "Vortex",
+      "class": 8
+    },
+    {
+      "name": "vstr",
+      "hash": 1456336509,
+      "label": "V-STR",
+      "class": 6
+    },
+    {
+      "name": "warrener",
+      "hash": 1373123368,
+      "label": "Warrener",
+      "class": 1
+    },
+    {
+      "name": "warrener2",
+      "hash": 579912970,
+      "label": "Warrener HKR",
+      "class": 1
+    },
+    {
+      "name": "washington",
+      "hash": 1777363799,
+      "label": "Washington",
+      "class": 1
+    },
+    {
+      "name": "wastelander",
+      "hash": 2382949506,
+      "label": "Wastelander",
+      "class": 17
+    },
+    {
+      "name": "weevil",
+      "hash": 1644055914,
+      "label": "Weevil",
+      "class": 0
+    },
+    {
+      "name": "weevil2",
+      "hash": 3300595976,
+      "label": "Weevil Custom",
+      "class": 4
+    },
+    {
+      "name": "windsor",
+      "hash": 1581459400,
+      "label": "Windsor",
+      "class": 3
+    },
+    {
+      "name": "windsor2",
+      "hash": 2364918497,
+      "label": "Windsor Drop",
+      "class": 3
+    },
+    {
+      "name": "winky",
+      "hash": 4084658662,
+      "label": "Winky",
+      "class": 9
+    },
+    {
+      "name": "wolfsbane",
+      "hash": 3676349299,
+      "label": "Wolfsbane",
+      "class": 8
+    },
+    {
+      "name": "woodlander",
+      "hash": 1966698497,
+      "label": "Woodlander",
+      "class": 2
+    },
+    {
+      "name": "xa21",
+      "hash": 917809321,
+      "label": "XA-21",
+      "class": 7
+    },
+    {
+      "name": "xls",
+      "hash": 1203490606,
+      "label": "XLS",
+      "class": 2
+    },
+    {
+      "name": "xls2",
+      "hash": 3862958888,
+      "label": "XLS (Armored)",
+      "class": 2
+    },
+    {
+      "name": "xtreme",
+      "hash": 2515968713,
+      "label": "X-treme",
+      "class": 7
+    },
+    {
+      "name": "yosemite",
+      "hash": 1871995513,
+      "label": "Yosemite",
+      "class": 4
+    },
+    {
+      "name": "yosemite1500",
+      "hash": 2398479240,
+      "label": "Yosemite 1500",
+      "class": 9
+    },
+    {
+      "name": "yosemite2",
+      "hash": 1693751655,
+      "label": "Drift Yosemite [yosemite2]",
+      "class": 4
+    },
+    {
+      "name": "yosemite3",
+      "hash": 67753863,
+      "label": "Yosemite Rancher",
+      "class": 9
+    },
+    {
+      "name": "youga",
+      "hash": 65402552,
+      "label": "Youga",
+      "class": 12
+    },
+    {
+      "name": "youga2",
+      "hash": 1026149675,
+      "label": "Youga Classic",
+      "class": 12
+    },
+    {
+      "name": "youga3",
+      "hash": 1802742206,
+      "label": "Youga Classic 4x4",
+      "class": 12
+    },
+    {
+      "name": "youga4",
+      "hash": 1486521356,
+      "label": "Youga Custom [youga4]",
+      "class": 12
+    },
+    {
+      "name": "youga5",
+      "hash": 2266063097,
+      "label": "Youga Custom [youga5]",
+      "class": 12
+    },
+    {
+      "name": "z190",
+      "hash": 838982985,
+      "label": "190z",
+      "class": 5
+    },
+    {
+      "name": "zeno",
+      "hash": 655665811,
+      "label": "Zeno",
+      "class": 7
+    },
+    {
+      "name": "zentorno",
+      "hash": 2891838741,
+      "label": "Zentorno",
+      "class": 7
+    },
+    {
+      "name": "zhaba",
+      "hash": 1284356689,
+      "label": "Zhaba",
+      "class": 9
+    },
+    {
+      "name": "zion",
+      "hash": 3172678083,
+      "label": "Zion",
+      "class": 3
+    },
+    {
+      "name": "zion2",
+      "hash": 3101863448,
+      "label": "Zion Cabrio",
+      "class": 3
+    },
+    {
+      "name": "zion3",
+      "hash": 1862507111,
+      "label": "Zion Classic",
+      "class": 5
+    },
+    {
+      "name": "zombiea",
+      "hash": 3285698347,
+      "label": "Zombie Bobber",
+      "class": 8
+    },
+    {
+      "name": "zombieb",
+      "hash": 3724934023,
+      "label": "Zombie Chopper",
+      "class": 8
+    },
+    {
+      "name": "zorrusso",
+      "hash": 3612858749,
+      "label": "Zorrusso",
+      "class": 7
+    },
+    {
+      "name": "zr350",
+      "hash": 2436313176,
+      "label": "ZR350 [zr350]",
+      "class": 6
+    },
+    {
+      "name": "zr380",
+      "hash": 540101442,
+      "label": "Apocalypse ZR380",
+      "class": 6
+    },
+    {
+      "name": "zr3802",
+      "hash": 3188846534,
+      "label": "Future Shock ZR380",
+      "class": 6
+    },
+    {
+      "name": "zr3803",
+      "hash": 2816263004,
+      "label": "Nightmare ZR380",
+      "class": 6
+    },
+    {
+      "name": "ztype",
+      "hash": 758895617,
+      "label": "Z-Type",
+      "class": 5
+    }
+  ]
+}

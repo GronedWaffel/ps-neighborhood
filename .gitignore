@@ -17,6 +17,8 @@ receiver-ps5/build/
 *.dmp
 *.elf
 *.bin
+!trainers/gta5-story/gta-bridge.bin
+!trainers/gta5-story/profiles/*/gta-bridge.bin
 *.exe
 *.dll
 *.pdb
@@ -29,6 +31,8 @@ Thumbs.db
 .cursor/
 scripts/probe-trainer-field.mjs
 scripts/trainer-action.mjs
+scripts/gta-native-diagnostic.mjs
+scripts/gta-research.mjs
 
 늸ꊅɋ/
 臘瘺Ƶ/

@@ -1,7 +1,7 @@
 {
   "name": "ps-neighborhood",
   "productName": "PS Neighborhood",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",
@@ -28,6 +28,9 @@
     "serve": "node src/server.mjs",
     "mcp": "node src/mcp.mjs",
     "trainer": "electron desktop/trainer.cjs",
+    "trainer:gta": "electron desktop/gta-story.cjs",
+    "menu:gta": "electron desktop/gta-menu.cjs",
+    "build:gta": "node scripts/build-gta-bridge.mjs",
     "build:receiver": "node receiver/build.mjs",
     "test": "node --test tests/*.test.mjs",
     "package": "node scripts/package.mjs"

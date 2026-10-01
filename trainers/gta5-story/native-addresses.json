@@ -1,0 +1,800 @@
+{
+  "ADD_TEXT_COMPONENT_SUBSTRING_PLAYER_NAME": {
+    "at": "0x17ea9c8",
+    "hash": "0x76db21247ae4e4e2",
+    "handler": "0x17eede0",
+    "originalHash": "0x6C188BE134E074AA",
+    "namespace": "HUD"
+  },
+  "APPLY_FORCE_TO_ENTITY_CENTER_OF_MASS": {
+    "at": "0x17be762",
+    "hash": "0x57ffaa29e06177f6",
+    "handler": "0x17c2b40",
+    "originalHash": "0x18FF00FC7EFF559E",
+    "namespace": "ENTITY"
+  },
+  "BEGIN_TEXT_COMMAND_DISPLAY_TEXT": {
+    "at": "0x17ea7ce",
+    "hash": "0xcdda0c58b818f6b2",
+    "handler": "0x17ee590",
+    "originalHash": "0x25FBB336DF1804CB",
+    "namespace": "HUD"
+  },
+  "CLEAR_FOCUS": {
+    "at": "0x1906b9e",
+    "hash": "0x5639e771f6085bf6",
+    "handler": "0x1908550",
+    "originalHash": "0x31B73D1EA9F01DA2",
+    "namespace": "STREAMING"
+  },
+  "CLEAR_PLAYER_WANTED_LEVEL": {
+    "at": "0x18c7f38",
+    "hash": "0xba5d7196eacb9282",
+    "handler": "0x18c9ef0",
+    "originalHash": "0xB302540597885499",
+    "namespace": "PLAYER"
+  },
+  "CREATE_AMBIENT_PICKUP": {
+    "at": "0x1883be8",
+    "hash": "0xb765858a7a410073",
+    "handler": "0x1887290",
+    "originalHash": "0x673966A0C0FD7171",
+    "namespace": "OBJECT"
+  },
+  "CREATE_CAM": {
+    "at": "0x179d310",
+    "hash": "0xb93a4265cb0f5b1f",
+    "handler": "0x179e880",
+    "originalHash": "0xC3981DCE61D9E13F",
+    "namespace": "CAMERA"
+  },
+  "CREATE_OBJECT_NO_OFFSET": {
+    "at": "0x188354a",
+    "hash": "0xa7322c6d0e1a985",
+    "handler": "0x18843c0",
+    "originalHash": "0x9A294B2138ABB884",
+    "namespace": "OBJECT"
+  },
+  "CREATE_VEHICLE": {
+    "at": "0x1941104",
+    "hash": "0xba715a7beba5a1f9",
+    "handler": "0x1945010",
+    "originalHash": "0xAF35D0D2583051B0",
+    "namespace": "VEHICLE"
+  },
+  "DECOR_EXIST_ON": {
+    "at": "0x17ae86e",
+    "hash": "0xf2549ff74d64b720",
+    "handler": "0x17af630",
+    "originalHash": "0x05661B80A8C9165F",
+    "namespace": "DECORATOR"
+  },
+  "DECOR_GET_INT": {
+    "at": "0x17ae858",
+    "hash": "0xc3b76795ecbdef41",
+    "handler": "0x17af500",
+    "originalHash": "0xA06C969B02A97298",
+    "namespace": "DECORATOR"
+  },
+  "DECOR_IS_REGISTERED_AS_TYPE": {
+    "at": "0x17ae8b0",
+    "hash": "0x6bd06f4780eac5dd",
+    "handler": "0x17af800",
+    "originalHash": "0x4F14F9F870D6FBC8",
+    "namespace": "DECORATOR"
+  },
+  "DECOR_SET_INT": {
+    "at": "0x17ae816",
+    "hash": "0x5b874e9abff72b4",
+    "handler": "0x17af030",
+    "originalHash": "0x0CE3AA5E1CA19E10",
+    "namespace": "DECORATOR"
+  },
+  "DELETE_OBJECT": {
+    "at": "0x1883560",
+    "hash": "0x4bda5afd88c085eb",
+    "handler": "0x1884440",
+    "originalHash": "0x539E0AE3E6634B9F",
+    "namespace": "OBJECT"
+  },
+  "DELETE_VEHICLE": {
+    "at": "0x194111a",
+    "hash": "0xd59cc8123fd1a789",
+    "handler": "0x1945060",
+    "originalHash": "0xEA386986E786A54F",
+    "namespace": "VEHICLE"
+  },
+  "DESTROY_CAM": {
+    "at": "0x179d368",
+    "hash": "0x588ddcb644c6486a",
+    "handler": "0x179ed60",
+    "originalHash": "0x865908C81A2C22E9",
+    "namespace": "CAMERA"
+  },
+  "DESTROY_MOBILE_PHONE": {
+    "at": "0x18d2b9a",
+    "hash": "0xa7518cfb10a7defb",
+    "handler": "0x18d2dc0",
+    "originalHash": "0x3BC861DF703E5097",
+    "namespace": "GTA"
+  },
+  "DISABLE_ALL_CONTROL_ACTIONS": {
+    "at": "0x188a600",
+    "hash": "0x58699da34f83b510",
+    "handler": "0x188dc30",
+    "originalHash": "0x5F4B6931816E599B",
+    "namespace": "PAD"
+  },
+  "DISABLE_CONTROL_ACTION": {
+    "at": "0x188a5d4",
+    "hash": "0x7653d561c9574763",
+    "handler": "0x188d7f0",
+    "originalHash": "0xFE99B66D079CF6BC",
+    "namespace": "PAD"
+  },
+  "DOES_BLIP_EXIST": {
+    "at": "0x17eb8e8",
+    "hash": "0x12dd4a0b247d9b4d",
+    "handler": "0x17f30f0",
+    "originalHash": "0xA6DB27D19ECBB7DA",
+    "namespace": "HUD"
+  },
+  "DOES_ENTITY_EXIST": {
+    "at": "0x17be014",
+    "hash": "0xe5965cdf24f93a9f",
+    "handler": "0x17befc0",
+    "originalHash": "0x7239B21A38F536BA",
+    "namespace": "ENTITY"
+  },
+  "DOES_TEXT_LABEL_EXIST": {
+    "at": "0x17eabd8",
+    "hash": "0xe73671e3d37cf79e",
+    "handler": "0x17ef400",
+    "originalHash": "0xAC09CA973C564252",
+    "namespace": "HUD"
+  },
+  "DRAW_RECT": {
+    "at": "0x17d87d4",
+    "hash": "0xca4c0ad3caff651e",
+    "handler": "0x17dc470",
+    "originalHash": "0x3A618A217E5154F0",
+    "namespace": "GRAPHICS"
+  },
+  "END_TEXT_COMMAND_DISPLAY_TEXT": {
+    "at": "0x17ea7e4",
+    "hash": "0x1a53079994915fa6",
+    "handler": "0x17ee5f0",
+    "originalHash": "0xCD015E5BB0D96A57",
+    "namespace": "HUD"
+  },
+  "FREEZE_ENTITY_POSITION": {
+    "at": "0x17be854",
+    "hash": "0x5c65dddc219b3aa5",
+    "handler": "0x17c31d0",
+    "originalHash": "0x428CA6DBD1094446",
+    "namespace": "ENTITY"
+  },
+  "GET_BLIP_INFO_ID_COORD": {
+    "at": "0x17eb2b8",
+    "hash": "0x9a497500ddc52c34",
+    "handler": "0x17f1150",
+    "originalHash": "0xFA7C7F0AADF25D09",
+    "namespace": "HUD"
+  },
+  "GET_ENTITY_COORDS": {
+    "at": "0x17be1cc",
+    "hash": "0x6b62510f212526dc",
+    "handler": "0x17bfb20",
+    "originalHash": "0x3FEF770D40960D5A",
+    "namespace": "ENTITY"
+  },
+  "GET_ENTITY_HEADING": {
+    "at": "0x17be224",
+    "hash": "0x82fe2343f8bdff0b",
+    "handler": "0x17bfdb0",
+    "originalHash": "0xE83D4F9BA2A38914",
+    "namespace": "ENTITY"
+  },
+  "GET_ENTITY_MAX_HEALTH": {
+    "at": "0x17be266",
+    "hash": "0x72649caa101b626c",
+    "handler": "0x17c0040",
+    "originalHash": "0x15D757606D170C3C",
+    "namespace": "ENTITY"
+  },
+  "GET_ENTITY_MODEL": {
+    "at": "0x17be2d4",
+    "hash": "0x15caa6d7b11f1a7c",
+    "handler": "0x17c0410",
+    "originalHash": "0x9F47B058362C84B5",
+    "namespace": "ENTITY"
+  },
+  "GET_ENTITY_SPEED": {
+    "at": "0x17be39a",
+    "hash": "0x207d53f9e0190691",
+    "handler": "0x17c1040",
+    "originalHash": "0xD5037BA82E12416F",
+    "namespace": "ENTITY"
+  },
+  "GET_FILENAME_FOR_AUDIO_CONVERSATION": {
+    "at": "0x17eaaa4",
+    "hash": "0xaef70623d03f7b02",
+    "handler": "0x17ef030",
+    "originalHash": "0x7B5280EBA9840C72",
+    "namespace": "HUD"
+  },
+  "GET_FIRST_BLIP_INFO_ID": {
+    "at": "0x17eb28c",
+    "hash": "0xfd3a7cd556889d1d",
+    "handler": "0x17f1100",
+    "originalHash": "0x1BEDE233E6CD2A1F",
+    "namespace": "HUD"
+  },
+  "GET_FRAME_COUNT": {
+    "at": "0x18024da",
+    "hash": "0x8142a6539ddc180f",
+    "handler": "0x1804f90",
+    "originalHash": "0xFC8202EFC642E6F2",
+    "namespace": "MISC"
+  },
+  "GET_FRAME_TIME": {
+    "at": "0x18024ae",
+    "hash": "0x51109c28352ec9a3",
+    "handler": "0x1804f70",
+    "originalHash": "0x15C40837039FFAF7",
+    "namespace": "MISC"
+  },
+  "GET_GAME_TIMER": {
+    "at": "0x1802498",
+    "hash": "0x320d1840b6daa1cc",
+    "handler": "0x1804f60",
+    "originalHash": "0x9CD27B0045628463",
+    "namespace": "MISC"
+  },
+  "GET_GROUND_Z_FOR_3D_COORD": {
+    "at": "0x1802532",
+    "hash": "0x9cd4cbf2bbe10f00",
+    "handler": "0x1805140",
+    "originalHash": "0xC906A7DAB05C8D2B",
+    "namespace": "MISC"
+  },
+  "GET_HASH_NAME_FOR_COMPONENT": {
+    "at": "0x17afe62",
+    "hash": "0x748ef68a43bbbc6c",
+    "handler": "0x17b0cc0",
+    "originalHash": "0x0368B3A838070348",
+    "namespace": "EXTRAMETADATA"
+  },
+  "GET_MODEL_DIMENSIONS": {
+    "at": "0x1802bd0",
+    "hash": "0xb38ef75835faf667",
+    "handler": "0x18076b0",
+    "originalHash": "0x03E8D3D5F549087A",
+    "namespace": "MISC"
+  },
+  "GET_NUMBER_OF_PED_DRAWABLE_VARIATIONS": {
+    "at": "0x18a58d2",
+    "hash": "0x37684f94e628d1ac",
+    "handler": "0x18b08b0",
+    "originalHash": "0x27561561732A7842",
+    "namespace": "PED"
+  },
+  "GET_NUMBER_OF_PED_TEXTURE_VARIATIONS": {
+    "at": "0x18a58fe",
+    "hash": "0x91e7da9eaffb9499",
+    "handler": "0x18b0960",
+    "originalHash": "0x8F7156A3142A6BAD",
+    "namespace": "PED"
+  },
+  "GET_NUM_MOD_KITS": {
+    "at": "0x194355e",
+    "hash": "0x3ac3319d1b50189",
+    "handler": "0x19561e0",
+    "originalHash": "0x33F2E3FE70EAAE1D",
+    "namespace": "VEHICLE"
+  },
+  "GET_NUM_VEHICLE_MODS": {
+    "at": "0x19436d4",
+    "hash": "0x6b83f5ae0478286f",
+    "handler": "0x1957190",
+    "originalHash": "0xE38E9162A2500646",
+    "namespace": "VEHICLE"
+  },
+  "GET_OFFSET_FROM_ENTITY_IN_WORLD_COORDS": {
+    "at": "0x17be300",
+    "hash": "0xcacad935c0bee14f",
+    "handler": "0x17c0570",
+    "originalHash": "0x1899F328B0E12848",
+    "namespace": "ENTITY"
+  },
+  "GET_PED_DRAWABLE_VARIATION": {
+    "at": "0x18a58bc",
+    "hash": "0x5355baa621c153cf",
+    "handler": "0x18b0830",
+    "originalHash": "0x67F3780DD425D4FC",
+    "namespace": "PED"
+  },
+  "GET_PED_PALETTE_VARIATION": {
+    "at": "0x18a5940",
+    "hash": "0x272ab65a4e7277b4",
+    "handler": "0x18b09f0",
+    "originalHash": "0xE3DD5F2A84B42281",
+    "namespace": "PED"
+  },
+  "GET_PED_TEXTURE_VARIATION": {
+    "at": "0x18a58e8",
+    "hash": "0xf1050e548c37f4a5",
+    "handler": "0x18b08e0",
+    "originalHash": "0x04A355E041E004E6",
+    "namespace": "PED"
+  },
+  "GET_RENDERING_CAM": {
+    "at": "0x179d3ec",
+    "hash": "0x65a2cb8ececaf1",
+    "handler": "0x179f180",
+    "originalHash": "0x5234F9F10919EABA",
+    "namespace": "CAMERA"
+  },
+  "GET_SHOP_PED_COMPONENT": {
+    "at": "0x17afe0a",
+    "hash": "0x37e8462bc2a63393",
+    "handler": "0x17b06f0",
+    "originalHash": "0x74C0E2A57EC66760",
+    "namespace": "EXTRAMETADATA"
+  },
+  "GET_VEHICLE_MOD": {
+    "at": "0x19436a8",
+    "hash": "0xdd0bc46c4cfd6ad",
+    "handler": "0x1956fa0",
+    "originalHash": "0x772960298DA26FDB",
+    "namespace": "VEHICLE"
+  },
+  "GET_VEHICLE_MOD_KIT": {
+    "at": "0x194358a",
+    "hash": "0x741835e0ef89491d",
+    "handler": "0x19562f0",
+    "originalHash": "0x6325D1A044AE510D",
+    "namespace": "VEHICLE"
+  },
+  "GET_VEHICLE_PED_IS_IN": {
+    "at": "0x18a466e",
+    "hash": "0xb3ff0049c1fd38ec",
+    "handler": "0x18a9210",
+    "originalHash": "0x9A9112A0FE9A4713",
+    "namespace": "PED"
+  },
+  "GET_WATER_HEIGHT_NO_WAVES": {
+    "at": "0x1961a1a",
+    "hash": "0x7f38b18228435c61",
+    "handler": "0x1961d40",
+    "originalHash": "0x8EE6B53CE13A9794",
+    "namespace": "WATER"
+  },
+  "GIVE_ACHIEVEMENT_TO_PLAYER": {
+    "at": "0x18c8618",
+    "hash": "0xb8d77780df8e1242",
+    "handler": "0x18cc9e0",
+    "originalHash": "0xBEC7076D64130195",
+    "namespace": "PLAYER"
+  },
+  "GIVE_WEAPON_TO_PED": {
+    "at": "0x1966b1a",
+    "hash": "0x9521fb98db6ddf50",
+    "handler": "0x1968140",
+    "originalHash": "0xBF0FD6E56C964FCB",
+    "namespace": "WEAPON"
+  },
+  "HAS_MODEL_LOADED": {
+    "at": "0x190682e",
+    "hash": "0x152aa00fa3130f1",
+    "handler": "0x1907390",
+    "originalHash": "0x98A4EB5D89A0C952",
+    "namespace": "STREAMING"
+  },
+  "IS_CUTSCENE_ACTIVE": {
+    "at": "0x17a80a4",
+    "hash": "0x496531e41fcf5116",
+    "handler": "0x17a8860",
+    "originalHash": "0x991251AFC3981F84",
+    "namespace": "CUTSCENE"
+  },
+  "IS_DISABLED_CONTROL_PRESSED": {
+    "at": "0x188a340",
+    "hash": "0xdba73788f6e3c5f",
+    "handler": "0x188b970",
+    "originalHash": "0xE2587F8CBBD87B1D",
+    "namespace": "PAD"
+  },
+  "IS_GAMEPLAY_CAM_RENDERING": {
+    "at": "0x179dd76",
+    "hash": "0x66def7450747437a",
+    "handler": "0x17a2a00",
+    "originalHash": "0x39B5D1B10383F0C8",
+    "namespace": "CAMERA"
+  },
+  "IS_HORN_ACTIVE": {
+    "at": "0x178eb50",
+    "hash": "0x5e1f820e490c4eef",
+    "handler": "0x1795910",
+    "originalHash": "0x9D6BFC12B05C6121",
+    "namespace": "AUDIO"
+  },
+  "IS_MODEL_A_PED": {
+    "at": "0x190689c",
+    "hash": "0x5a01a43be2689db0",
+    "handler": "0x1907710",
+    "originalHash": "0x75816577FEA6DAD5",
+    "namespace": "STREAMING"
+  },
+  "IS_MODEL_A_VEHICLE": {
+    "at": "0x19068b2",
+    "hash": "0x2886b1bfe0896a9a",
+    "handler": "0x19077b0",
+    "originalHash": "0x19AAC8F07BFEC53E",
+    "namespace": "STREAMING"
+  },
+  "IS_MODEL_IN_CDIMAGE": {
+    "at": "0x1906870",
+    "hash": "0x51046eee00e2bbda",
+    "handler": "0x1907650",
+    "originalHash": "0x35B9E0803292B641",
+    "namespace": "STREAMING"
+  },
+  "IS_MODEL_VALID": {
+    "at": "0x1906886",
+    "hash": "0x61adf697df551da6",
+    "handler": "0x19076b0",
+    "originalHash": "0xC0296A2EDF545E92",
+    "namespace": "STREAMING"
+  },
+  "IS_NEW_LOAD_SCENE_ACTIVE": {
+    "at": "0x1906d14",
+    "hash": "0x2981c54770e1d19c",
+    "handler": "0x1908db0",
+    "originalHash": "0xA41A05B6CB741B85",
+    "namespace": "STREAMING"
+  },
+  "IS_NEW_LOAD_SCENE_LOADED": {
+    "at": "0x1906d2a",
+    "hash": "0x8a6ab093d1ee5368",
+    "handler": "0x1908dc0",
+    "originalHash": "0x01B8247A7A8B9AD1",
+    "namespace": "STREAMING"
+  },
+  "IS_TOGGLE_MOD_ON": {
+    "at": "0x1943716",
+    "hash": "0x75b2c853cb0b3047",
+    "handler": "0x1957420",
+    "originalHash": "0x84B233A8C8FC8AE7",
+    "namespace": "VEHICLE"
+  },
+  "IS_WEAPON_VALID": {
+    "at": "0x1966a3e",
+    "hash": "0x72699bd07af0086",
+    "handler": "0x1967c00",
+    "originalHash": "0x937C71165CF334B3",
+    "namespace": "WEAPON"
+  },
+  "NEW_LOAD_SCENE_START_SPHERE": {
+    "at": "0x1906ce8",
+    "hash": "0xca60df1d01dbd440",
+    "handler": "0x1908d00",
+    "originalHash": "0xACCFB4ACF53551B0",
+    "namespace": "STREAMING"
+  },
+  "NEW_LOAD_SCENE_STOP": {
+    "at": "0x1906cfe",
+    "hash": "0xee3a19a84a10f8b9",
+    "handler": "0x1908da0",
+    "originalHash": "0xC197616D221FF4A4",
+    "namespace": "STREAMING"
+  },
+  "PLAYER_ID": {
+    "at": "0x18c853c",
+    "hash": "0x9e2d6c50374fcfa9",
+    "handler": "0x18cc690",
+    "originalHash": "0x4F8644AF03D0E0D6",
+    "namespace": "PLAYER"
+  },
+  "PLAYER_PED_ID": {
+    "at": "0x18c8552",
+    "hash": "0xe2d3d51028f0428a",
+    "handler": "0x18cc6b0",
+    "originalHash": "0xD80958FC74E988A6",
+    "namespace": "PLAYER"
+  },
+  "POINT_CAM_AT_ENTITY": {
+    "at": "0x179d704",
+    "hash": "0x98a99a554b458431",
+    "handler": "0x17a0510",
+    "originalHash": "0x5640BFF86B16E8DC",
+    "namespace": "CAMERA"
+  },
+  "RENDER_SCRIPT_CAMS": {
+    "at": "0x179d2e4",
+    "hash": "0x850d4ef3d40fb068",
+    "handler": "0x179e770",
+    "originalHash": "0x07E5B515DB0636FC",
+    "namespace": "CAMERA"
+  },
+  "REQUEST_COLLISION_AT_COORD": {
+    "at": "0x19068c8",
+    "hash": "0xe49a23f069c82c93",
+    "handler": "0x1907850",
+    "originalHash": "0x07503F7948F491A7",
+    "namespace": "STREAMING"
+  },
+  "REQUEST_MODEL": {
+    "at": "0x1906802",
+    "hash": "0xd69a0c3662175e68",
+    "handler": "0x1907360",
+    "originalHash": "0x963D27A58DF860AC",
+    "namespace": "STREAMING"
+  },
+  "SET_CAM_COORD": {
+    "at": "0x179d49c",
+    "hash": "0xdee4f5f0b93be664",
+    "handler": "0x179f600",
+    "originalHash": "0x4D41783FB745E42E",
+    "namespace": "CAMERA"
+  },
+  "SET_CAM_FOV": {
+    "at": "0x179d4c8",
+    "hash": "0xa18c027350d3c19",
+    "handler": "0x179f6c0",
+    "originalHash": "0xB13C14F66A00D047",
+    "namespace": "CAMERA"
+  },
+  "SET_CLOCK_TIME": {
+    "at": "0x17a5444",
+    "hash": "0xaa27c85e5be092aa",
+    "handler": "0x17a55b0",
+    "originalHash": "0x47C3B5848C3E45D8",
+    "namespace": "CLOCK"
+  },
+  "SET_ENTITY_COORDS_NO_OFFSET": {
+    "at": "0x17beaa6",
+    "hash": "0xa539ede8da5bbc22",
+    "handler": "0x17c3b90",
+    "originalHash": "0x239A3351AC1DA385",
+    "namespace": "ENTITY"
+  },
+  "SET_ENTITY_HEADING": {
+    "at": "0x17bead2",
+    "hash": "0xbbf86885619695ce",
+    "handler": "0x17c3cf0",
+    "originalHash": "0x8E2530AA8ADA980E",
+    "namespace": "ENTITY"
+  },
+  "SET_ENTITY_HEALTH": {
+    "at": "0x17beae8",
+    "hash": "0xf160248d9083ed0c",
+    "handler": "0x17c3d00",
+    "originalHash": "0x6B76DC1F3AE6E6A3",
+    "namespace": "ENTITY"
+  },
+  "SET_ENTITY_INVINCIBLE": {
+    "at": "0x17beafe",
+    "hash": "0x9210f85e9cd785f1",
+    "handler": "0x17c3d20",
+    "originalHash": "0x3882114BDE571AD4",
+    "namespace": "ENTITY"
+  },
+  "SET_ENTITY_ROTATION": {
+    "at": "0x17bec06",
+    "hash": "0x8ce3d365f064f69e",
+    "handler": "0x17c4a30",
+    "originalHash": "0x8524A8B0171D5E07",
+    "namespace": "ENTITY"
+  },
+  "SET_ENTITY_VISIBLE": {
+    "at": "0x17bec1c",
+    "hash": "0x1c2ed929474dc6fe",
+    "handler": "0x17c4a50",
+    "originalHash": "0xEA1C610A04DB6BBB",
+    "namespace": "ENTITY"
+  },
+  "SET_FOCUS_POS_AND_VEL": {
+    "at": "0x1906bb4",
+    "hash": "0x7d5c42a7cdb11db6",
+    "handler": "0x1908560",
+    "originalHash": "0xBB7454BAFF08FE25",
+    "namespace": "STREAMING"
+  },
+  "SET_MOBILE_RADIO_ENABLED_DURING_GAMEPLAY": {
+    "at": "0x178e84e",
+    "hash": "0x9367fadb11a30d38",
+    "handler": "0x1793df0",
+    "originalHash": "0x1098355A16064BB3",
+    "namespace": "AUDIO"
+  },
+  "SET_MODEL_AS_NO_LONGER_NEEDED": {
+    "at": "0x190685a",
+    "hash": "0xf1a23b343dfedfd0",
+    "handler": "0x1907570",
+    "originalHash": "0xE532F5D78798DAAB",
+    "namespace": "STREAMING"
+  },
+  "SET_PED_CAN_BE_KNOCKED_OFF_VEHICLE": {
+    "at": "0x18a5486",
+    "hash": "0xb11c0cf5ccdfe10a",
+    "handler": "0x18ae820",
+    "originalHash": "0x7A6535691B477C48",
+    "namespace": "PED"
+  },
+  "SET_PED_COMPONENT_VARIATION": {
+    "at": "0x18a59ae",
+    "hash": "0xe3752b10dc995e95",
+    "handler": "0x18b0c00",
+    "originalHash": "0x262B14F48D29DE80",
+    "namespace": "PED"
+  },
+  "SET_PED_CONFIG_FLAG": {
+    "at": "0x18a67c6",
+    "hash": "0xd6a76bab45a4b460",
+    "handler": "0x18b7ec0",
+    "originalHash": "0x1913FE4CBF41C463",
+    "namespace": "PED"
+  },
+  "SET_PED_DEFAULT_COMPONENT_VARIATION": {
+    "at": "0x18a59f0",
+    "hash": "0xdcb52c614b3660ec",
+    "handler": "0x18b0ea0",
+    "originalHash": "0x45EEE61580806D63",
+    "namespace": "PED"
+  },
+  "SET_PED_INTO_VEHICLE": {
+    "at": "0x18a4566",
+    "hash": "0xa9f390242f9eb2e1",
+    "handler": "0x18a8cb0",
+    "originalHash": "0xF75B0D629E1C063D",
+    "namespace": "PED"
+  },
+  "SET_PLAYER_MODEL": {
+    "at": "0x18c7d80",
+    "hash": "0xbece2b5c03bb4f09",
+    "handler": "0x18c93c0",
+    "originalHash": "0x00A1CADD00108836",
+    "namespace": "PLAYER"
+  },
+  "SET_RUN_SPRINT_MULTIPLIER_FOR_PLAYER": {
+    "at": "0x18c8854",
+    "hash": "0xc6ebabc089a80be",
+    "handler": "0x18cd3c0",
+    "originalHash": "0x6DB47AA77FD94E09",
+    "namespace": "PLAYER"
+  },
+  "SET_TEXT_CENTRE": {
+    "at": "0x17eb00e",
+    "hash": "0x21fc15ae6b6188c4",
+    "handler": "0x17f0860",
+    "originalHash": "0xC02F4DBFB51D988B",
+    "namespace": "HUD"
+  },
+  "SET_TEXT_COLOUR": {
+    "at": "0x17eaff8",
+    "hash": "0x71f4002cb1a0b451",
+    "handler": "0x17f0830",
+    "originalHash": "0xBE6B23FFA53FB442",
+    "namespace": "HUD"
+  },
+  "SET_TEXT_FONT": {
+    "at": "0x17eb092",
+    "hash": "0xf68e5437af17efbc",
+    "handler": "0x17f08f0",
+    "originalHash": "0x66E0276CC5F6B9DA",
+    "namespace": "HUD"
+  },
+  "SET_TEXT_OUTLINE": {
+    "at": "0x17eb0d4",
+    "hash": "0x435b084ae3274e4c",
+    "handler": "0x17f0920",
+    "originalHash": "0x2513DFB0FB8400FE",
+    "namespace": "HUD"
+  },
+  "SET_TEXT_RIGHT_JUSTIFY": {
+    "at": "0x17eb024",
+    "hash": "0xb9a0cf201cf801f2",
+    "handler": "0x17f0880",
+    "originalHash": "0x6B3C4650BC8BEE47",
+    "namespace": "HUD"
+  },
+  "SET_TEXT_SCALE": {
+    "at": "0x17eafe2",
+    "hash": "0x3f03c2d4efa888bc",
+    "handler": "0x17f0810",
+    "originalHash": "0x07C837F9A01C34C9",
+    "namespace": "HUD"
+  },
+  "SET_TEXT_WRAP": {
+    "at": "0x17eb050",
+    "hash": "0xe835f806be49c67b",
+    "handler": "0x17f08b0",
+    "originalHash": "0x63145D9C883A1A70",
+    "namespace": "HUD"
+  },
+  "SET_VEHICLE_CAN_BREAK": {
+    "at": "0x194263e",
+    "hash": "0x5bb40fec6faa468d",
+    "handler": "0x194ed50",
+    "originalHash": "0x59BF8C3D52C92F66",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_DEFORMATION_FIXED": {
+    "at": "0x194296c",
+    "hash": "0x5dacc304f20af7e6",
+    "handler": "0x1950370",
+    "originalHash": "0x953DA1E1B12C0491",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_FIXED": {
+    "at": "0x1942956",
+    "hash": "0x2443408423266f9",
+    "handler": "0x19502e0",
+    "originalHash": "0x115722B1B9C14C1C",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_FORWARD_SPEED": {
+    "at": "0x1941986",
+    "hash": "0xb2d5451cc5606248",
+    "handler": "0x1949330",
+    "originalHash": "0xAB54A438726D25D5",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_MOD": {
+    "at": "0x1943692",
+    "hash": "0x61b7c9351b41ed",
+    "handler": "0x1956e30",
+    "originalHash": "0x6AF0636DDEDCB6DD",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_MOD_KIT": {
+    "at": "0x1943574",
+    "hash": "0x3c1bce3438ecbfc0",
+    "handler": "0x1956260",
+    "originalHash": "0x1F2AA07F00B3217A",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_ON_GROUND_PROPERLY": {
+    "at": "0x1941290",
+    "hash": "0x9f65b3bafa302a65",
+    "handler": "0x19458f0",
+    "originalHash": "0x49733E92263139D1",
+    "namespace": "VEHICLE"
+  },
+  "SET_VEHICLE_TYRES_CAN_BURST": {
+    "at": "0x1941b80",
+    "hash": "0xafe1b52f0de91595",
+    "handler": "0x1949e20",
+    "originalHash": "0xEB9DC3C7D8596C46",
+    "namespace": "VEHICLE"
+  },
+  "SET_WEATHER_TYPE_NOW_PERSIST": {
+    "at": "0x18020fc",
+    "hash": "0x9cd86fac92dbe038",
+    "handler": "0x18044d0",
+    "originalHash": "0xED712CA327900C8A",
+    "namespace": "MISC"
+  },
+  "STAT_GET_INT": {
+    "at": "0x18f9b7c",
+    "hash": "0x61481f9fbb1c7edd",
+    "handler": "0x18fbbf0",
+    "originalHash": "0x767FBC2AC802EF3D",
+    "namespace": "STATS"
+  },
+  "STAT_SET_INT": {
+    "at": "0x18f9aa0",
+    "hash": "0x76a5661ef5abee4",
+    "handler": "0x18fb9c0",
+    "originalHash": "0xB3271D7AB655B441",
+    "namespace": "STATS"
+  },
+  "TOGGLE_VEHICLE_MOD": {
+    "at": "0x1943700",
+    "hash": "0x6c6188d0f8ab739a",
+    "handler": "0x1957380",
+    "originalHash": "0x2A1F4F37F95BAD08",
+    "namespace": "VEHICLE"
+  }
+}

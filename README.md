@@ -1,6 +1,8 @@
 # PS Neighborhood
 
-**[Download the Windows release — v0.10.1 with PS5 ShadowMount support](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.10.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
+**[Download the Windows release — v0.11.0 with GTA V in-game menu](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.11.0)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
+
+**GTA V Story Mode menu:** connect PS Neighborhood to PS5Debug-NG, enable **Allow MCP compare-and-write**, enter Story Mode, then run **GTA V In-Game Menu.cmd**. Press **L1 + D-pad Right** to open it. It runs inside GTA and continues after closing the PC app. Supports the fingerprinted PS5 builds **PPSA04263 01.000.000** and **PPSA04264 01.010.002**; other builds are refused. Full source, build instructions and feature details are in [trainers/gta5-story](trainers/gta5-story/README.md).
 
 [![Release](https://img.shields.io/github/v/release/GronedWaffel/ps-neighborhood)](https://github.com/GronedWaffel/ps-neighborhood/releases/latest) [![License: GPL v3+](https://img.shields.io/badge/license-GPL--3.0--or--later-blue)](LICENSE) ![Windows x64](https://img.shields.io/badge/platform-Windows%20x64-0078D4) ![Hardware tested: PS4 10.01](https://img.shields.io/badge/hardware%20tested-PS4%2010.01-orange) ![Hardware tested: PS5 13.60](https://img.shields.io/badge/hardware%20tested-PS5%2013.60-blue)
 

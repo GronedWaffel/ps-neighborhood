@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.11.0 — GTA V Story Mode in-game menu
+
+- Added the controller-operated GTA V menu, installed through PS5Debug-NG with executable fingerprint checks. Supports PPSA04263 01.000.000 and PPSA04264 01.010.002 with separate native maps, player offsets and mission profiles.
+- Includes player/weapon controls, Never Wanted, searchable-by-category vehicle lists, performance upgrades and vehicle protection, clothing preview, character models, waypoint travel, weather/time, radio/phone options and confirmed progression actions.
+- Model prefetching and bounded per-frame jobs keep the menu responsive. Movement and camera controls remain available while it is open. The menu remains resident when the PC app closes; reinstall after restarting GTA.
+- Includes trainer C/JavaScript source, generated catalogs, both bridge images, build scripts and regression tests. Live native calls and user gameplay checks passed on PPSA04264 01.010.002 / PS5 13.60. The new Prologue state machine was compared and fingerprinted; its completion was not replayed against the user's progressed save.
+
 ## 0.10.1 — ShadowMount game transfers
 
 - Added a PS5 ShadowMount page for folder/image transfer queues, free-space checks, progress, cancellation and file-level retry. Incomplete games remain staged, existing games are not overwritten, and copying is distinguished from console recognition.

@@ -1,0 +1,46 @@
+{
+  "titleId": "PPSA04263",
+  "contentId": "EP1004-PPSA04263_00-GTAVFULLGAMEDISC",
+  "version": "01.000.000",
+  "platform": "ps5",
+  "playerRoot": "0x3fc5b88",
+  "networkFlag": "0x49e7151",
+  "fingerprints": [
+    {
+      "address": "0x18cc6b0",
+      "length": 46,
+      "sha256": "ec4eb5ebbbad03f17ec09737d527e7cfc690a93f939300cdb5ec2c9ccd56cb0a"
+    },
+    {
+      "address": "0x18ccb00",
+      "length": 197,
+      "sha256": "765bf928eed3fbebf4952284a4c9fed2e521315b79f1d79a08f6abf33f1d47b3"
+    },
+    {
+      "address": "0x1967f90",
+      "length": 158,
+      "sha256": "e74068595b2bfbb9f0726cf90e0460ce6b5d966abc6baa8c07726844d17b9c06"
+    },
+    {
+      "address": "0x18cd3c0",
+      "length": 139,
+      "sha256": "a219f9e789bb4fbce548c837c2e91f64b97a96d3853ca4c1ac63f8064003cc0c"
+    }
+  ],
+  "scriptRegistry": "0x4688118",
+  "threadTable": "0x50b66f8",
+  "runOffset": "0xcb0",
+  "frameFlagsOffset": "0x228",
+  "execEnd": "0x345c000",
+  "threadHashOffset": 12,
+  "threadStateOffset": 16,
+  "threadStackOffset": 176,
+  "threadNameOffset": 212,
+  "prologue": {
+    "length": 633543,
+    "fnv": "0x2c16b354d5a08b9e",
+    "sha256": "09606aa151d5396ca2c0bb514963053c1411e2d34daaad509cc264028e02a0c2",
+    "stageLocal": 1255,
+    "completeStage": 16
+  }
+}
