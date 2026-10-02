@@ -2,6 +2,15 @@
 #include <string.h>
 #include "install-abi.h"
 int main(void){
+ assert(psn_install_content_valid("IV0002-ITEM00001_00-STOREUPD00000000",0x1a));
+ assert(psn_install_content_valid("IV0001-SFIN00000_00-SFIN000000009400",0x1a));
+ assert(psn_install_content_valid("IV0002-CUSA00001_00-TESTPACKAGE00001",0x8000001a));
+ assert(psn_install_content_valid("IV0002-PPSA00001_00-TESTPACKAGE00001",0x20));
+ assert(!psn_install_content_valid("IV0002-PPSA00001_00-TESTPACKAGE00001",0x1a));
+ assert(!psn_install_content_valid("IV0002-ITEM00001_00-TESTPACKAGE00001",0x20));
+ assert(!psn_install_content_valid("IV0002-NPXS20001_00-TESTPACKAGE00001",0x1a));
+ assert(!psn_install_content_valid("IV0002-ITEM0000X_00-TESTPACKAGE00001",0x1a));
+ assert(!psn_install_content_valid("IV0002-ITEM00001/00-TESTPACKAGE00001",0x1a));
  // Model the actual native read/write boundaries independently of sizeof.
  struct {struct install_meta meta;unsigned char guard[16];} input;
  memset(&input,0xa5,sizeof input);input.meta=(struct install_meta){.uri="http://test/package.pkg",.option=0,.flag=0};

@@ -89,6 +89,7 @@ export class Receiver {
     }catch(e){this.error=e.message;throw e;}
   }
   async install(pkg,url){
+    if(this.platform==='ps5'&&pkg.platform==='ps4'&&!pkg.titleId.startsWith('CUSA')&&(this.runtimeInfo?.revision||0)<107)throw Error('PS4 homebrew packages need the updated PS5 companion (revision 107). Close and reopen this updated app, then load its companion.');
     const strings=[pkg.contentId,pkg.name,url].map((s,i)=>{const b=Buffer.from(s);if(b.length>=[40,256,768][i]||b.includes(0))throw Error('Package name or URL is too long');const length=Buffer.alloc(4);length.writeUInt32LE(b.length);return Buffer.concat([length,b]);});
     const head=Buffer.alloc(12);head.writeBigUInt64LE(BigInt(pkg.size));head.writeUInt32LE((pkg.type|(this.platform==='ps5'&&pkg.kind==='Patch'?0x80000000:0))>>>0,8);
     const r=await this.command(3,Buffer.concat([head,...strings]));

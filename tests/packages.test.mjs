@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { mkdtemp, writeFile, rm, open } from 'node:fs/promises';
 import { PackageInstaller, inspectPackage, parseInstallerReply, parseRange } from '../src/packages.mjs';
+import {conversionUI} from '../ui/conversion.js';
 
 async function fixture(t, size = 0x3000) {
   const dir = await mkdtemp(path.join(os.tmpdir(), 'psn-pkg-')); t.after(() => rm(dir, { recursive: true, force: true }));
@@ -30,6 +31,23 @@ test('HTTP ranges support suffixes and large offsets; original RPI hexadecimal r
   assert.deepEqual(parseRange('bytes=-4', 10), {start:6,end:9,partial:true});
   for (const r of ['bytes=9-2','bytes=10-','bytes=-0','bytes=0-1,4-5']) assert.throws(() => parseRange(r,10));
   assert.deepEqual(parseInstallerReply('{"status":"success","bits":0x1A,"length_total":0x100000001,"title":"0xBAD"}'), {status:'success',bits:26,length_total:4294967297,title:'0xBAD'});
+});
+test('PS4 games, homebrew, patches and DLC use native installation under either console profile', async t => {
+  const {local,data}=await fixture(t);
+  for(const platform of ['ps4','ps5'])for(const title of ['CUSA57548','ITEM00001','SFIN00000','BREW12345'])for(const [type,kind] of [[0x1a,'Game / app'],[0x1e,'Patch'],[0x1b,'Add-on'],[0x1c,'Add-on']]){
+    data.write('IV0002-'+title+'_00-TESTPACKAGE00001',0x40);data.writeUInt32BE(type,0x74);await writeFile(local,data);
+    const installer=new PackageInstaller({profile:()=>({platform})});
+    const p=await installer.inspect(local);assert.equal(p.platform,'ps4');assert.equal(p.kind,kind);assert.equal(p.shadowConvertible,false);
+    const calls=[];const ui=conversionUI({api:async(method,args)=>{calls.push(method);assert.equal(method,'pkg_inspect');return installer.inspect(args.local);}});
+    assert.equal(await ui.offer(local),'native');assert.deepEqual(calls,['pkg_inspect']);
+    await installer.queue.addFolder(path.dirname(local));assert.equal(installer.queue.items[0].state,'queued');
+  }
+  for(const title of ['NPXS20001','ITEM0000X','item00001']){
+    data.write('IV0002-'+title+'_00-TESTPACKAGE00001',0x40);await writeFile(local,data);
+    await assert.rejects(inspectPackage(local,{platform:'ps5'}),/content ID/);
+  }
+  data.write('IV0002-ITEM00001_00-TESTPACKAGE00001',0x40);data.writeUInt32BE(0x20,0x74);await writeFile(local,data);
+  await assert.rejects(inspectPackage(local,{platform:'ps5'}),/content type/);
 });
 test('direct install serves only the selected unchanged file, honors range requests, and tracks the real task', async t => {
   const {local,data} = await fixture(t); let source, paused = false;

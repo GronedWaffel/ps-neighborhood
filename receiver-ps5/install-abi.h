@@ -3,6 +3,22 @@
 #define PSN_PS5_INSTALL_ABI_H
 #include <stdint.h>
 #include <stddef.h>
+// Package installation permits custom PS4 homebrew IDs. Keep the narrower
+// installed-game/save validators separate from package submission.
+static int psn_install_content_valid(const char *content,uint32_t type){
+ if(__builtin_strlen(content)!=36||content[6]!='-'||content[16]!='_'||content[17]!='0'||content[18]!='0'||content[19]!='-')return 0;
+ for(unsigned i=0;i<36;i++){
+  if(i==6||i==16||i==19)continue;
+  if(!((content[i]>='A'&&content[i]<='Z')||(content[i]>='0'&&content[i]<='9')))return 0;
+ }
+ for(unsigned i=7;i<11;i++)if(content[i]<'A'||content[i]>'Z')return 0;
+ for(unsigned i=11;i<16;i++)if(content[i]<'0'||content[i]>'9')return 0;
+ const char *title=content+7;type&=0x7fffffffu;
+ int ps5=!__builtin_memcmp(title,"PPSA",4)||!__builtin_memcmp(title,"MOUU",4);
+ if(ps5)return type==0x20||type==0x21||type==0x22||type==0x26;
+ if(!__builtin_memcmp(title,"NPXS",4))return 0;
+ return type==0x1a||type==0x1b||type==0x1c||type==0x1e;
+}
 // Verified against the 13.60 AppInstUtil marshaller. The default system
 // installer supplies zero for both fields after the six string pointers.
 struct install_meta { const char *uri,*extra,*scenario,*content,*name,*icon; uint32_t option; uint8_t flag; };

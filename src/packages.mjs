@@ -42,10 +42,12 @@ export async function inspectPackage(local, {platform='ps4'}={}) {
     const declaredSize = header.readBigUInt64BE(0x430);
     if (declaredSize !== BigInt(st.size)) throw Error('PKG is incomplete or split. Finish downloading or merge its parts first');
     const contentId = header.subarray(0x40, 0x64).toString('ascii').replace(/\0.*$/, '');
-    if (!/^[A-Z0-9]{6}-CUSA\d{5}_00-[A-Z0-9]{16}$/.test(contentId)) throw Error('Invalid PS4 game content ID');
+    // PS4-format homebrew also uses custom title prefixes (e.g. ITEM/SFIN).
+    // Classify by the CNT format and content type, not the game's CUSA prefix.
+    if (!/^[A-Z0-9]{6}-(?!NPXS|PPSA|MOUU)[A-Z]{4}\d{5}_00-[A-Z0-9]{16}$/.test(contentId)) throw Error('Invalid PS4 game or homebrew content ID');
     const type = header.readUInt32BE(0x74), flags = header.readUInt32BE(0x78);
     if (![0x1a, 0x1b, 0x1c, 0x1e].includes(type)) throw Error('Unsupported PS4 package content type');
-    return { local: path.resolve(local), name: path.basename(local), size: st.size, mtimeMs: st.mtimeMs, contentId, titleId: contentId.slice(7, 16), kind: type === 0x1e || (flags & 0x60100000) ? 'Patch' : type === 0x1a ? 'Game / app' : 'Add-on', type };
+    return { local: path.resolve(local), name: path.basename(local), size: st.size, mtimeMs: st.mtimeMs, platform: 'ps4', packageFormat: 'ps4-cnt', shadowConvertible: false, contentId, titleId: contentId.slice(7, 16), kind: type === 0x1e || (flags & 0x60100000) ? 'Patch' : type === 0x1a ? 'Game / app' : 'Add-on', type };
   } finally { await file.close(); }
 }
 

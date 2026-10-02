@@ -44,6 +44,13 @@ async function fixture(t,{platform=5,brand='ps5debug-NG by OSR v1.3.1\0'+'1.1'}=
 }
 function elf(){const b=Buffer.alloc(160);b.set([0x7f,69,76,70,2,1,1]);b.writeUInt16LE(2,16);b.writeUInt16LE(62,18);b.writeBigUInt64LE(64n,32);b.writeUInt16LE(64,52);b.writeUInt16LE(56,54);b.writeUInt16LE(1,56);b.writeUInt32LE(1,64);b.writeBigUInt64LE(120n,72);b.writeBigUInt64LE(0x4000n,80);b.writeBigUInt64LE(40n,96);b.writeBigUInt64LE(64n,104);return b;}
 
+test('PS4 profile refuses a PS5 debugger before enumeration or receiver loading',async t=>{
+ const f=await fixture(t),w=await new Workbench(await directory(t)).init();t.after(()=>w.disconnect());
+ await w.setProfile({...w.profile,platform:'ps4',debugPort:f.port});
+ await assert.rejects(w.connect(),/Select PlayStation 5/);
+ assert.equal(w.mode,'disconnected');assert.equal(w.client,null);assert.deepEqual(f.commands,[0xbd000501]);
+});
+
 test('PS5 identity uses raw uint16 replies before memory access, with fragmented packets and host scanning',async t=>{
  const f=await fixture(t),w=await new Workbench(await directory(t)).init();t.after(()=>w.disconnect());
  await w.setProfile({...w.profile,platform:'ps5',debugPort:f.port,firmware:'13.60'});

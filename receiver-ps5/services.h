@@ -135,7 +135,8 @@ static int submit_package(const uint8_t *data,uint32_t length){
  if(sysctlbyname("kern.sdk_version",&firmware,&fw_size,0,0)||(firmware>>16)!=0x1360)return -1032;
  char content[40],name[256],url[768];const uint8_t *p=data+12;uint32_t left=length-12;
  if(read_string(&p,&left,content,sizeof content)||read_string(&p,&left,name,sizeof name)||read_string(&p,&left,url,sizeof url)||left)return -1010;
- char title[10];if(strlen(content)!=36||valid_title((uint8_t*)content+7,9,title))return -1010;
+ uint32_t package_type;memcpy(&package_type,data+8,4);
+ if(!psn_install_content_valid(content,package_type))return -1010;
  // Local staging is restricted to files placed by this application's FTP workflow.
  // Accept the previous staging path for existing clients as well.
  if(strncmp(url,"http://",7)&&strncmp(url,"/data/ps-neighborhood-pkgs/",sizeof("/data/ps-neighborhood-pkgs/")-1)&&strncmp(url,"/data/ps-neighbourhood-pkgs/",sizeof("/data/ps-neighbourhood-pkgs/")-1))return -1010;

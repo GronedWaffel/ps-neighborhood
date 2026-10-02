@@ -67,7 +67,13 @@ export class Workbench extends EventEmitter {
   }
   async connect(demo = false) {
     await this.disconnect(); const client = demo ? new DemoConsole() : await new (this.profile.platform === 'ps5' ? PS5Debug : PS4Debug)({ host: this.profile.host, port: this.profile.debugPort }).connect();
-    try { if (!demo && this.profile.platform === 'ps5') await client.detectCapabilities(); const processes = await client.processes(); if (!demo && this.profile.platform !== 'ps5') await client.detectCapabilities(); this.client = client; this.mode = demo ? 'demo' : 'live'; this.connectionId = randomUUID(); this.log('Connected', demo ? 'Simulated memory lab' : this.profile.host); return { ...this.status(), processes }; }
+    try {
+      if (!demo) {
+        await client.detectCapabilities();
+        if (this.profile.platform !== 'ps5' && /ps5debug\b/i.test(client.capabilities?.branding || '')) throw Error('PS5Debug detected. Select PlayStation 5 on Overview, then Connect console. PS4-format PKGs also install through the PS5 profile.');
+      }
+      const processes = await client.processes(); this.client = client; this.mode = demo ? 'demo' : 'live'; this.connectionId = randomUUID(); this.log('Connected', demo ? 'Simulated memory lab' : this.profile.host); return { ...this.status(), processes };
+    }
     catch (e) { client.close(); throw e; }
   }
   async disconnect() {
