@@ -1,3 +1,7 @@
+<!-- snipers-experimental-release -->
+**Experimental multi-firmware downloads:** [Open the release with ELF / Windows assets](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.13.0-experimental.1). Targets 33 exact firmware versions from 7.00 through 13.60; 9.05 and 11.40 excluded. Community testing is still required. Stable 13.60 remains separate. [Experimental builder](https://sniperscheats.lol/builder/ex/) · [Experimental payloads](https://sniperscheats.lol/payloads/ex/).
+<!-- /snipers-experimental-release -->
+
 # PS Neighborhood
 
 **[Download the Windows release — v0.12.1 with PS5 fPKG conversion](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.12.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
