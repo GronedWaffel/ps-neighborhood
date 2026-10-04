@@ -1,11 +1,11 @@
 {
   "name": "ps-neighborhood",
   "productName": "PS Neighborhood",
-  "version": "0.12.1",
+  "version": "0.13.0-experimental.1",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",
-  "description": "PS4 and PS5 desktop memory workbench with MCP, Ghidra exports, FTP and payload loading; platform-specific package and console management",
+  "description": "Community-test multi-firmware PS5 compatibility build. Hardware validation remains scoped to 13.60.",
   "license": "GPL-3.0-or-later",
   "engines": {
     "node": ">=24"

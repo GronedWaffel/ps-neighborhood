@@ -1,3 +1,7 @@
+> **Experimental multi-firmware branch.** Community-test targets: 7.00, 7.01, 7.20, 7.40, 7.60, 7.61, 8.00, 8.20, 8.40, 8.60, 9.00, 9.20, 9.40, 9.60, 10.00, 10.01, 10.20, 10.40, 10.60, 11.00, 11.20, 11.60, 12.00, 12.02, 12.20, 12.40, 12.60, 12.70, 13.00, 13.20, 13.40, 13.42, 13.60. 9.05 and 11.40 are excluded. The earlier 13.60 validation below describes the stable release; it does not certify this new build on other firmware. Stable releases remain available separately.
+
+Native PKG installation, patch removal, decrypted-save operations and ShadowMount batch registration retain their 13.60-only ABI checks. Memory/FTP/ELF loading and discovered console-service capabilities can be tested on the listed targets with a compatible PS5Debug-NG payload.
+
 # PS Neighborhood
 
 **[Download the Windows release — v0.12.1 with PS5 fPKG conversion](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.12.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.

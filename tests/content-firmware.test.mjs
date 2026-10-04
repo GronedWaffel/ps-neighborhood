@@ -48,3 +48,9 @@ test('runtime query is distinct from native controls and initialization stops at
   const receiver=new Receiver(),calls=[];receiver.command=async op=>{calls.push(op);if(op===13){const body=Buffer.alloc(12);body.writeUInt32LE(0x13520000);body.writeUInt32LE(1,4);body.writeUInt32LE(2,8);return {code:0,body};}const body=Buffer.alloc(4);body.writeUInt32LE(40);return {code:-1040,body};};
   assert.equal((await receiver.runtime()).firmware,'13.52');await assert.rejects(receiver.probe(),/stage 40/);assert.deepEqual(calls,[13,13,2]);assert.equal(receiver.serviceReady,false);
 });
+
+test('experimental PS5 targets retain feature boundaries and truthful validation labels',async()=>{
+ const {ps5FirmwareTargets}=await import('../src/ps5-firmware.mjs');
+ for(const firmware of ps5FirmwareTargets){const c=compatibility('auto',{firmware},'ps5');assert.equal(c.target,true);assert.equal(c.receiverSupported,true);assert.equal(c.hardwareTested,firmware==='13.60');assert.equal(c.restrictedFeatures.length>0,firmware!=='13.60');}
+ for(const firmware of ['9.05','11.40','14.00']){const c=compatibility('auto',{firmware},'ps5');assert.equal(c.target,false);assert.equal(c.receiverSupported,false);assert.equal(c.hardwareTested,false);}
+});

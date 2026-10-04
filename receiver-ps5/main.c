@@ -1,3 +1,4 @@
+#include "firmware-targets.h"
 // SPDX-License-Identifier: GPL-3.0-or-later
 // PS5 companion using PS5 SDK service ABIs, without PS4 payload code.
 #include <sys/param.h>
@@ -43,6 +44,8 @@ static int storage(uint32_t index,uint8_t *out){
  strncpy((char*)out+136,s.f_mntfromname,87);return 0;
 }
 int main(void){
+ uint32_t firmware=0;size_t firmware_size=sizeof firmware;
+ if(sysctlbyname("kern.sdk_version",&firmware,&firmware_size,0,0)||!snipers_firmware_supported(firmware))return 1;
  signal(SIGPIPE,SIG_IGN);
  int fd=socket(AF_INET,SOCK_STREAM,0);if(fd<0)return 1;
  struct sockaddr_in dest;memset(&dest,0,sizeof dest);dest.sin_len=sizeof dest;dest.sin_family=AF_INET;dest.sin_addr.s_addr=config.addr;dest.sin_port=config.port;
@@ -61,7 +64,7 @@ int main(void){
   else if(h.code==7&&!h.length){response(fd,h.id,0,0,0);break;}
   else if(h.code==8&&!h.length){uint32_t caps[3]={service_caps()|(save_available()?512:0),service_symbols,0};memcpy(body,caps,sizeof caps);size=sizeof caps;}
   else if(h.code==9&&h.length==4){uint32_t index;memcpy(&index,body,4);r=storage(index,body);if(!r)size=224;}
-  else if(h.code==13&&!h.length){uint32_t info[3]={0,0,107};size_t n=4;r=sysctlbyname("kern.sdk_version",&info[0],&n,0,0);info[1]=1;if(!r){memcpy(body,info,sizeof info);size=sizeof info;}}
+  else if(h.code==13&&!h.length){uint32_t info[3]={0,0,108};size_t n=4;r=sysctlbyname("kern.sdk_version",&info[0],&n,0,0);info[1]=1;if(!r){memcpy(body,info,sizeof info);size=sizeof info;}}
   else if(h.code==23){uint8_t *reply=NULL;r=shadow_request(body,h.length,&reply,&size);alarm(0);int failed=response(fd,h.id,r,reply,size);free(reply);if(failed)break;continue;}
   else if(h.code==18){r=save_mount_session(body,h.length);}
   else if(h.code==19){r=save_unmount_session(body,h.length);}
