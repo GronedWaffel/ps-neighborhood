@@ -182,7 +182,7 @@ export class Workbench extends EventEmitter {
   async payload({ local }) {
     if (this.mode === 'demo') throw new Error('Leave memory lab before sending a payload');
     if (this.transfer?.state === 'running') throw new Error('A transfer is already running');
-    const info = await stat(local); if (!info.isFile() || info.size < 1 || info.size > 32 * 1048576) throw new Error('Select a payload file of 1 byte–32 MiB');
+    const info = await stat(local); if (!info.isFile() || info.size < 1 || info.size > 64 * 1048576) throw new Error('Select a payload file of 1 byte–64 MiB');
     if (this.profile.platform === 'ps5') {
       const data = await readFile(local), elf = validatePS5Elf(data);
       if (/ps5debug/i.test(path.basename(local))) {

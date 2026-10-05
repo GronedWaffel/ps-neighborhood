@@ -2,6 +2,7 @@
 #pragma once
 #include <stdint.h>
 static inline int snipers_firmware_supported(uint32_t code){
+ if((code&0xffff0000u)<0x11000000u)return 0;
  switch(code&0xffff0000u){
  case 0x7000000u:
  case 0x7010000u:

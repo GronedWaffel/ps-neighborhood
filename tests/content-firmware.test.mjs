@@ -52,5 +52,5 @@ test('runtime query is distinct from native controls and initialization stops at
 test('experimental PS5 targets retain feature boundaries and truthful validation labels',async()=>{
  const {ps5FirmwareTargets}=await import('../src/ps5-firmware.mjs');
  for(const firmware of ps5FirmwareTargets){const c=compatibility('auto',{firmware},'ps5');assert.equal(c.target,true);assert.equal(c.receiverSupported,true);assert.equal(c.hardwareTested,firmware==='13.60');assert.equal(c.restrictedFeatures.length>0,firmware!=='13.60');}
- for(const firmware of ['9.05','11.40','14.00']){const c=compatibility('auto',{firmware},'ps5');assert.equal(c.target,false);assert.equal(c.receiverSupported,false);assert.equal(c.hardwareTested,false);}
+ for(const firmware of ['7.00','10.60','9.05','11.40','14.00']){const c=compatibility('auto',{firmware},'ps5');assert.equal(c.target,false);assert.equal(c.receiverSupported,false);assert.equal(c.hardwareTested,false);}
 });

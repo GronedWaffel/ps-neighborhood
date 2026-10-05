@@ -1,10 +1,12 @@
-> **Experimental multi-firmware branch.** Community-test targets: 7.00, 7.01, 7.20, 7.40, 7.60, 7.61, 8.00, 8.20, 8.40, 8.60, 9.00, 9.20, 9.40, 9.60, 10.00, 10.01, 10.20, 10.40, 10.60, 11.00, 11.20, 11.60, 12.00, 12.02, 12.20, 12.40, 12.60, 12.70, 13.00, 13.20, 13.40, 13.42, 13.60. 9.05 and 11.40 are excluded. The earlier 13.60 validation below describes the stable release; it does not certify this new build on other firmware. Stable releases remain available separately.
+**[Download the current unified release](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.13.0)** · [YouTube builder](https://sniperscheats.lol/builder/) · [Payloads](https://sniperscheats.lol/payloads/)
+
+> **Unified PS5 11.00–13.60 release.** Exact targets: 11.00, 11.20, 11.60, 12.00, 12.02, 12.20, 12.40, 12.60, 12.70, 13.00, 13.20, 13.40, 13.42, 13.60. 11.40 and firmware below 11.00 are excluded. Earlier hardware validation remains scoped; not every feature is tested on every profile.
 
 Native PKG installation, patch removal, decrypted-save operations and ShadowMount batch registration retain their 13.60-only ABI checks. Memory/FTP/ELF loading and discovered console-service capabilities can be tested on the listed targets with a compatible PS5Debug-NG payload.
 
 # PS Neighborhood
 
-**[Download the Windows release — v0.12.1 with PS5 fPKG conversion](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.12.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
+**[Download the Windows release — v0.13.0](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.13.0)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
 
 **GTA V Story Mode menu:** connect PS Neighborhood to PS5Debug-NG, enable **Allow MCP compare-and-write**, enter Story Mode, then run **GTA V In-Game Menu.cmd**. Press **L1 + D-pad Right** to open it. It runs inside GTA and continues after closing the PC app. Supports the fingerprinted PS5 builds **PPSA04263 01.000.000** and **PPSA04264 01.010.002**; other builds are refused. Full source, build instructions and feature details are in [trainers/gta5-story](trainers/gta5-story/README.md).
 

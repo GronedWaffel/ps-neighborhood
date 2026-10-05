@@ -1,11 +1,11 @@
 {
   "name": "ps-neighborhood",
   "productName": "PS Neighborhood",
-  "version": "0.13.0-experimental.1",
+  "version": "0.13.0",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",
-  "description": "Community-test multi-firmware PS5 compatibility build. Hardware validation remains scoped to 13.60.",
+  "description": "Unified PS5 11.00-13.60 support with exact firmware and feature compatibility checks.",
   "license": "GPL-3.0-or-later",
   "engines": {
     "node": ">=24"
