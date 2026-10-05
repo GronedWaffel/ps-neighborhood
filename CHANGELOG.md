@@ -1,3 +1,11 @@
+## 0.12.2-support.1 — Support Build
+
+- Separate opt-in remote console support through the Snipers HTTPS relay.
+- One-use pairing, authenticated operators, explicit action permission, activity visibility and immediate owner disconnect.
+- Scoped console diagnostics, FTP file reads, validated PS5 ELF transfer and expected-byte memory writes; no PC filesystem or shell access.
+- One-hour session limit; no automatic reconnect or command replay. Normal release stays Latest.
+- See docs/REMOTE-SUPPORT.md for setup, privacy, validation and hardware limits.
+
 # Changelog
 
 ## 0.12.1 — Connection and first-run storage fixes

@@ -1,7 +1,7 @@
 {
   "name": "ps-neighborhood",
   "productName": "PS Neighborhood",
-  "version": "0.12.1",
+  "version": "0.12.2-support.1",
   "private": true,
   "type": "module",
   "main": "desktop/entry.cjs",

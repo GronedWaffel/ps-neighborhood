@@ -30,7 +30,7 @@ await cp(path.join(root, 'scripts/build-gta-bridge.mjs'), path.join(app, 'script
 await cp(path.join(root, 'scripts/build-gta-vehicles.mjs'), path.join(app, 'scripts/build-gta-vehicles.mjs'));
 await cp(path.join(root, 'receiver'), path.join(app, 'receiver'), { recursive: true, filter: source => {const relative=path.relative(path.join(root,'receiver'),source).replaceAll('\\','/');return !relative.startsWith('build/')||['build/manifest.json','build/ps-neighborhood-receiver.bin','build/receiver.elf','build/nids.h','build/syscalls.S'].includes(relative);} });
 await cp(path.join(root, 'receiver-ps5'), path.join(app, 'receiver-ps5'), { recursive: true, filter: source => {const relative=path.relative(path.join(root,'receiver-ps5'),source).replaceAll('\\','/');return !relative.startsWith('build/')||['build/manifest.json','build/ps-neighborhood-ps5.elf'].includes(relative);} });
-await cp(path.join(root, 'node_modules'), path.join(app, 'node_modules'), { recursive: true, filter: src => {
+await cp(path.join(root, 'node_modules'), path.join(app, 'node_modules'), { recursive: true, dereference: true, filter: src => {
   const relative = path.relative(path.join(root, 'node_modules'), src).replaceAll('\\', '/');
   return !['electron', '@electron', '@electron-internal', '.bin'].some(p => relative === p || relative.startsWith(p + '/'));
 } });

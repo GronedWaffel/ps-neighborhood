@@ -1,5 +1,7 @@
 # PS Neighborhood
 
+> **Separate Support Build:** [Download v0.12.2-support.1](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.12.2-support.1) for opt-in remote console support. [Tester and operator instructions](docs/REMOTE-SUPPORT.md). Start a session, share its temporary code privately, and disconnect at any time. The normal release remains Latest.
+
 **[Download the Windows release — v0.12.1 with PS5 fPKG conversion](https://github.com/GronedWaffel/ps-neighborhood/releases/tag/v0.12.1)**. Extract the Windows ZIP and run **Start PS5 Neighborhood.cmd** or **Start ShadowMount.cmd**. PS4 support is included in the same download.
 
 **GTA V Story Mode menu:** connect PS Neighborhood to PS5Debug-NG, enable **Allow MCP compare-and-write**, enter Story Mode, then run **GTA V In-Game Menu.cmd**. Press **L1 + D-pad Right** to open it. It runs inside GTA and continues after closing the PC app. Supports the fingerprinted PS5 builds **PPSA04263 01.000.000** and **PPSA04264 01.010.002**; other builds are refused. Full source, build instructions and feature details are in [trainers/gta5-story](trainers/gta5-story/README.md).
