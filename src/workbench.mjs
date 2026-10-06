@@ -207,12 +207,13 @@ export class Workbench extends EventEmitter {
     const result = { bytes: info.size, sha256: hash.digest('hex'), status: 'Bytes sent; BinLoader does not acknowledge successful execution.' };
     this.log('Payload sent', path.basename(local)); return result;
   }
-  async call(method, args = {}, source = 'desktop') {
+  async call(method, args = {}, source = 'desktop', {signal} = {}) {
+    signal?.throwIfAborted();
     // Serialize connection changes and writes across UI and MCP. Scans/dumps remain
     // cancellable jobs and individual wire requests are independently serialized.
     const controls = ['connect', 'disconnect', 'profile', 'payload', 'memory_write', 'watch_add', 'watch_remove'];
     if (controls.includes(method)) {
-      const run = this.controlTail.then(() => this.dispatch(method, args, source)); this.controlTail = run.catch(() => {}); return run;
+      const run = this.controlTail.then(() => {signal?.throwIfAborted();return this.dispatch(method, args, source);}); this.controlTail = run.catch(() => {}); return run;
     }
     return this.dispatch(method, args, source);
   }

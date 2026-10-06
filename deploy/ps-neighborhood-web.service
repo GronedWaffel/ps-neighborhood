@@ -1,0 +1,27 @@
+[Unit]
+Description=PS Neighborhood website relay
+After=network.target
+
+[Service]
+Type=simple
+User=psn-web
+Group=psn-web
+WorkingDirectory=/opt/ps-neighborhood-web/current
+ExecStart=/opt/snipers-youtube-builder/runtimes/node-v24.21.0-linux-x64/bin/node src/web-relay.mjs
+Environment=PORT=8794
+Environment=PSN_WEB_ORIGIN=https://psneighborhood.com
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+MemoryHigh=384M
+MemoryMax=512M
+CPUQuota=100%
+CPUWeight=10
+TasksMax=64
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

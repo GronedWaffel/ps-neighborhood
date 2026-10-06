@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.14.0 — Website and background companion
+
+- Added psneighborhood.com pairing with explicit PC approval, expiring sessions and disconnect controls.
+- Hosted the same workbench UI, with native file/folder dialogs, exports, console confirmations and save-restore confirmation routed to the companion.
+- Kept MCP on its local STDIO/loopback connection, sharing the existing backend and retaining its separate write permissions. Queued website controls are cancelled when access is revoked; timed-out commands are never automatically replayed.
+- Added tray operation, a Website Companion launcher, setup instructions and transport/browser parity tests.
+- Built on the unified 0.13.0 firmware support and existing feature-specific compatibility gates. All desktop tools remain bundled.
+
 ## 0.12.1 — Connection and first-run storage fixes
 
 - Show live transfer byte counts in the converter while a large image is copying, instead of waiting for the entire file to finish before updating progress.
