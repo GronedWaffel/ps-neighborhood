@@ -1,6 +1,12 @@
 # Website and companion
 
-Open **https://psneighborhood.com** with the **0.14.0 or newer Windows companion**.
+**Development status:** the v0.14.0 PC-companion release has been withdrawn.
+A PS5-side bridge is being developed for website use without the Windows app.
+That version is not released yet. The existing desktop/MCP release is v0.13.0.
+The remaining notes document the retained companion preview implementation for
+developers and people who already built it; they are not a download recommendation.
+
+With an existing source-built preview, open **https://psneighborhood.com**.
 Run `Start Website Companion.cmd`, click **Start website session**, enter its code
 on the website and approve the request on the PC. Only approve your own browser.
 
